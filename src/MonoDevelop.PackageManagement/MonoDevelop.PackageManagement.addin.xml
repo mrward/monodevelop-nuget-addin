@@ -1,0 +1,43 @@
+﻿<Addin name        = "NuGet Package Management"
+       id          = "PackageManagement"
+       namespace   = "MonoDevelop"
+       author      = "Matt Ward"
+       copyright   = "MIT X11"
+       url         = "http://github.com/mrward/monodevelop-nuget"
+       description = "NuGet Package Management"
+       category    = "IDE extensions"
+       version     = "0.1">
+
+	<Runtime>
+		<Import assembly="MonoDevelop.PackageManagement.dll" />
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Core" version="3.0.5"/>
+		<Addin id="Ide" version="3.0.5"/>
+	</Dependencies>
+	
+	<Extension path = "/MonoDevelop/Ide/Commands/Project">
+		<Command
+			id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
+			_description = "Add NuGet package"
+			_label = "_Install Package"
+			defaultHandler = "MonoDevelop.PackageManagement.Commands.InstallPackageHandler" />
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/MainMenu/Project">
+		<CommandItem
+			id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
+			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+			insertbefore = "ExportSeparator" />
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+		<Condition id="ItemType" value="ProjectReferenceCollection">
+			<CommandItem
+				id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
+				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+				insertbefore = "AddSectionEnd" />
+		</Condition>
+	</Extension>
+</Addin>
