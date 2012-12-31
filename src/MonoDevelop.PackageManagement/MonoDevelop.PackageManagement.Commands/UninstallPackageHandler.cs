@@ -1,5 +1,5 @@
 ﻿// 
-// ISharpDevelopPackageManager.cs
+// UninstallPackageHandler.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,19 +27,45 @@
 //
 
 using System;
-using System.Collections.Generic;
+using ICSharpCode.PackageManagement;
+using MonoDevelop.Components.Commands;
+using MonoDevelop.Ide;
+using MonoDevelop.Projects;
 using NuGet;
 
-namespace ICSharpCode.PackageManagement
+namespace MonoDevelop.PackageManagement.Commands
 {
-	public interface ISharpDevelopPackageManager : IPackageManager
+	public class UninstallPackageHandler : CommandHandler
 	{
-		ISharpDevelopProjectManager ProjectManager { get; }
+		protected override void Update (CommandInfo info)
+		{
+			if (IsDotNetProjectSelected ()) {
+				info.Bypass = false;
+			} else {
+				info.Enabled = false;
+				info.Bypass = true;
+			}
+		}
 		
-		void InstallPackage(IPackage package, InstallPackageAction installAction);
-		void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction);
-		//void UpdatePackage(IPackage package, UpdatePackageAction updateAction);
+		bool IsDotNetProjectSelected ()
+		{
+			return IdeApp.ProjectOperations.CurrentSelectedProject is DotNetProject;
+		}
 		
-		IEnumerable<PackageOperation> GetInstallPackageOperations(IPackage package, InstallPackageAction installAction);
+		protected override void Run ()
+		{
+			try {
+				Project project = PackageManagementServices.ProjectService.CurrentProject;
+				IPackageRepository repository = PackageManagementServices.RegisteredPackageRepositories.ActiveRepository;
+				IPackageManagementProject packageManagementProject = PackageManagementServices.Solution.GetProject (repository, project);
+				UninstallPackageAction action = packageManagementProject.CreateUninstallPackageAction ();
+				action.PackageId = "NUnit";
+				action.Execute ();
+
+				MessageService.ShowMessage ("Package uninstalled");
+			} catch (Exception ex) {
+				MessageService.ShowException (ex);
+			}
+		}
 	}
 }

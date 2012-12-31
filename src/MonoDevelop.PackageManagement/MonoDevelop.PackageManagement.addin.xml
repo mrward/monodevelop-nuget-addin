@@ -23,11 +23,20 @@
 			_description = "Add NuGet package"
 			_label = "_Install Package"
 			defaultHandler = "MonoDevelop.PackageManagement.Commands.InstallPackageHandler" />
+		<Command
+			id = "MonoDevelop.PackageManagement.Commands.UninstallPackage"
+			_description = "Remove NuGet package"
+			_label = "_Uninstall Package"
+			defaultHandler = "MonoDevelop.PackageManagement.Commands.UninstallPackageHandler" />
 	</Extension>
 	
 	<Extension path = "/MonoDevelop/Ide/MainMenu/Project">
 		<CommandItem
 			id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
+			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+			insertbefore = "ExportSeparator" />
+		<CommandItem
+			id = "MonoDevelop.PackageManagement.Commands.UninstallPackage"
 			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
 			insertbefore = "ExportSeparator" />
 	</Extension>
@@ -36,6 +45,10 @@
 		<Condition id="ItemType" value="ProjectReferenceCollection">
 			<CommandItem
 				id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
+				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+				insertbefore = "AddSectionEnd" />
+			<CommandItem
+				id = "MonoDevelop.PackageManagement.Commands.UninstallPackage"
 				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
 				insertbefore = "AddSectionEnd" />
 		</Condition>

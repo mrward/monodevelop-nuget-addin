@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\InstallPackageHandler.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Commands\UninstallPackageHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ConfigSettingsFileSystem.cs" />
     <Compile Include="MonoDevelop.PackageManagement\DefaultProjectTemplatePackageSource.cs" />
     <Compile Include="MonoDevelop.PackageManagement\DotNetProjectExtensions.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="MonoDevelop.PackageManagement\SolutionPackageRepositoryFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SolutionPackageRepositoryPath.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ThreadSafeProjectBrowserUpdater.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UninstallPackageAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />

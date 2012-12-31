@@ -1,5 +1,5 @@
 ﻿// 
-// ISharpDevelopPackageManager.cs
+// UninstallPackageAction.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,19 +27,39 @@
 //
 
 using System;
-using System.Collections.Generic;
+using System.IO;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public interface ISharpDevelopPackageManager : IPackageManager
+	public class UninstallPackageAction : ProcessPackageAction
 	{
-		ISharpDevelopProjectManager ProjectManager { get; }
+		public UninstallPackageAction(
+			IPackageManagementProject project,
+			IPackageManagementEvents packageManagementEvents)
+			: base(project, packageManagementEvents)
+		{
+			this.AllowPrereleaseVersions = true;
+		}
 		
-		void InstallPackage(IPackage package, InstallPackageAction installAction);
-		void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction);
-		//void UpdatePackage(IPackage package, UpdatePackageAction updateAction);
+		public bool ForceRemove { get; set; }
+		public bool RemoveDependencies { get; set; }
+
+		protected override void BeforeExecute()
+		{
+			base.BeforeExecute();
+		}
 		
-		IEnumerable<PackageOperation> GetInstallPackageOperations(IPackage package, InstallPackageAction installAction);
+		protected override void ExecuteCore()
+		{
+			Project.UninstallPackage(Package, this);
+			OnParentPackageUninstalled();
+		}
+		
+		public override bool HasPackageScriptsToRun()
+		{
+			var files = new PackageFiles(Package);
+			return files.HasUninstallPackageScript();
+		}
 	}
 }

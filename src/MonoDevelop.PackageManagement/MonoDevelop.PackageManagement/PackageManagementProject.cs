@@ -119,11 +119,11 @@ namespace ICSharpCode.PackageManagement
 			packageManager.InstallPackage(package, installAction);
 		}
 		
-//		public void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction)
-//		{
-//			packageManager.UninstallPackage(package, uninstallAction);
-//		}
-//		
+		public void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction)
+		{
+			packageManager.UninstallPackage(package, uninstallAction);
+		}
+		
 //		public void UpdatePackage(IPackage package, UpdatePackageAction updateAction)
 //		{
 //			packageManager.UpdatePackage(package, updateAction);
@@ -134,11 +134,11 @@ namespace ICSharpCode.PackageManagement
 			return new InstallPackageAction(this, packageManagementEvents);
 		}
 		
-//		public UninstallPackageAction CreateUninstallPackageAction()
-//		{
-//			return new UninstallPackageAction(this, packageManagementEvents);
-//		}
-//		
+		public UninstallPackageAction CreateUninstallPackageAction()
+		{
+			return new UninstallPackageAction(this, packageManagementEvents);
+		}
+		
 //		public UpdatePackageAction CreateUpdatePackageAction()
 //		{
 //			return new UpdatePackageAction(this, packageManagementEvents);

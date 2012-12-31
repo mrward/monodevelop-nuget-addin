@@ -30,6 +30,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Versioning;
+
+using MonoDevelop.Core;
 using MonoDevelop.PackageManagement;
 using MonoDevelop.Projects;
 using NuGet;
@@ -139,7 +141,8 @@ namespace ICSharpCode.PackageManagement
 		{
 			string referenceName = GetReferenceName(name);
 			foreach (ProjectReference referenceProjectItem in project.References) {
-				if (IsMatchIgnoringCase(referenceProjectItem.Reference, referenceName)) {
+				string projectReferenceName = GetReferenceName(referenceProjectItem.Reference);
+				if (IsMatchIgnoringCase(projectReferenceName, referenceName)) {
 					return referenceProjectItem;
 				}
 			}
@@ -293,6 +296,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			TempLoggingService.LogInfo("DeleteFile: " + path);
 			string fileName = GetFullPath(path);
+			project.Files.Remove(fileName);
 			fileService.RemoveFile(fileName);
 			projectService.Save(project);
 			LogDeletedFileInfo(path);

@@ -55,10 +55,10 @@ namespace ICSharpCode.PackageManagement
 		
 		void InstallPackage(IPackage package, InstallPackageAction installAction);
 		//void UpdatePackage(IPackage package, UpdatePackageAction updateAction);
-		//void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction);
+		void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction);
 		
 		InstallPackageAction CreateInstallPackageAction();
-		//UninstallPackageAction CreateUninstallPackageAction();
+		UninstallPackageAction CreateUninstallPackageAction();
 		//UpdatePackageAction CreateUpdatePackageAction();
 	}
 }

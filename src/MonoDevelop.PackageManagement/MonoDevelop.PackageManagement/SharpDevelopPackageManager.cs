@@ -108,18 +108,18 @@ namespace ICSharpCode.PackageManagement
 			AddPackageReference(package, ignoreDependencies, allowPrereleaseVersions);
 		}
 		
-//		public void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction)
-//		{
-//			UninstallPackage(package, uninstallAction.ForceRemove, uninstallAction.RemoveDependencies);
-//		}
-//		
-//		public override void UninstallPackage(IPackage package, bool forceRemove, bool removeDependencies)
-//		{
-//			ProjectManager.RemovePackageReference(package.Id, forceRemove, removeDependencies);
-//			if (!IsPackageReferencedByOtherProjects(package)) {
-//				base.UninstallPackage(package, forceRemove, removeDependencies);
-//			}
-//		}
+		public void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction)
+		{
+			UninstallPackage(package, uninstallAction.ForceRemove, uninstallAction.RemoveDependencies);
+		}
+		
+		public override void UninstallPackage(IPackage package, bool forceRemove, bool removeDependencies)
+		{
+			ProjectManager.RemovePackageReference(package.Id, forceRemove, removeDependencies);
+			if (!IsPackageReferencedByOtherProjects(package)) {
+				base.UninstallPackage(package, forceRemove, removeDependencies);
+			}
+		}
 		
 		bool IsPackageReferencedByOtherProjects(IPackage package)
 		{
