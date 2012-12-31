@@ -61,7 +61,7 @@ namespace ICSharpCode.PackageManagement
 		
 		static string AppendTrailingSlashToDirectory(string directory)
 		{
-			return directory + @"\";
+			return directory + Path.DirectorySeparatorChar.ToString();
 		}
 		
 		public bool IsBindingRedirectSupported { get; set; }
