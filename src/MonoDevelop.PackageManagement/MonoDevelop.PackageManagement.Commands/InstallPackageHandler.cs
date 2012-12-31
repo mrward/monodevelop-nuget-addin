@@ -27,9 +27,11 @@
 //
 
 using System;
+using ICSharpCode.PackageManagement;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
+using NuGet;
 
 namespace MonoDevelop.PackageManagement.Commands
 {
@@ -37,7 +39,6 @@ namespace MonoDevelop.PackageManagement.Commands
 	{
 		protected override void Update (CommandInfo info)
 		{
-			System.Diagnostics.Debug.WriteLine("UPDATE");
 			if (IsDotNetProjectSelected ()) {
 				info.Bypass = false;
 			} else {
@@ -53,7 +54,23 @@ namespace MonoDevelop.PackageManagement.Commands
 		
 		protected override void Run ()
 		{
-			MessageService.ShowMessage ("Install package");
+			try {
+				TempLoggingService.LogInfo("Installing package...");
+				Project project = PackageManagementServices.ProjectService.CurrentProject;
+				IPackageRepository repository = PackageManagementServices.RegisteredPackageRepositories.ActiveRepository;
+				IPackageManagementProject packageManagementProject = PackageManagementServices.Solution.GetProject(repository, project);
+				InstallPackageAction action = packageManagementProject.CreateInstallPackageAction();
+				action.PackageId = "NUnit";
+				action.Execute();
+				
+				TempLoggingService.LogInfo("Package installed");
+				MessageService.ShowMessage("Package installed");
+			} catch (TypeLoadException ex) {
+				string message = "Type: " + ex.TypeName + "\r\n" + ex.ToString();
+				MessageService.ShowError(message);
+			} catch (Exception ex) {
+				MessageService.ShowException(ex);
+			}
 		}
 	}
 }
