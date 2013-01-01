@@ -1,10 +1,10 @@
 ﻿// 
-// ISharpDevelopPackageManager.cs
+// UpdatePackageAction.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,14 +32,42 @@ using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public interface ISharpDevelopPackageManager : IPackageManager
+	public class UpdatePackageAction : ProcessPackageOperationsAction
 	{
-		ISharpDevelopProjectManager ProjectManager { get; }
+		public UpdatePackageAction(
+			IPackageManagementProject project,
+			IPackageManagementEvents packageManagementEvents)
+			: base(project, packageManagementEvents)
+		{
+			UpdateDependencies = true;
+			UpdateIfPackageDoesNotExistInProject = true;
+		}
 		
-		void InstallPackage(IPackage package, InstallPackageAction installAction);
-		void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction);
-		void UpdatePackage(IPackage package, UpdatePackageAction updateAction);
+		public bool UpdateDependencies { get; set; }
+		public bool UpdateIfPackageDoesNotExistInProject { get; set; }
 		
-		IEnumerable<PackageOperation> GetInstallPackageOperations(IPackage package, InstallPackageAction installAction);
+		protected override IEnumerable<PackageOperation> GetPackageOperations()
+		{
+			var installAction = Project.CreateInstallPackageAction();
+			installAction.AllowPrereleaseVersions = AllowPrereleaseVersions;
+			installAction.IgnoreDependencies = !UpdateDependencies;
+			return Project.GetInstallPackageOperations(Package, installAction);
+		}
+		
+		protected override void ExecuteCore()
+		{
+			if (ShouldUpdatePackage()) {
+				Project.UpdatePackage(Package, this);
+				OnParentPackageInstalled();
+			}
+		}
+		
+		bool ShouldUpdatePackage()
+		{
+			if (!UpdateIfPackageDoesNotExistInProject) {
+				return PackageIdExistsInProject();
+			}
+			return true;
+		}
 	}
 }

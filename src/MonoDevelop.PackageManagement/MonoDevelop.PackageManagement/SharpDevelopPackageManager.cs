@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2012-2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -142,18 +142,18 @@ namespace ICSharpCode.PackageManagement
 				installAction);
 		}
 		
-//		public void UpdatePackage(IPackage package, UpdatePackageAction updateAction)
-//		{
-//			foreach (PackageOperation operation in updateAction.Operations) {
-//				Execute(operation);
-//			}
-//			UpdatePackageReference(package, updateAction);
-//		}
-//		
-//		void UpdatePackageReference(IPackage package, UpdatePackageAction updateAction)
-//		{
-//			ProjectManager.UpdatePackageReference(package.Id, package.Version, updateAction.UpdateDependencies, updateAction.AllowPrereleaseVersions);		
-//		}
+		public void UpdatePackage(IPackage package, UpdatePackageAction updateAction)
+		{
+			foreach (PackageOperation operation in updateAction.Operations) {
+				Execute(operation);
+			}
+			UpdatePackageReference(package, updateAction);
+		}
+		
+		void UpdatePackageReference(IPackage package, UpdatePackageAction updateAction)
+		{
+			ProjectManager.UpdatePackageReference(package.Id, package.Version, updateAction.UpdateDependencies, updateAction.AllowPrereleaseVersions);		
+		}
 		
 		protected override void OnInstalling(PackageOperationEventArgs e)
 		{

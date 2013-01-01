@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2012-2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -54,11 +54,11 @@ namespace ICSharpCode.PackageManagement
 		IEnumerable<PackageOperation> GetInstallPackageOperations(IPackage package, InstallPackageAction installAction);
 		
 		void InstallPackage(IPackage package, InstallPackageAction installAction);
-		//void UpdatePackage(IPackage package, UpdatePackageAction updateAction);
+		void UpdatePackage(IPackage package, UpdatePackageAction updateAction);
 		void UninstallPackage(IPackage package, UninstallPackageAction uninstallAction);
 		
 		InstallPackageAction CreateInstallPackageAction();
 		UninstallPackageAction CreateUninstallPackageAction();
-		//UpdatePackageAction CreateUpdatePackageAction();
+		UpdatePackageAction CreateUpdatePackageAction();
 	}
 }
