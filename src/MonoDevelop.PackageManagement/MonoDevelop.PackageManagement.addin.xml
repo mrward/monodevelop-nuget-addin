@@ -33,6 +33,11 @@
 			_description = "Update NuGet package"
 			_label = "U_pdate Package"
 			defaultHandler = "MonoDevelop.PackageManagement.Commands.UpdatePackageHandler" />
+		<Command
+			id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
+			_description = "Manage NuGet packages"
+			_label = "_Manage NuGet Packages..."
+			defaultHandler = "MonoDevelop.PackageManagement.Commands.ManagePackageHandler" />
 	</Extension>
 	
 	<Extension path = "/MonoDevelop/Ide/MainMenu/Project">
@@ -46,6 +51,10 @@
 			insertbefore = "ExportSeparator" />
 		<CommandItem
 			id = "MonoDevelop.PackageManagement.Commands.UpdatePackage"
+			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+			insertbefore = "ExportSeparator" />
+		<CommandItem
+			id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
 			insertbefore = "ExportSeparator" />
 	</Extension>
@@ -62,6 +71,12 @@
 				insertbefore = "AddSectionEnd" />
 			<CommandItem
 				id = "MonoDevelop.PackageManagement.Commands.UpdatePackage"
+				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+				insertbefore = "AddSectionEnd" />
+		</Condition>
+		<Condition id="ItemType" value="Solution|Project|ProjectReferenceCollection">
+			<CommandItem
+				id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
 				insertbefore = "AddSectionEnd" />
 		</Condition>

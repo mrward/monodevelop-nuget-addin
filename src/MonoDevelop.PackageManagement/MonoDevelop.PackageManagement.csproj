@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\InstallPackageHandler.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Commands\ManagePackageHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\UninstallPackageHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\UpdatePackageHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AcceptLicensesEventArgs.cs" />
@@ -205,6 +206,7 @@
   <ItemGroup>
     <Folder Include="MonoDevelop.PackageManagement.Commands" />
     <Folder Include="MonoDevelop.PackageManagement" />
+    <Folder Include="MonoDevelop.PackageManagement.Gui" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
