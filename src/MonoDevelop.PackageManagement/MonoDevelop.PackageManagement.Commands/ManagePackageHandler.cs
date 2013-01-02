@@ -60,8 +60,8 @@ namespace MonoDevelop.PackageManagement.Commands
 		protected override void Run ()
 		{
 			try {
-
-				MessageService.ShowMessage ("Manage packages");
+				var dialog = new ManagePackagesDialog ();
+				MessageService.ShowCustomDialog (dialog);
 			} catch (Exception ex) {
 				MessageService.ShowException (ex);
 			}
