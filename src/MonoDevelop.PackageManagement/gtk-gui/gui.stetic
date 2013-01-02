@@ -14,7 +14,6 @@
     <property name="WindowPosition">Center</property>
     <property name="DefaultWidth">640</property>
     <property name="DefaultHeight">480</property>
-    <property name="DestroyWithParent">True</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
