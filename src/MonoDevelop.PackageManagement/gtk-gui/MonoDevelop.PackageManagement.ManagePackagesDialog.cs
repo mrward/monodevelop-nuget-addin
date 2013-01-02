@@ -4,6 +4,15 @@ namespace MonoDevelop.PackageManagement
 {
 	public partial class ManagePackagesDialog
 	{
+		private global::Gtk.Notebook notebook;
+		private global::MonoDevelop.PackageManagement.PackagesWidget availablePackagesWidget;
+		private global::Gtk.Label availablePackagesLabel;
+		private global::MonoDevelop.PackageManagement.PackagesWidget installedPackagesWidget;
+		private global::Gtk.Label installedPackagesLabel;
+		private global::MonoDevelop.PackageManagement.PackagesWidget UpdatedPackagesWidget;
+		private global::Gtk.Label updatedPackagesLabel;
+		private global::MonoDevelop.PackageManagement.PackagesWidget recentPackagesWidget;
+		private global::Gtk.Label recentPackagesLabel;
 		private global::Gtk.Button buttonClose;
 		
 		protected virtual void Build ()
@@ -20,12 +29,70 @@ namespace MonoDevelop.PackageManagement
 			global::Gtk.VBox w1 = this.VBox;
 			w1.Name = "mainVBox";
 			w1.BorderWidth = ((uint)(2));
+			// Container child mainVBox.Gtk.Box+BoxChild
+			this.notebook = new global::Gtk.Notebook ();
+			this.notebook.CanFocus = true;
+			this.notebook.Name = "notebook";
+			this.notebook.CurrentPage = 0;
+			// Container child notebook.Gtk.Notebook+NotebookChild
+			this.availablePackagesWidget = new global::MonoDevelop.PackageManagement.PackagesWidget ();
+			this.availablePackagesWidget.Events = ((global::Gdk.EventMask)(256));
+			this.availablePackagesWidget.Name = "availablePackagesWidget";
+			this.notebook.Add (this.availablePackagesWidget);
+			// Notebook tab
+			this.availablePackagesLabel = new global::Gtk.Label ();
+			this.availablePackagesLabel.Name = "availablePackagesLabel";
+			this.availablePackagesLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Available");
+			this.notebook.SetTabLabel (this.availablePackagesWidget, this.availablePackagesLabel);
+			this.availablePackagesLabel.ShowAll ();
+			// Container child notebook.Gtk.Notebook+NotebookChild
+			this.installedPackagesWidget = new global::MonoDevelop.PackageManagement.PackagesWidget ();
+			this.installedPackagesWidget.Events = ((global::Gdk.EventMask)(256));
+			this.installedPackagesWidget.Name = "installedPackagesWidget";
+			this.notebook.Add (this.installedPackagesWidget);
+			global::Gtk.Notebook.NotebookChild w3 = ((global::Gtk.Notebook.NotebookChild)(this.notebook [this.installedPackagesWidget]));
+			w3.Position = 1;
+			// Notebook tab
+			this.installedPackagesLabel = new global::Gtk.Label ();
+			this.installedPackagesLabel.Name = "installedPackagesLabel";
+			this.installedPackagesLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Installed");
+			this.notebook.SetTabLabel (this.installedPackagesWidget, this.installedPackagesLabel);
+			this.installedPackagesLabel.ShowAll ();
+			// Container child notebook.Gtk.Notebook+NotebookChild
+			this.UpdatedPackagesWidget = new global::MonoDevelop.PackageManagement.PackagesWidget ();
+			this.UpdatedPackagesWidget.Events = ((global::Gdk.EventMask)(256));
+			this.UpdatedPackagesWidget.Name = "UpdatedPackagesWidget";
+			this.notebook.Add (this.UpdatedPackagesWidget);
+			global::Gtk.Notebook.NotebookChild w4 = ((global::Gtk.Notebook.NotebookChild)(this.notebook [this.UpdatedPackagesWidget]));
+			w4.Position = 2;
+			// Notebook tab
+			this.updatedPackagesLabel = new global::Gtk.Label ();
+			this.updatedPackagesLabel.Name = "updatedPackagesLabel";
+			this.updatedPackagesLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Updated");
+			this.notebook.SetTabLabel (this.UpdatedPackagesWidget, this.updatedPackagesLabel);
+			this.updatedPackagesLabel.ShowAll ();
+			// Container child notebook.Gtk.Notebook+NotebookChild
+			this.recentPackagesWidget = new global::MonoDevelop.PackageManagement.PackagesWidget ();
+			this.recentPackagesWidget.Events = ((global::Gdk.EventMask)(256));
+			this.recentPackagesWidget.Name = "recentPackagesWidget";
+			this.notebook.Add (this.recentPackagesWidget);
+			global::Gtk.Notebook.NotebookChild w5 = ((global::Gtk.Notebook.NotebookChild)(this.notebook [this.recentPackagesWidget]));
+			w5.Position = 3;
+			// Notebook tab
+			this.recentPackagesLabel = new global::Gtk.Label ();
+			this.recentPackagesLabel.Name = "recentPackagesLabel";
+			this.recentPackagesLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Recent");
+			this.notebook.SetTabLabel (this.recentPackagesWidget, this.recentPackagesLabel);
+			this.recentPackagesLabel.ShowAll ();
+			w1.Add (this.notebook);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook]));
+			w6.Position = 0;
 			// Internal child MonoDevelop.PackageManagement.ManagePackagesDialog.ActionArea
-			global::Gtk.HButtonBox w2 = this.ActionArea;
-			w2.Name = "buttonArea";
-			w2.Spacing = 10;
-			w2.BorderWidth = ((uint)(5));
-			w2.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w7 = this.ActionArea;
+			w7.Name = "buttonArea";
+			w7.Spacing = 10;
+			w7.BorderWidth = ((uint)(5));
+			w7.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child buttonArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonClose = new global::Gtk.Button ();
 			this.buttonClose.CanDefault = true;
@@ -35,9 +102,9 @@ namespace MonoDevelop.PackageManagement
 			this.buttonClose.UseUnderline = true;
 			this.buttonClose.Label = "gtk-close";
 			this.AddActionWidget (this.buttonClose, -7);
-			global::Gtk.ButtonBox.ButtonBoxChild w3 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w2 [this.buttonClose]));
-			w3.Expand = false;
-			w3.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w8 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w7 [this.buttonClose]));
+			w8.Expand = false;
+			w8.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

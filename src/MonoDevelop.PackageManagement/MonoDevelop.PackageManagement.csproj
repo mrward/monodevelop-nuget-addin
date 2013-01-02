@@ -212,6 +212,8 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\ManagePackagesDialog.cs" />
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.ManagePackagesDialog.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\PackagesWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackagesWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />
