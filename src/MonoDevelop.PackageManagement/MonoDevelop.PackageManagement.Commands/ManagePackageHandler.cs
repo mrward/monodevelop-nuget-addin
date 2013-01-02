@@ -61,7 +61,7 @@ namespace MonoDevelop.PackageManagement.Commands
 		{
 			try {
 				var viewModels = new PackageManagementViewModels ();
-				var dialog = new ManagePackagesDialog (viewModels);
+				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel);
 				MessageService.ShowCustomDialog (dialog);
 			} catch (Exception ex) {
 				MessageService.ShowException (ex);

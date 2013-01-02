@@ -5,16 +5,21 @@ namespace MonoDevelop.PackageManagement
 {
 	public partial class ManagePackagesDialog : Gtk.Dialog
 	{
-		public ManagePackagesDialog (PackageManagementViewModels viewModels)
+		public ManagePackagesDialog (ManagePackagesViewModel viewModel)
 		{
 			this.Build ();
 			
-			LoadViewModels (viewModels);
+			LoadViewModels (viewModel);
 		}
 		
-		void LoadViewModels (PackageManagementViewModels viewModels)
+		void LoadViewModels (ManagePackagesViewModel viewModel)
 		{
-			this.Title = viewModels.ManagePackagesViewModel.Title;
+			this.Title = viewModel.Title;
+			
+			this.availablePackagesWidget.LoadViewModel (viewModel.AvailablePackagesViewModel);
+			this.installedPackagesWidget.LoadViewModel (viewModel.InstalledPackagesViewModel);
+			this.UpdatedPackagesWidget.LoadViewModel (viewModel.UpdatedPackagesViewModel);
+			this.recentPackagesWidget.LoadViewModel (viewModel.RecentPackagesViewModel);
 		}
 	}
 }
