@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// ViewModelBase.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,40 @@
 //
 
 using System;
-using NuGet;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public abstract class ViewModelBase<TModel> : INotifyPropertyChanged
 	{
-		string message;
-		object[] args;
+		public event PropertyChangedEventHandler PropertyChanged;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public string PropertyChangedFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			MemberExpression memberExpression = expression.Body as MemberExpression;
+			return PropertyChangedFor(memberExpression);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		string PropertyChangedFor(MemberExpression memberExpression)
 		{
-			return String.Format(message, args);
+			if (memberExpression != null) {
+				return memberExpression.Member.Name;
+			}
+			return String.Empty;
+		}
+		
+		protected void OnPropertyChanged<TProperty>(Expression<Func<TModel, TProperty>> expression)
+		{
+			string propertyName = PropertyChangedFor(expression);
+			OnPropertyChanged(propertyName);
+		}
+		
+		protected void OnPropertyChanged(string propertyName)
+		{
+			if (PropertyChanged != null) {
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

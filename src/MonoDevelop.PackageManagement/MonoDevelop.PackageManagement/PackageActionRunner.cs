@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// PackageActionRunner.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,59 @@
 //
 
 using System;
+using System.Collections.Generic;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class PackageActionRunner : IPackageActionRunner
 	{
-		string message;
-		object[] args;
+		IPackageManagementEvents packageManagementEvents;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public PackageActionRunner( IPackageManagementEvents packageManagementEvents)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.packageManagementEvents = packageManagementEvents;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public void Run(IEnumerable<ProcessPackageAction> actions)
 		{
-			return String.Format(message, args);
+			if (ShouldRunActionsInConsole(actions)) {
+				ReportScriptsWillNotBeRun();
+			}
+			
+			foreach (ProcessPackageAction action in actions) {
+				action.Execute();
+			}
+		}
+		
+		bool ShouldRunActionsInConsole(IEnumerable<ProcessPackageAction> actions)
+		{
+			foreach (ProcessPackageAction action in actions) {
+				if (ShouldRunActionInConsole(action)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public void Run(ProcessPackageAction action)
+		{
+			if (ShouldRunActionInConsole(action)) {
+				ReportScriptsWillNotBeRun();
+			}
+			
+			action.Execute();
+		}
+		
+		bool ShouldRunActionInConsole(ProcessPackageAction action)
+		{
+			return action.HasPackageScriptsToRun();
+		}
+		
+		void ReportScriptsWillNotBeRun()
+		{
+			string message = "PowerShell scripts will not be run.";
+			packageManagementEvents.OnPackageOperationMessageLogged(MessageLevel.Warning, message);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// FolderBrowser.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,20 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class FolderBrowser : IFolderBrowser
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public string SelectFolder()
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
+//			using (var dialog = new FolderBrowserDialog()) {
+//				IWin32Window owner = WorkbenchSingleton.MainWin32Window;
+//				if (dialog.ShowDialog(owner) == DialogResult.OK) {
+//					return dialog.SelectedPath;
+//				}
+//			}
+			return null;
 		}
 	}
 }

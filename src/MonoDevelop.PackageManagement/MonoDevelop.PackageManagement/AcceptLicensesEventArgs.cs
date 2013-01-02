@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// AcceptLicensesEventArgs.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,19 @@
 //
 
 using System;
+using System.Collections.Generic;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class AcceptLicensesEventArgs : EventArgs
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public AcceptLicensesEventArgs(IEnumerable<IPackage> packages)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.Packages = packages;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		public IEnumerable<IPackage> Packages { get; private set; }
+		public bool IsAccepted { get; set; }
 	}
 }

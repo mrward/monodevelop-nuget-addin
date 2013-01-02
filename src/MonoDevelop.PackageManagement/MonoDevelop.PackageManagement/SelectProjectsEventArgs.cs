@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// SelectProjectsEventArgs.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,19 @@
 //
 
 using System;
-using NuGet;
+using System.Collections.Generic;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class SelectProjectsEventArgs : EventArgs
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public SelectProjectsEventArgs(IEnumerable<IPackageManagementSelectedProject> selectedProjects)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.SelectedProjects = selectedProjects;
 		}
 		
-		public MessageLevel Level { get; private set; }
+		public IEnumerable<IPackageManagementSelectedProject> SelectedProjects { get; private set; }
 		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		public bool IsAccepted { get; set; }
 	}
 }

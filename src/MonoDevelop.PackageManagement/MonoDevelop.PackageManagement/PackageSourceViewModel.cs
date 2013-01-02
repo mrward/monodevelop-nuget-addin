@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// PackageSourceViewModel.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -31,26 +31,33 @@ using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class PackageSourceViewModel : ViewModelBase<PackageSourceViewModel>
 	{
-		string message;
-		object[] args;
+		RegisteredPackageSource packageSource;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public PackageSourceViewModel(PackageSource packageSource)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.packageSource = new RegisteredPackageSource(packageSource);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public PackageSource GetPackageSource()
 		{
-			return String.Format(message, args);
+			return packageSource.ToPackageSource();
+		}
+		
+		public string Name {
+			get { return packageSource.Name; }
+			set { packageSource.Name = value; }
+		}
+		
+		public string SourceUrl {
+			get { return packageSource.Source; }
+			set { packageSource.Source = value; }
+		}
+		
+		public bool IsEnabled {
+			get { return packageSource.IsEnabled; }
+			set { packageSource.IsEnabled = value; }
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// PackagesForSelectedPageResult.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,24 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class PackagesForSelectedPageResult
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public PackagesForSelectedPageResult(IEnumerable<IPackage> packages, int totalPackages)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.Packages = packages;
+			this.TotalPackagesOnPage = packages.Count();
+			this.TotalPackages = totalPackages;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		public IEnumerable<IPackage> Packages { get; set; }
+		public int TotalPackagesOnPage { get; set; }
+		public int TotalPackages { get; set; }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// SelectedProjectsForInstalledPackages.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,19 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class SelectedProjectsForInstalledPackages : PackageManagementSelectedProjects
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public SelectedProjectsForInstalledPackages(IPackageManagementSolution solution)
+			: base(solution)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		protected override bool IsProjectSelected(IPackageManagementProject project, IPackageFromRepository package)
 		{
-			return String.Format(message, args);
+			return project.IsPackageInstalled(package);
 		}
 	}
 }

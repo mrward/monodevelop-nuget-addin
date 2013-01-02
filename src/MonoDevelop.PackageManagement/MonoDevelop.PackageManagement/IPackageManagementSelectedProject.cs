@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// IPackageManagementSelectedProject.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,17 @@
 //
 
 using System;
+using System.Collections.Generic;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public interface IPackageManagementSelectedProject
 	{
-		string message;
-		object[] args;
+		string Name { get; }
+		bool IsSelected { get; set; }
+		bool IsEnabled { get; set; }
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
-		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		IPackageManagementProject Project { get; }
 	}
 }

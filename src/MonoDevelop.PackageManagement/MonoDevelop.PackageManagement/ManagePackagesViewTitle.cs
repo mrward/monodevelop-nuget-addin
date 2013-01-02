@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// ManagePackagesViewTitle.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,23 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class ManagePackagesViewTitle
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public ManagePackagesViewTitle(IPackageManagementSolution solution)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			GetTitle(solution);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		void GetTitle(IPackageManagementSolution solution)
 		{
-			return String.Format(message, args);
+			var selectedProjects = new PackageManagementSelectedProjects(solution);
+			string selectionName = selectedProjects.SelectionName;
+			Title = String.Format("{0} - Manage Packages", selectionName);
 		}
+		
+		public string Title { get; private set; }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// MachinePackageCache.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,25 @@
 //
 
 using System;
+using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class MachinePackageCache : IMachinePackageCache
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public IQueryable<IPackage> GetPackages()
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			return MachineCache.Default.GetPackages();
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public void Clear()
 		{
-			return String.Format(message, args);
+			MachineCache.Default.Clear();
+		}
+		
+		public string Source {
+			get { return MachineCache.Default.Source; }
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// SelectProjectsService.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,30 @@
 //
 
 using System;
-using NuGet;
+using System.Collections.Generic;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class SelectProjectsService : ISelectProjectsService
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public bool SelectProjects(IEnumerable<IPackageManagementSelectedProject> projects)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			//SelectProjectsView view = CreateSelectProjectsView(projects);
+			//return view.ShowDialog() ?? false;
+			return false;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+//		SelectProjectsView CreateSelectProjectsView(IEnumerable<IPackageManagementSelectedProject> projects)
+//		{
+//			var viewModel = new SelectProjectsViewModel(projects);
+//			return CreateSelectProjectsView(viewModel);
+//		}
+//		
+//		SelectProjectsView CreateSelectProjectsView(SelectProjectsViewModel viewModel)
+//		{
+//			var view = new SelectProjectsView();
+//			view.DataContext = viewModel;
+//			return view;
+//		}
 	}
 }

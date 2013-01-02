@@ -38,6 +38,7 @@ namespace ICSharpCode.PackageManagement
 		static readonly PackageManagementEvents packageManagementEvents = new PackageManagementEvents();
 		static readonly PackageManagementProjectService projectService = new PackageManagementProjectService();
 		static readonly PackageManagementOutputMessagesView outputMessagesView;
+		static readonly PackageActionRunner packageActionRunner;
 		static readonly IPackageRepositoryCache projectTemplatePackageRepositoryCache;
 		static readonly RegisteredProjectTemplatePackageSources projectTemplatePackageSources;
 		static readonly PackageRepositoryCache packageRepositoryCache;
@@ -52,6 +53,7 @@ namespace ICSharpCode.PackageManagement
 			
 			outputMessagesView = new PackageManagementOutputMessagesView(packageManagementEvents);
 			solution = new PackageManagementSolution(registeredPackageRepositories, packageManagementEvents);
+			packageActionRunner = new PackageActionRunner(packageManagementEvents);
 		}
 		
 		public static PackageManagementOptions Options {
@@ -80,6 +82,10 @@ namespace ICSharpCode.PackageManagement
 		
 		public static IPackageManagementProjectService ProjectService {
 			get { return projectService; }
+		}
+		
+		public static IPackageActionRunner PackageActionRunner {
+			get { return packageActionRunner; }
 		}
 		
 		public static IPackageRepositoryCache ProjectTemplatePackageRepositoryCache {

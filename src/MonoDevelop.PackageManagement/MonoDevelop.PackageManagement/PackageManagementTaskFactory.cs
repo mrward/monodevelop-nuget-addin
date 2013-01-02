@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// PackageManagementTaskFactory.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,20 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class PackageManagementTaskFactory : ITaskFactory
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public ITask<TResult> CreateTask<TResult>(
+			Func<TResult> function,
+			Action<ITask<TResult>> continueWith)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
+			return new PackageManagementTask<TResult>(function, continueWith);
 		}
 	}
 }

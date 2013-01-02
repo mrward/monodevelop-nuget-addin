@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// DelegateCommand.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,41 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class DelegateCommand : ICommand
 	{
-		string message;
-		object[] args;
+		Action<object> execute;
+		Predicate<object> canExecute;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.execute = execute;
+			this.canExecute = canExecute;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public DelegateCommand(Action<object> execute)
+			: this(execute, null)
 		{
-			return String.Format(message, args);
+		}
+		
+		public event EventHandler CanExecuteChanged {
+			add { } //CommandManager.RequerySuggested += value; }
+			remove { } //CommandManager.RequerySuggested -= value; }
+		}
+		
+		public void Execute(object parameter)
+		{
+			execute(parameter);
+		}
+		
+		public bool CanExecute(object parameter)
+		{
+			if (canExecute != null) {
+				return canExecute(parameter);
+			}
+			return true;
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// ICommand.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,14 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public interface ICommand
 	{
-		string message;
-		object[] args;
+		bool CanExecute(object parameter);
+		void Execute(object parameter);
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
-		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		event EventHandler CanExecuteChanged;
 	}
 }

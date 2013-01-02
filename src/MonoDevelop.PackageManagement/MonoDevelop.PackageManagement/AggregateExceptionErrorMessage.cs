@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// AggregateExceptionErrorMessage.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,42 @@
 //
 
 using System;
-using NuGet;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class AggregateExceptionErrorMessage
 	{
-		string message;
-		object[] args;
+		AggregateException ex;
+		StringBuilder errorMessage = new StringBuilder();
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public AggregateExceptionErrorMessage(AggregateException ex)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.ex = ex;
+			BuildErrorMessage();
 		}
 		
-		public MessageLevel Level { get; private set; }
+		void BuildErrorMessage()
+		{
+			BuildErrorMessage(ex.InnerExceptions);
+		}
+		
+		void BuildErrorMessage(IEnumerable<Exception> exceptions)
+		{
+			foreach (Exception ex in exceptions) {
+				var aggregateEx = ex as AggregateException;
+				if (aggregateEx != null) {
+					BuildErrorMessage(aggregateEx.InnerExceptions);
+				} else {
+					errorMessage.AppendLine(ex.Message);
+				}
+			}
+		}
 		
 		public override string ToString()
 		{
-			return String.Format(message, args);
+			return errorMessage.ToString().TrimEnd();
 		}
 	}
 }

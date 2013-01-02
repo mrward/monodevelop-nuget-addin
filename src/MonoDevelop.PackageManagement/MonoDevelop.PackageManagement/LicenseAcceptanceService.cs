@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// LicenseAcceptanceService.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,33 @@
 //
 
 using System;
+using System.Collections.Generic;
+
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class LicenseAcceptanceService : ILicenseAcceptanceService
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public bool AcceptLicenses(IEnumerable<IPackage> packages)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			//LicenseAcceptanceView view = CreateLicenseAcceptanceView(packages);
+			//return view.ShowDialog() ?? false;
+			return false;
 		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+//		
+//		LicenseAcceptanceView CreateLicenseAcceptanceView(IEnumerable<IPackage> packages)
+//		{
+//			var viewModel = new LicenseAcceptanceViewModel(packages);
+//			return CreateLicenseAcceptanceView(viewModel);
+//		}
+//		
+//		LicenseAcceptanceView CreateLicenseAcceptanceView(LicenseAcceptanceViewModel viewModel)
+//		{
+//			var view = new LicenseAcceptanceView();
+//			view.DataContext = viewModel;
+//			view.Owner = Owner;
+//			return view;
+//		}
 	}
 }

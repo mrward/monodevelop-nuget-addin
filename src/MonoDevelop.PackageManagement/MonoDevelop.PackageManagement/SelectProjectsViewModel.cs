@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// SelectProjectsViewModel.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,35 @@
 //
 
 using System;
-using NuGet;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class SelectProjectsViewModel
 	{
-		string message;
-		object[] args;
+		ObservableCollection<IPackageManagementSelectedProject> projects = 
+			new ObservableCollection<IPackageManagementSelectedProject>();
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public SelectProjectsViewModel(IEnumerable<IPackageManagementSelectedProject> projects)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			AddProjects(projects);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		void AddProjects(IEnumerable<IPackageManagementSelectedProject> projects)
 		{
-			return String.Format(message, args);
+			foreach (IPackageManagementSelectedProject project in projects) {
+				AddProject(project);
+			}
+		}
+		
+		void AddProject(IPackageManagementSelectedProject project)
+		{
+			projects.Add(project);
+		}
+		
+		public ObservableCollection<IPackageManagementSelectedProject> Projects {
+			get { return projects; }
 		}
 	}
 }

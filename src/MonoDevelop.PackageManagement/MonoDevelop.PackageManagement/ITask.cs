@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// ITask.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,18 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public interface ITask<TResult>
 	{
-		string message;
-		object[] args;
+		void Start();
+		void Cancel();
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
-		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
+		TResult Result { get; }
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		bool IsCancelled { get; }
+		bool IsFaulted { get; }
+		AggregateException Exception { get; }
 	}
 }

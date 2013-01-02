@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// UpdatePackageViewModelFactory.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -31,26 +31,24 @@ using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class UpdatedPackageViewModelFactory : PackageViewModelFactory
 	{
-		string message;
-		object[] args;
+		SelectedProjectsForUpdatedPackages selectedProjectsForUpdatedPackages;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public UpdatedPackageViewModelFactory(IPackageViewModelFactory packageViewModelFactory)
+			: base(packageViewModelFactory)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			selectedProjectsForUpdatedPackages = new SelectedProjectsForUpdatedPackages(Solution);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public override PackageViewModel CreatePackageViewModel(IPackageFromRepository package)
 		{
-			return String.Format(message, args);
+			return new UpdatedPackageViewModel(
+				package,
+				selectedProjectsForUpdatedPackages,
+				PackageManagementEvents,
+				PackageActionRunner,
+				Logger);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// UpdatedPackages.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,57 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class UpdatedPackages
 	{
-		string message;
-		object[] args;
+		IPackageRepository sourceRepository;
+		IQueryable<IPackage> installedPackages;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public UpdatedPackages(
+			IPackageManagementProject project,
+			IPackageRepository aggregateRepository)
+			: this(
+				project.GetPackages(),
+				aggregateRepository)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public UpdatedPackages(
+			IQueryable<IPackage> installedPackages,
+			IPackageRepository aggregrateRepository)
 		{
-			return String.Format(message, args);
+			this.installedPackages = installedPackages;
+			this.sourceRepository = aggregrateRepository;
+		}
+		
+		public string SearchTerms { get; set; }
+		
+		public IEnumerable<IPackage> GetUpdatedPackages()
+		{
+			IQueryable<IPackage> localPackages = installedPackages;
+			localPackages = FilterPackages(localPackages);
+			return GetUpdatedPackages(sourceRepository, localPackages);
+		}
+		
+		IQueryable<IPackage> GetInstalledPackages()
+		{
+			return installedPackages;
+		}
+		
+		IQueryable<IPackage> FilterPackages(IQueryable<IPackage> localPackages)
+		{
+			return localPackages.Find(SearchTerms);
+		}
+		
+		IEnumerable<IPackage> GetUpdatedPackages(IPackageRepository sourceRepository, IQueryable<IPackage> localPackages)
+		{
+			return sourceRepository.GetUpdates(localPackages, false, false);
 		}
 	}
 }

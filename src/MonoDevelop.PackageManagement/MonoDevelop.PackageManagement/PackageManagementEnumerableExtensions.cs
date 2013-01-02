@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// PackageManagementEnumerableExtensions.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,29 @@
 //
 
 using System;
+using System.Collections.Generic;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public static class PackageManagementEnumerableExtensions
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public static IEnumerable<TSource> DistinctLast<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource> comparer)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
+			TSource previousItem = default(TSource);
+			
+			foreach (TSource currentItem in source) {
+				if (previousItem != null) {
+					if (!comparer.Equals(previousItem, currentItem)) {
+						yield return previousItem;
+					}
+				}
+				previousItem = currentItem;
+			}
+			
+			if (previousItem != null) {
+				yield return previousItem;
+			}
 		}
 	}
 }

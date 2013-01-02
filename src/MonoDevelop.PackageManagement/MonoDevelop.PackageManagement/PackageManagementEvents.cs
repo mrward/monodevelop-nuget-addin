@@ -54,17 +54,17 @@ namespace ICSharpCode.PackageManagement
 			}
 		}
 		
-		//public event EventHandler<AcceptLicensesEventArgs> AcceptLicenses;
+		public event EventHandler<AcceptLicensesEventArgs> AcceptLicenses;
 		
-//		public bool OnAcceptLicenses(IEnumerable<IPackage> packages)
-//		{
-//			if (AcceptLicenses != null) {
-//				var eventArgs = new AcceptLicensesEventArgs(packages);
-//				AcceptLicenses(this, eventArgs);
-//				return eventArgs.IsAccepted;
-//			}
-//			return true;
-//		}
+		public bool OnAcceptLicenses(IEnumerable<IPackage> packages)
+		{
+			if (AcceptLicenses != null) {
+				var eventArgs = new AcceptLicensesEventArgs(packages);
+				AcceptLicenses(this, eventArgs);
+				return eventArgs.IsAccepted;
+			}
+			return true;
+		}
 		
 		public event EventHandler<ParentPackageOperationEventArgs> ParentPackageInstalled;
 		
@@ -96,16 +96,16 @@ namespace ICSharpCode.PackageManagement
 			}
 		}
 		
-//		public event EventHandler<SelectProjectsEventArgs> SelectProjects;
-//		
-//		public bool OnSelectProjects(IEnumerable<IPackageManagementSelectedProject> projects)
-//		{
-//			if (SelectProjects != null) {
-//				var eventArgs = new SelectProjectsEventArgs(projects);
-//				SelectProjects(this, eventArgs);
-//				return eventArgs.IsAccepted;
-//			}
-//			return true;
-//		}
+		public event EventHandler<SelectProjectsEventArgs> SelectProjects;
+		
+		public bool OnSelectProjects(IEnumerable<IPackageManagementSelectedProject> projects)
+		{
+			if (SelectProjects != null) {
+				var eventArgs = new SelectProjectsEventArgs(projects);
+				SelectProjects(this, eventArgs);
+				return eventArgs.IsAccepted;
+			}
+			return true;
+		}
 	}
 }

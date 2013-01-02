@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// SelectedProjectsForUpdatedPackages.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,33 @@
 //
 
 using System;
+using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class SelectedProjectsForUpdatedPackages : PackageManagementSelectedProjects
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public SelectedProjectsForUpdatedPackages(IPackageManagementSolution solution)
+			: base(solution)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		protected override bool IsProjectSelected(IPackageManagementProject project, IPackageFromRepository package)
 		{
-			return String.Format(message, args);
+			return IsProjectEnabled(project, package);
+		}
+		
+		protected override bool IsProjectEnabled(IPackageManagementProject project, IPackageFromRepository package)
+		{
+			return project.GetPackages()
+				.Where(p => IsPackageIdMatch(p.Id, package.Id))
+				.Any(p => p.Version < package.Version);
+		}
+		
+		bool IsPackageIdMatch(string id1, string id2)
+		{
+			return String.Equals(id1, id2, StringComparison.InvariantCultureIgnoreCase);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// PackageManagementTask.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,62 @@
 //
 
 using System;
-using NuGet;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class PackageManagementTask<TResult> : ITask<TResult>
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		Task<TResult> task;
+		Action<ITask<TResult>> continueWith;
+		CancellationTokenSource cancellationTokenSource;
+			
+		public PackageManagementTask(
+			Func<TResult> function,
+			Action<ITask<TResult>> continueWith)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			this.continueWith = continueWith;			
+			CreateTask(function);
+		}
+
+		void CreateTask(Func<TResult> function)
+		{
+			TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+			cancellationTokenSource = new CancellationTokenSource();
+			task = new Task<TResult>(function, cancellationTokenSource.Token);
+			task.ContinueWith(result => OnContinueWith(result), scheduler);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		void OnContinueWith(Task<TResult> task)
 		{
-			return String.Format(message, args);
+			continueWith(this);
+		}
+		
+		public void Start()
+		{
+			task.Start();
+		}
+		
+		public TResult Result {
+			get { return task.Result; }
+		}
+		
+		public void Cancel()
+		{
+			cancellationTokenSource.Cancel();
+		}
+		
+		public bool IsCancelled {
+			get { return task.IsCanceled; }
+		}
+		
+		public bool IsFaulted {
+			get { return task.IsFaulted; }
+		}
+		
+		public AggregateException Exception {
+			get { return task.Exception; }
 		}
 	}
 }

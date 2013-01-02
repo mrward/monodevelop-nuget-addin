@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// IPackageFromRepository.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -31,26 +31,10 @@ using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public interface IPackageFromRepository : IPackage
 	{
-		string message;
-		object[] args;
-		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
-		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
-		}
-		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
-		{
-			return String.Format(message, args);
-		}
+		IPackageRepository Repository { get; }
+		bool HasDependencies { get; }
+		DateTime? LastUpdated { get; }
 	}
 }

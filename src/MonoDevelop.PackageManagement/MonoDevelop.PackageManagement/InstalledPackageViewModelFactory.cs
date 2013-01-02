@@ -1,5 +1,5 @@
 ﻿// 
-// PackageOperationMessage.cs
+// InstalledPackageViewModelFactory.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,30 +27,27 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageOperationMessage
+	public class InstalledPackageViewModelFactory : PackageViewModelFactory
 	{
-		string message;
-		object[] args;
+		SelectedProjectsForInstalledPackages selectedProjectsForInstalledPackages;
 		
-		public PackageOperationMessage(
-			MessageLevel level,
-			string message,
-			params object[] args)
+		public InstalledPackageViewModelFactory(IPackageViewModelFactory packageViewModelFactory)
+			: base(packageViewModelFactory)
 		{
-			this.Level = level;
-			this.message = message;
-			this.args = args;
+			selectedProjectsForInstalledPackages = new SelectedProjectsForInstalledPackages(Solution);
 		}
 		
-		public MessageLevel Level { get; private set; }
-		
-		public override string ToString()
+		public override PackageViewModel CreatePackageViewModel(IPackageFromRepository package)
 		{
-			return String.Format(message, args);
+			return new InstalledPackageViewModel(
+				package,
+				selectedProjectsForInstalledPackages,
+				PackageManagementEvents,
+				PackageActionRunner,
+				Logger);
 		}
 	}
 }
