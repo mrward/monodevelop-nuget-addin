@@ -3,7 +3,7 @@
        namespace   = "MonoDevelop"
        author      = "Matt Ward"
        copyright   = "MIT X11"
-       url         = "http://github.com/mrward/monodevelop-nuget"
+       url         = "https://github.com/mrward/monodevelop-nuget-addin"
        description = "NuGet Package Management"
        category    = "IDE extensions"
        version     = "0.1">
