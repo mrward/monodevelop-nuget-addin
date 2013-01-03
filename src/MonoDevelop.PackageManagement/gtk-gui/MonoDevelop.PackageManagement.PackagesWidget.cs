@@ -42,6 +42,7 @@ namespace MonoDevelop.PackageManagement
 			this.packagesTreeView.CanFocus = true;
 			this.packagesTreeView.Name = "packagesTreeView";
 			this.packagesTreeView.EnableSearch = false;
+			this.packagesTreeView.HeadersVisible = false;
 			this.GtkScrolledWindow2.Add (this.packagesTreeView);
 			this.packagesListVBox.Add (this.GtkScrolledWindow2);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.packagesListVBox [this.GtkScrolledWindow2]));

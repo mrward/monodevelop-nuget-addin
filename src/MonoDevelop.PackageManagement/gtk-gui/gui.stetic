@@ -150,6 +150,7 @@
                     <property name="CanFocus">True</property>
                     <property name="ShowScrollbars">True</property>
                     <property name="EnableSearch">False</property>
+                    <property name="HeadersVisible">False</property>
                   </widget>
                 </child>
               </widget>
