@@ -453,5 +453,12 @@ namespace ICSharpCode.PackageManagement
 				operation.Package.RequireLicenseAcceptance &&
 				!IsPackageInstalledInSolution(operation.Package);
 		}
+		
+		static readonly string DisplayTextMarkupFormat = "<span weight='bold'>{0}</span>\n{1}";
+		
+		public string GetDisplayTextMarkup()
+		{
+			return MarkupString.Format (DisplayTextMarkupFormat, package.Id, package.Summary);
+		}
 	}
 }

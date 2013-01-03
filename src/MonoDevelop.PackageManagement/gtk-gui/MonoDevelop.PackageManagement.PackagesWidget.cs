@@ -5,6 +5,9 @@ namespace MonoDevelop.PackageManagement
 	public partial class PackagesWidget
 	{
 		private global::Gtk.HPaned mainPane;
+		private global::Gtk.VBox packagesListVBox;
+		private global::Gtk.ScrolledWindow GtkScrolledWindow2;
+		private global::Gtk.TreeView packagesTreeView;
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		private global::Gtk.TextView packagesListTextView;
 		private global::Gtk.VBox packageInfoVBox;
@@ -27,6 +30,23 @@ namespace MonoDevelop.PackageManagement
 			this.mainPane.Name = "mainPane";
 			this.mainPane.Position = 322;
 			// Container child mainPane.Gtk.Paned+PanedChild
+			this.packagesListVBox = new global::Gtk.VBox ();
+			this.packagesListVBox.Name = "packagesListVBox";
+			this.packagesListVBox.Spacing = 6;
+			// Container child packagesListVBox.Gtk.Box+BoxChild
+			this.GtkScrolledWindow2 = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow2.Name = "GtkScrolledWindow2";
+			this.GtkScrolledWindow2.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow2.Gtk.Container+ContainerChild
+			this.packagesTreeView = new global::Gtk.TreeView ();
+			this.packagesTreeView.CanFocus = true;
+			this.packagesTreeView.Name = "packagesTreeView";
+			this.packagesTreeView.EnableSearch = false;
+			this.GtkScrolledWindow2.Add (this.packagesTreeView);
+			this.packagesListVBox.Add (this.GtkScrolledWindow2);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.packagesListVBox [this.GtkScrolledWindow2]));
+			w2.Position = 0;
+			// Container child packagesListVBox.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
 			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
@@ -35,9 +55,12 @@ namespace MonoDevelop.PackageManagement
 			this.packagesListTextView.CanFocus = true;
 			this.packagesListTextView.Name = "packagesListTextView";
 			this.GtkScrolledWindow.Add (this.packagesListTextView);
-			this.mainPane.Add (this.GtkScrolledWindow);
-			global::Gtk.Paned.PanedChild w2 = ((global::Gtk.Paned.PanedChild)(this.mainPane [this.GtkScrolledWindow]));
-			w2.Resize = false;
+			this.packagesListVBox.Add (this.GtkScrolledWindow);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.packagesListVBox [this.GtkScrolledWindow]));
+			w4.Position = 1;
+			this.mainPane.Add (this.packagesListVBox);
+			global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.mainPane [this.packagesListVBox]));
+			w5.Resize = false;
 			// Container child mainPane.Gtk.Paned+PanedChild
 			this.packageInfoVBox = new global::Gtk.VBox ();
 			this.packageInfoVBox.Name = "packageInfoVBox";
@@ -46,10 +69,10 @@ namespace MonoDevelop.PackageManagement
 			this.packageSourceComboBox = global::Gtk.ComboBox.NewText ();
 			this.packageSourceComboBox.Name = "packageSourceComboBox";
 			this.packageInfoVBox.Add (this.packageSourceComboBox);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageSourceComboBox]));
-			w3.Position = 0;
-			w3.Expand = false;
-			w3.Fill = false;
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageSourceComboBox]));
+			w6.Position = 0;
+			w6.Expand = false;
+			w6.Fill = false;
 			// Container child packageInfoVBox.Gtk.Box+BoxChild
 			this.packageSearchHBox = new global::Gtk.HBox ();
 			this.packageSearchHBox.Name = "packageSearchHBox";
@@ -61,37 +84,37 @@ namespace MonoDevelop.PackageManagement
 			this.packageSearchEntry.IsEditable = true;
 			this.packageSearchEntry.InvisibleChar = '●';
 			this.packageSearchHBox.Add (this.packageSearchEntry);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.packageSearchHBox [this.packageSearchEntry]));
-			w4.Position = 0;
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.packageSearchHBox [this.packageSearchEntry]));
+			w7.Position = 0;
 			// Container child packageSearchHBox.Gtk.Box+BoxChild
 			this.packageSearchButton = new global::Gtk.Button ();
 			this.packageSearchButton.CanFocus = true;
 			this.packageSearchButton.Name = "packageSearchButton";
 			this.packageSearchButton.UseUnderline = true;
 			// Container child packageSearchButton.Gtk.Container+ContainerChild
-			global::Gtk.Alignment w5 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			global::Gtk.Alignment w8 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			global::Gtk.HBox w6 = new global::Gtk.HBox ();
-			w6.Spacing = 2;
+			global::Gtk.HBox w9 = new global::Gtk.HBox ();
+			w9.Spacing = 2;
 			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Image w7 = new global::Gtk.Image ();
-			w7.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.Menu);
-			w6.Add (w7);
+			global::Gtk.Image w10 = new global::Gtk.Image ();
+			w10.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.Menu);
+			w9.Add (w10);
 			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Label w9 = new global::Gtk.Label ();
-			w6.Add (w9);
-			w5.Add (w6);
-			this.packageSearchButton.Add (w5);
+			global::Gtk.Label w12 = new global::Gtk.Label ();
+			w9.Add (w12);
+			w8.Add (w9);
+			this.packageSearchButton.Add (w8);
 			this.packageSearchHBox.Add (this.packageSearchButton);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.packageSearchHBox [this.packageSearchButton]));
-			w13.Position = 1;
-			w13.Expand = false;
-			w13.Fill = false;
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.packageSearchHBox [this.packageSearchButton]));
+			w16.Position = 1;
+			w16.Expand = false;
+			w16.Fill = false;
 			this.packageInfoVBox.Add (this.packageSearchHBox);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageSearchHBox]));
-			w14.Position = 1;
-			w14.Expand = false;
-			w14.Fill = false;
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageSearchHBox]));
+			w17.Position = 1;
+			w17.Expand = false;
+			w17.Fill = false;
 			// Container child packageInfoVBox.Gtk.Box+BoxChild
 			this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
@@ -102,8 +125,8 @@ namespace MonoDevelop.PackageManagement
 			this.packageInfoTextView.Name = "packageInfoTextView";
 			this.GtkScrolledWindow1.Add (this.packageInfoTextView);
 			this.packageInfoVBox.Add (this.GtkScrolledWindow1);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.GtkScrolledWindow1]));
-			w16.Position = 2;
+			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.GtkScrolledWindow1]));
+			w19.Position = 2;
 			this.mainPane.Add (this.packageInfoVBox);
 			this.Add (this.mainPane);
 			if ((this.Child != null)) {
