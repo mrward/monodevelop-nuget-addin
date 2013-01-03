@@ -110,6 +110,9 @@ namespace MonoDevelop.PackageManagement
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
+			this.packageSourceComboBox.Changed += new global::System.EventHandler (this.PackageSourceChanged);
+			this.packageSearchEntry.Activated += new global::System.EventHandler (this.PackageSearchEntryActivated);
+			this.packageSearchButton.Clicked += new global::System.EventHandler (this.SearchButtonClicked);
 		}
 	}
 }
