@@ -6,6 +6,7 @@ using System.Linq;
 using Gdk;
 using Gtk;
 using ICSharpCode.PackageManagement;
+using MonoDevelop.Ide;
 using NuGet;
 
 namespace MonoDevelop.PackageManagement
@@ -136,7 +137,10 @@ namespace MonoDevelop.PackageManagement
 		
 		void AppendPackageToTreeView (PackageViewModel packageViewModel)
 		{
-			packageStore.AppendValues (null, packageViewModel.GetDisplayTextMarkup (), packageViewModel);
+			packageStore.AppendValues (
+				ImageService.GetPixbuf ("md-nuget-package", IconSize.Dnd),
+				packageViewModel.GetDisplayTextMarkup (),
+				packageViewModel);
 		}
 	}
 }

@@ -81,4 +81,8 @@
 				insertbefore = "AddSectionEnd" />
 		</Condition>
 	</Extension>
+	
+	<Extension path="/MonoDevelop/Core/StockIcons">
+		<StockIcon stockid="md-nuget-package" resource="packageicon.png" />
+	</Extension>
 </Addin>
