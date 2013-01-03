@@ -25,8 +25,6 @@ namespace MonoDevelop.PackageManagement
 			
 			this.packageSearchHBox.Visible = viewModel.IsSearchable;
 			PopulatePackageSources ();
-			this.packageSourceComboBox.Changed += PackageSourceChanged;
-			
 			viewModel.PropertyChanged += ViewModelPropertyChanged;
 		}
 		
@@ -74,10 +72,30 @@ namespace MonoDevelop.PackageManagement
 			
 			return PackageSources [this.packageSourceComboBox.Active];
 		}
+		
+		void SearchButtonClicked (object sender, EventArgs e)
+		{
+			Search ();
+		}
+		
+		void Search ()
+		{
+			viewModel.SearchTerms = this.packageSearchEntry.Text;
+			viewModel.SearchCommand.Execute (null);
+		}
 
 		void ViewModelPropertyChanged (object sender, PropertyChangedEventArgs e)
 		{
 			this.packagesListTextView.Buffer.Text += "PropertyChanged: " + e.PropertyName + "\r\n";
+			
+			foreach (PackageViewModel packageViewModel in viewModel.PackageViewModels) {
+				this.packagesListTextView.Buffer.Text += packageViewModel.Id + "\r\n";
+			}
+		}
+
+		void PackageSearchEntryActivated (object sender, EventArgs e)
+		{
+			Search ();
 		}
 	}
 }

@@ -14,7 +14,6 @@
     <property name="WindowPosition">Center</property>
     <property name="DefaultWidth">640</property>
     <property name="DefaultHeight">480</property>
-    <property name="DestroyWithParent">True</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
@@ -163,6 +162,7 @@
                 <property name="MemberName" />
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes" />
+                <signal name="Changed" handler="PackageSourceChanged" />
               </widget>
               <packing>
                 <property name="Position">0</property>
@@ -181,6 +181,7 @@
                     <property name="CanFocus">True</property>
                     <property name="IsEditable">True</property>
                     <property name="InvisibleChar">●</property>
+                    <signal name="Activated" handler="PackageSearchEntryActivated" after="yes" />
                   </widget>
                   <packing>
                     <property name="Position">0</property>
@@ -195,6 +196,7 @@
                     <property name="Icon">stock:gtk-find Menu</property>
                     <property name="Label" translatable="yes" />
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="SearchButtonClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>

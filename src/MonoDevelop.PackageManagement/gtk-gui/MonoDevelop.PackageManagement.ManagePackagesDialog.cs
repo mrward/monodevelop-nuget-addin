@@ -24,7 +24,6 @@ namespace MonoDevelop.PackageManagement
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 			this.DefaultWidth = 640;
 			this.DefaultHeight = 480;
-			this.DestroyWithParent = true;
 			// Internal child MonoDevelop.PackageManagement.ManagePackagesDialog.VBox
 			global::Gtk.VBox w1 = this.VBox;
 			w1.Name = "mainVBox";
