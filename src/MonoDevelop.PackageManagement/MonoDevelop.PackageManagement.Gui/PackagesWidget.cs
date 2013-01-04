@@ -202,12 +202,14 @@ namespace MonoDevelop.PackageManagement
 		{
 			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
 			packageViewModel.AddPackage ();
+			EnablePackageActionButtons (packageViewModel);
 		}
 		
 		void RemovePackageButtonClicked (object sender, EventArgs e)
 		{
 			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
 			packageViewModel.RemovePackage ();
+			EnablePackageActionButtons (packageViewModel);
 		}
 		
 		void ManagePackagesButtonClicked (object sender, EventArgs e)
