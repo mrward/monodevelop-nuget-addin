@@ -153,7 +153,12 @@ namespace ICSharpCode.PackageManagement
 		}
 		
 		public string Summary {
-			get { return package.Summary; }
+			get {
+				if (!String.IsNullOrEmpty (package.Summary)) {
+					return package.Summary;
+				}
+				return package.Description;
+			}
 		}
 		
 		public SemanticVersion Version {
@@ -458,7 +463,7 @@ namespace ICSharpCode.PackageManagement
 		
 		public string GetDisplayTextMarkup ()
 		{
-			return MarkupString.Format (DisplayTextMarkupFormat, package.Id, package.Summary);
+			return MarkupString.Format (DisplayTextMarkupFormat, package.Id, Summary);
 		}
 		
 		public string GetAuthors()
