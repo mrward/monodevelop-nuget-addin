@@ -137,6 +137,7 @@ namespace MonoDevelop.PackageManagement
 				this.Child.ShowAll ();
 			}
 			this.Show ();
+			this.messagesExpander.Activated += new global::System.EventHandler (this.MessagesExpanderActivated);
 		}
 	}
 }

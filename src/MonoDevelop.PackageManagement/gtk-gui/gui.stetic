@@ -104,6 +104,7 @@
           <widget class="Gtk.Expander" id="messagesExpander">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
+            <signal name="Activated" handler="MessagesExpanderActivated" />
             <child>
               <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow8">
                 <property name="MemberName" />

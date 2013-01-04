@@ -63,6 +63,12 @@ namespace MonoDevelop.PackageManagement
 			RemovePackageManagementEventHandlers ();
 			base.Destroy ();
 		}
+		
+		void MessagesExpanderActivated (object sender, EventArgs e)
+		{
+			var child = this.VBox [this.messagesExpander] as Box.BoxChild;
+			child.Expand = this.messagesExpander.Expanded;
+		}
 	}
 }
 
