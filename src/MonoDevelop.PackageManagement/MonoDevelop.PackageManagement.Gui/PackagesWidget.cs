@@ -172,16 +172,10 @@ namespace MonoDevelop.PackageManagement
 		
 		void ViewModelPropertyChanged (object sender, PropertyChangedEventArgs e)
 		{
-			this.packagesListTextView.Buffer.Text += "PropertyChanged: " + e.PropertyName + "\r\n";
 			this.packageStore.Clear ();
 			
 			foreach (PackageViewModel packageViewModel in viewModel.PackageViewModels) {
-				this.packagesListTextView.Buffer.Text += packageViewModel.Id + "\r\n";
 				AppendPackageToTreeView (packageViewModel);
-			}
-			
-			if (viewModel.HasError) {
-				this.packagesListTextView.Buffer.Text += viewModel.ErrorMessage + "\r\n";
 			}
 		}
 

@@ -100,6 +100,43 @@
             <property name="AutoSize">True</property>
           </packing>
         </child>
+        <child>
+          <widget class="Gtk.Expander" id="messagesExpander">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <child>
+              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow8">
+                <property name="MemberName" />
+                <property name="ShadowType">In</property>
+                <child>
+                  <widget class="Gtk.TextView" id="messagesTextView">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="ShowScrollbars">True</property>
+                    <property name="Editable">False</property>
+                    <property name="CursorVisible">False</property>
+                    <property name="Text" translatable="yes" />
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="messagesExpanderLabel">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">Messages</property>
+                <property name="UseUnderline">True</property>
+              </widget>
+              <packing>
+                <property name="type">label_item</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+          </packing>
+        </child>
       </widget>
     </child>
     <child internal-child="ActionArea">
@@ -156,24 +193,6 @@
               </widget>
               <packing>
                 <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
-                <property name="MemberName" />
-                <property name="ShadowType">In</property>
-                <child>
-                  <widget class="Gtk.TextView" id="packagesListTextView">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="ShowScrollbars">True</property>
-                    <property name="Text" translatable="yes" />
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
                 <property name="AutoSize">True</property>
               </packing>
             </child>

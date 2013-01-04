@@ -13,6 +13,10 @@ namespace MonoDevelop.PackageManagement
 		private global::Gtk.Label updatedPackagesLabel;
 		private global::MonoDevelop.PackageManagement.PackagesWidget recentPackagesWidget;
 		private global::Gtk.Label recentPackagesLabel;
+		private global::Gtk.Expander messagesExpander;
+		private global::Gtk.ScrolledWindow GtkScrolledWindow8;
+		private global::Gtk.TextView messagesTextView;
+		private global::Gtk.Label messagesExpanderLabel;
 		private global::Gtk.Button buttonClose;
 		
 		protected virtual void Build ()
@@ -86,12 +90,37 @@ namespace MonoDevelop.PackageManagement
 			w1.Add (this.notebook);
 			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook]));
 			w6.Position = 0;
+			// Container child mainVBox.Gtk.Box+BoxChild
+			this.messagesExpander = new global::Gtk.Expander (null);
+			this.messagesExpander.CanFocus = true;
+			this.messagesExpander.Name = "messagesExpander";
+			// Container child messagesExpander.Gtk.Container+ContainerChild
+			this.GtkScrolledWindow8 = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow8.Name = "GtkScrolledWindow8";
+			this.GtkScrolledWindow8.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow8.Gtk.Container+ContainerChild
+			this.messagesTextView = new global::Gtk.TextView ();
+			this.messagesTextView.CanFocus = true;
+			this.messagesTextView.Name = "messagesTextView";
+			this.messagesTextView.Editable = false;
+			this.messagesTextView.CursorVisible = false;
+			this.GtkScrolledWindow8.Add (this.messagesTextView);
+			this.messagesExpander.Add (this.GtkScrolledWindow8);
+			this.messagesExpanderLabel = new global::Gtk.Label ();
+			this.messagesExpanderLabel.Name = "messagesExpanderLabel";
+			this.messagesExpanderLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Messages");
+			this.messagesExpanderLabel.UseUnderline = true;
+			this.messagesExpander.LabelWidget = this.messagesExpanderLabel;
+			w1.Add (this.messagesExpander);
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.messagesExpander]));
+			w9.Position = 1;
+			w9.Expand = false;
 			// Internal child MonoDevelop.PackageManagement.ManagePackagesDialog.ActionArea
-			global::Gtk.HButtonBox w7 = this.ActionArea;
-			w7.Name = "buttonArea";
-			w7.Spacing = 10;
-			w7.BorderWidth = ((uint)(5));
-			w7.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w10 = this.ActionArea;
+			w10.Name = "buttonArea";
+			w10.Spacing = 10;
+			w10.BorderWidth = ((uint)(5));
+			w10.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child buttonArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonClose = new global::Gtk.Button ();
 			this.buttonClose.CanDefault = true;
@@ -101,9 +130,9 @@ namespace MonoDevelop.PackageManagement
 			this.buttonClose.UseUnderline = true;
 			this.buttonClose.Label = "gtk-close";
 			this.AddActionWidget (this.buttonClose, -7);
-			global::Gtk.ButtonBox.ButtonBoxChild w8 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w7 [this.buttonClose]));
-			w8.Expand = false;
-			w8.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.buttonClose]));
+			w11.Expand = false;
+			w11.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
