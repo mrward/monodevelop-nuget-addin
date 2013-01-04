@@ -1,10 +1,10 @@
 ﻿// 
-// InstallPackageHandler.cs
+// ManagePackage.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012-2013 Matthew Ward
+// Copyright (C) 2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -35,11 +35,11 @@ using NuGet;
 
 namespace MonoDevelop.PackageManagement.Commands
 {
-	public class InstallPackageHandler : CommandHandler
+	public class ManagePackagesHandler : CommandHandler
 	{
 		protected override void Update (CommandInfo info)
 		{
-			if (IsDotNetProjectSelected ()) {
+			if (IsDotNetProjectSelected () || IsDotNetSolutionSelected()) {
 				info.Bypass = false;
 			} else {
 				info.Enabled = false;
@@ -52,25 +52,19 @@ namespace MonoDevelop.PackageManagement.Commands
 			return IdeApp.ProjectOperations.CurrentSelectedProject is DotNetProject;
 		}
 		
+		bool IsDotNetSolutionSelected ()
+		{
+			return IdeApp.ProjectOperations.CurrentSelectedSolution != null;
+		}
+		
 		protected override void Run ()
 		{
 			try {
-				TempLoggingService.LogInfo("Installing package...");
-				Project project = PackageManagementServices.ProjectService.CurrentProject;
-				IPackageRepository repository = PackageManagementServices.RegisteredPackageRepositories.ActiveRepository;
-				IPackageManagementProject packageManagementProject = PackageManagementServices.Solution.GetProject(repository, project);
-				InstallPackageAction action = packageManagementProject.CreateInstallPackageAction();
-				action.PackageId = "NUnit";
-				action.PackageVersion = new SemanticVersion("2.5.7.10213");
-				action.Execute();
-				
-				TempLoggingService.LogInfo("Package installed");
-				MessageService.ShowMessage("Package installed");
-			} catch (TypeLoadException ex) {
-				string message = "Type: " + ex.TypeName + "\r\n" + ex.ToString();
-				MessageService.ShowError(message);
+				var viewModels = new PackageManagementViewModels ();
+				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel);
+				MessageService.ShowCustomDialog (dialog);
 			} catch (Exception ex) {
-				MessageService.ShowException(ex);
+				MessageService.ShowException (ex);
 			}
 		}
 	}

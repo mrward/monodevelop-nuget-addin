@@ -68,10 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="MonoDevelop.PackageManagement.Commands\InstallPackageHandler.cs" />
-    <Compile Include="MonoDevelop.PackageManagement.Commands\ManagePackageHandler.cs" />
-    <Compile Include="MonoDevelop.PackageManagement.Commands\UninstallPackageHandler.cs" />
-    <Compile Include="MonoDevelop.PackageManagement.Commands\UpdatePackageHandler.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Commands\ManagePackagesHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AcceptLicensesEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AggregateExceptionErrorMessage.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AvailablePackagesViewModel.cs" />

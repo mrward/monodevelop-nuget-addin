@@ -19,40 +19,13 @@
 	
 	<Extension path = "/MonoDevelop/Ide/Commands/Project">
 		<Command
-			id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
-			_description = "Add NuGet package"
-			_label = "_Install Package"
-			defaultHandler = "MonoDevelop.PackageManagement.Commands.InstallPackageHandler" />
-		<Command
-			id = "MonoDevelop.PackageManagement.Commands.UninstallPackage"
-			_description = "Remove NuGet package"
-			_label = "_Uninstall Package"
-			defaultHandler = "MonoDevelop.PackageManagement.Commands.UninstallPackageHandler" />
-		<Command
-			id = "MonoDevelop.PackageManagement.Commands.UpdatePackage"
-			_description = "Update NuGet package"
-			_label = "U_pdate Package"
-			defaultHandler = "MonoDevelop.PackageManagement.Commands.UpdatePackageHandler" />
-		<Command
 			id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 			_description = "Manage NuGet packages"
 			_label = "_Manage NuGet Packages..."
-			defaultHandler = "MonoDevelop.PackageManagement.Commands.ManagePackageHandler" />
+			defaultHandler = "MonoDevelop.PackageManagement.Commands.ManagePackagesHandler" />
 	</Extension>
 	
 	<Extension path = "/MonoDevelop/Ide/MainMenu/Project">
-		<CommandItem
-			id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
-			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
-			insertbefore = "ExportSeparator" />
-		<CommandItem
-			id = "MonoDevelop.PackageManagement.Commands.UninstallPackage"
-			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
-			insertbefore = "ExportSeparator" />
-		<CommandItem
-			id = "MonoDevelop.PackageManagement.Commands.UpdatePackage"
-			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
-			insertbefore = "ExportSeparator" />
 		<CommandItem
 			id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
@@ -60,20 +33,6 @@
 	</Extension>
 	
 	<Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
-		<Condition id="ItemType" value="ProjectReferenceCollection">
-			<CommandItem
-				id = "MonoDevelop.PackageManagement.Commands.InstallPackage"
-				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
-				insertbefore = "AddSectionEnd" />
-			<CommandItem
-				id = "MonoDevelop.PackageManagement.Commands.UninstallPackage"
-				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
-				insertbefore = "AddSectionEnd" />
-			<CommandItem
-				id = "MonoDevelop.PackageManagement.Commands.UpdatePackage"
-				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
-				insertbefore = "AddSectionEnd" />
-		</Condition>
 		<Condition id="ItemType" value="Solution|Project|ProjectReferenceCollection">
 			<CommandItem
 				id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
