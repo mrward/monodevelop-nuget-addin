@@ -15,7 +15,7 @@ namespace MonoDevelop.PackageManagement
 		private global::Gtk.Button packageSearchButton;
 		private global::Gtk.Frame packageInfoFrame;
 		private global::Gtk.Alignment packageInfoFrameAlignment;
-		private global::Gtk.ScrolledWindow packageInfoFrameVBoxScrolledWindow;
+		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		private global::Gtk.VBox packageInfoFrameVBox;
 		private global::Gtk.HBox packageCreatedByHBox;
 		private global::Gtk.Label packageCreatedByLabel;
@@ -29,6 +29,10 @@ namespace MonoDevelop.PackageManagement
 		private global::Gtk.HBox packageDownloadsHBox;
 		private global::Gtk.Label packageDownloadsLabel;
 		private global::Gtk.Label packageDownloadsTextBox;
+		private global::Gtk.HBox viewLicenseTermsHBox;
+		private global::MonoDevelop.PackageManagement.HyperlinkWidget viewLicenseTermsButton;
+		private global::Gtk.HBox moreInformationHBox;
+		private global::MonoDevelop.PackageManagement.HyperlinkWidget moreInformationButton;
 		private global::Gtk.TextView packageDescriptionTextView;
 		private global::Gtk.HButtonBox managePackageButtonBox;
 		private global::Gtk.Button addPackageButton;
@@ -130,10 +134,10 @@ namespace MonoDevelop.PackageManagement
 			this.packageInfoFrameAlignment = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
 			this.packageInfoFrameAlignment.Name = "packageInfoFrameAlignment";
 			// Container child packageInfoFrameAlignment.Gtk.Container+ContainerChild
-			this.packageInfoFrameVBoxScrolledWindow = new global::Gtk.ScrolledWindow ();
-			this.packageInfoFrameVBoxScrolledWindow.Name = "packageInfoFrameVBoxScrolledWindow";
-			this.packageInfoFrameVBoxScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
-			// Container child packageInfoFrameVBoxScrolledWindow.Gtk.Container+ContainerChild
+			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
 			global::Gtk.Viewport w16 = new global::Gtk.Viewport ();
 			w16.ShadowType = ((global::Gtk.ShadowType)(0));
 			// Container child GtkViewport.Gtk.Container+ContainerChild
@@ -253,6 +257,40 @@ namespace MonoDevelop.PackageManagement
 			w28.Expand = false;
 			w28.Fill = false;
 			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.viewLicenseTermsHBox = new global::Gtk.HBox ();
+			this.viewLicenseTermsHBox.Name = "viewLicenseTermsHBox";
+			this.viewLicenseTermsHBox.Spacing = 6;
+			// Container child viewLicenseTermsHBox.Gtk.Box+BoxChild
+			this.viewLicenseTermsButton = new global::MonoDevelop.PackageManagement.HyperlinkWidget ();
+			this.viewLicenseTermsButton.Events = ((global::Gdk.EventMask)(256));
+			this.viewLicenseTermsButton.Name = "viewLicenseTermsButton";
+			this.viewLicenseTermsButton.Uri = "";
+			this.viewLicenseTermsButton.Label = "View License Terms";
+			this.viewLicenseTermsHBox.Add (this.viewLicenseTermsButton);
+			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.viewLicenseTermsHBox [this.viewLicenseTermsButton]));
+			w29.Position = 0;
+			this.packageInfoFrameVBox.Add (this.viewLicenseTermsHBox);
+			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.viewLicenseTermsHBox]));
+			w30.Position = 4;
+			w30.Expand = false;
+			w30.Fill = false;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.moreInformationHBox = new global::Gtk.HBox ();
+			this.moreInformationHBox.Name = "moreInformationHBox";
+			// Container child moreInformationHBox.Gtk.Box+BoxChild
+			this.moreInformationButton = new global::MonoDevelop.PackageManagement.HyperlinkWidget ();
+			this.moreInformationButton.Events = ((global::Gdk.EventMask)(256));
+			this.moreInformationButton.Name = "moreInformationButton";
+			this.moreInformationButton.Uri = "";
+			this.moreInformationButton.Label = "More Information";
+			this.moreInformationHBox.Add (this.moreInformationButton);
+			global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.moreInformationHBox [this.moreInformationButton]));
+			w31.Position = 0;
+			this.packageInfoFrameVBox.Add (this.moreInformationHBox);
+			global::Gtk.Box.BoxChild w32 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.moreInformationHBox]));
+			w32.Position = 5;
+			w32.Expand = false;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
 			this.packageDescriptionTextView = new global::Gtk.TextView ();
 			this.packageDescriptionTextView.CanFocus = true;
 			this.packageDescriptionTextView.Name = "packageDescriptionTextView";
@@ -260,15 +298,15 @@ namespace MonoDevelop.PackageManagement
 			this.packageDescriptionTextView.CursorVisible = false;
 			this.packageDescriptionTextView.WrapMode = ((global::Gtk.WrapMode)(2));
 			this.packageInfoFrameVBox.Add (this.packageDescriptionTextView);
-			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageDescriptionTextView]));
-			w29.Position = 4;
+			global::Gtk.Box.BoxChild w33 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageDescriptionTextView]));
+			w33.Position = 6;
 			w16.Add (this.packageInfoFrameVBox);
-			this.packageInfoFrameVBoxScrolledWindow.Add (w16);
-			this.packageInfoFrameAlignment.Add (this.packageInfoFrameVBoxScrolledWindow);
+			this.GtkScrolledWindow.Add (w16);
+			this.packageInfoFrameAlignment.Add (this.GtkScrolledWindow);
 			this.packageInfoFrame.Add (this.packageInfoFrameAlignment);
 			this.packageInfoVBox.Add (this.packageInfoFrame);
-			global::Gtk.Box.BoxChild w34 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
-			w34.Position = 2;
+			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
+			w38.Position = 2;
 			// Container child packageInfoVBox.Gtk.Box+BoxChild
 			this.managePackageButtonBox = new global::Gtk.HButtonBox ();
 			this.managePackageButtonBox.Name = "managePackageButtonBox";
@@ -280,9 +318,9 @@ namespace MonoDevelop.PackageManagement
 			this.addPackageButton.UseUnderline = true;
 			this.addPackageButton.Label = global::Mono.Unix.Catalog.GetString ("Add");
 			this.managePackageButtonBox.Add (this.addPackageButton);
-			global::Gtk.ButtonBox.ButtonBoxChild w35 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.addPackageButton]));
-			w35.Expand = false;
-			w35.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w39 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.addPackageButton]));
+			w39.Expand = false;
+			w39.Fill = false;
 			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
 			this.removePackageButton = new global::Gtk.Button ();
 			this.removePackageButton.CanFocus = true;
@@ -290,10 +328,10 @@ namespace MonoDevelop.PackageManagement
 			this.removePackageButton.UseUnderline = true;
 			this.removePackageButton.Label = global::Mono.Unix.Catalog.GetString ("Remove");
 			this.managePackageButtonBox.Add (this.removePackageButton);
-			global::Gtk.ButtonBox.ButtonBoxChild w36 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.removePackageButton]));
-			w36.Position = 1;
-			w36.Expand = false;
-			w36.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w40 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.removePackageButton]));
+			w40.Position = 1;
+			w40.Expand = false;
+			w40.Fill = false;
 			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
 			this.managePackageButton = new global::Gtk.Button ();
 			this.managePackageButton.CanFocus = true;
@@ -301,16 +339,16 @@ namespace MonoDevelop.PackageManagement
 			this.managePackageButton.UseUnderline = true;
 			this.managePackageButton.Label = global::Mono.Unix.Catalog.GetString ("Manage");
 			this.managePackageButtonBox.Add (this.managePackageButton);
-			global::Gtk.ButtonBox.ButtonBoxChild w37 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.managePackageButton]));
-			w37.Position = 2;
-			w37.Expand = false;
-			w37.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w41 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.managePackageButton]));
+			w41.Position = 2;
+			w41.Expand = false;
+			w41.Fill = false;
 			this.packageInfoVBox.Add (this.managePackageButtonBox);
-			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.managePackageButtonBox]));
-			w38.PackType = ((global::Gtk.PackType)(1));
-			w38.Position = 3;
-			w38.Expand = false;
-			w38.Fill = false;
+			global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.managePackageButtonBox]));
+			w42.PackType = ((global::Gtk.PackType)(1));
+			w42.Position = 3;
+			w42.Expand = false;
+			w42.Fill = false;
 			this.mainPane.Add (this.packageInfoVBox);
 			this.Add (this.mainPane);
 			if ((this.Child != null)) {

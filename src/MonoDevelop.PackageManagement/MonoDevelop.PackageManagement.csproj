@@ -213,15 +213,14 @@
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.ManagePackagesDialog.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackagesWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackagesWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.HyperlinkWidget.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\HyperlinkWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="icons" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="icons\packageicon.png">
