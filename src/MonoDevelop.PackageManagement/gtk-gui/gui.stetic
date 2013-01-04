@@ -448,65 +448,6 @@
                                     <property name="AutoSize">True</property>
                                   </packing>
                                 </child>
-                                <child>
-                                  <widget class="Gtk.HButtonBox" id="managePackageButtonBox">
-                                    <property name="MemberName" />
-                                    <property name="Size">3</property>
-                                    <child>
-                                      <widget class="Gtk.Button" id="addPackageButton">
-                                        <property name="MemberName" />
-                                        <property name="Visible">False</property>
-                                        <property name="CanFocus">True</property>
-                                        <property name="Type">TextOnly</property>
-                                        <property name="Label" translatable="yes">Add</property>
-                                        <property name="UseUnderline">True</property>
-                                        <signal name="Clicked" handler="OnAddPackageButtonClicked" />
-                                      </widget>
-                                      <packing>
-                                        <property name="Expand">False</property>
-                                        <property name="Fill">False</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="Gtk.Button" id="removePackageButton">
-                                        <property name="MemberName" />
-                                        <property name="Visible">False</property>
-                                        <property name="CanFocus">True</property>
-                                        <property name="Type">TextOnly</property>
-                                        <property name="Label" translatable="yes">Remove</property>
-                                        <property name="UseUnderline">True</property>
-                                        <signal name="Clicked" handler="RemovePackageButtonClicked" />
-                                      </widget>
-                                      <packing>
-                                        <property name="Position">1</property>
-                                        <property name="Expand">False</property>
-                                        <property name="Fill">False</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="Gtk.Button" id="managePackageButton">
-                                        <property name="MemberName" />
-                                        <property name="Visible">False</property>
-                                        <property name="CanFocus">True</property>
-                                        <property name="Type">TextOnly</property>
-                                        <property name="Label" translatable="yes">Manage</property>
-                                        <property name="UseUnderline">True</property>
-                                        <signal name="Clicked" handler="ManagePackagesButtonClicked" />
-                                      </widget>
-                                      <packing>
-                                        <property name="Position">2</property>
-                                        <property name="Expand">False</property>
-                                        <property name="Fill">False</property>
-                                      </packing>
-                                    </child>
-                                  </widget>
-                                  <packing>
-                                    <property name="Position">5</property>
-                                    <property name="AutoSize">True</property>
-                                    <property name="Expand">False</property>
-                                    <property name="Fill">False</property>
-                                  </packing>
-                                </child>
                               </widget>
                             </child>
                           </widget>
@@ -519,6 +460,67 @@
               <packing>
                 <property name="Position">2</property>
                 <property name="AutoSize">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.HButtonBox" id="managePackageButtonBox">
+                <property name="MemberName" />
+                <property name="Size">3</property>
+                <property name="LayoutStyle">Start</property>
+                <child>
+                  <widget class="Gtk.Button" id="addPackageButton">
+                    <property name="MemberName" />
+                    <property name="Visible">False</property>
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextOnly</property>
+                    <property name="Label" translatable="yes">Add</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnAddPackageButtonClicked" />
+                  </widget>
+                  <packing>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Button" id="removePackageButton">
+                    <property name="MemberName" />
+                    <property name="Visible">False</property>
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextOnly</property>
+                    <property name="Label" translatable="yes">Remove</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="RemovePackageButtonClicked" />
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Button" id="managePackageButton">
+                    <property name="MemberName" />
+                    <property name="Visible">False</property>
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextOnly</property>
+                    <property name="Label" translatable="yes">Manage</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="ManagePackagesButtonClicked" />
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="PackType">End</property>
+                <property name="Position">3</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
               </packing>
             </child>
           </widget>

@@ -262,9 +262,17 @@ namespace MonoDevelop.PackageManagement
 			this.packageInfoFrameVBox.Add (this.packageDescriptionTextView);
 			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageDescriptionTextView]));
 			w29.Position = 4;
-			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			w16.Add (this.packageInfoFrameVBox);
+			this.packageInfoFrameVBoxScrolledWindow.Add (w16);
+			this.packageInfoFrameAlignment.Add (this.packageInfoFrameVBoxScrolledWindow);
+			this.packageInfoFrame.Add (this.packageInfoFrameAlignment);
+			this.packageInfoVBox.Add (this.packageInfoFrame);
+			global::Gtk.Box.BoxChild w34 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
+			w34.Position = 2;
+			// Container child packageInfoVBox.Gtk.Box+BoxChild
 			this.managePackageButtonBox = new global::Gtk.HButtonBox ();
 			this.managePackageButtonBox.Name = "managePackageButtonBox";
+			this.managePackageButtonBox.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(3));
 			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
 			this.addPackageButton = new global::Gtk.Button ();
 			this.addPackageButton.CanFocus = true;
@@ -272,9 +280,9 @@ namespace MonoDevelop.PackageManagement
 			this.addPackageButton.UseUnderline = true;
 			this.addPackageButton.Label = global::Mono.Unix.Catalog.GetString ("Add");
 			this.managePackageButtonBox.Add (this.addPackageButton);
-			global::Gtk.ButtonBox.ButtonBoxChild w30 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.addPackageButton]));
-			w30.Expand = false;
-			w30.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w35 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.addPackageButton]));
+			w35.Expand = false;
+			w35.Fill = false;
 			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
 			this.removePackageButton = new global::Gtk.Button ();
 			this.removePackageButton.CanFocus = true;
@@ -282,10 +290,10 @@ namespace MonoDevelop.PackageManagement
 			this.removePackageButton.UseUnderline = true;
 			this.removePackageButton.Label = global::Mono.Unix.Catalog.GetString ("Remove");
 			this.managePackageButtonBox.Add (this.removePackageButton);
-			global::Gtk.ButtonBox.ButtonBoxChild w31 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.removePackageButton]));
-			w31.Position = 1;
-			w31.Expand = false;
-			w31.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w36 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.removePackageButton]));
+			w36.Position = 1;
+			w36.Expand = false;
+			w36.Fill = false;
 			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
 			this.managePackageButton = new global::Gtk.Button ();
 			this.managePackageButton.CanFocus = true;
@@ -293,31 +301,25 @@ namespace MonoDevelop.PackageManagement
 			this.managePackageButton.UseUnderline = true;
 			this.managePackageButton.Label = global::Mono.Unix.Catalog.GetString ("Manage");
 			this.managePackageButtonBox.Add (this.managePackageButton);
-			global::Gtk.ButtonBox.ButtonBoxChild w32 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.managePackageButton]));
-			w32.Position = 2;
-			w32.Expand = false;
-			w32.Fill = false;
-			this.packageInfoFrameVBox.Add (this.managePackageButtonBox);
-			global::Gtk.Box.BoxChild w33 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.managePackageButtonBox]));
-			w33.Position = 5;
-			w33.Expand = false;
-			w33.Fill = false;
-			w16.Add (this.packageInfoFrameVBox);
-			this.packageInfoFrameVBoxScrolledWindow.Add (w16);
-			this.packageInfoFrameAlignment.Add (this.packageInfoFrameVBoxScrolledWindow);
-			this.packageInfoFrame.Add (this.packageInfoFrameAlignment);
-			this.packageInfoVBox.Add (this.packageInfoFrame);
-			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
-			w38.Position = 2;
+			global::Gtk.ButtonBox.ButtonBoxChild w37 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.managePackageButton]));
+			w37.Position = 2;
+			w37.Expand = false;
+			w37.Fill = false;
+			this.packageInfoVBox.Add (this.managePackageButtonBox);
+			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.managePackageButtonBox]));
+			w38.PackType = ((global::Gtk.PackType)(1));
+			w38.Position = 3;
+			w38.Expand = false;
+			w38.Fill = false;
 			this.mainPane.Add (this.packageInfoVBox);
 			this.Add (this.mainPane);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
+			this.packageInfoFrameVBox.Hide ();
 			this.addPackageButton.Hide ();
 			this.removePackageButton.Hide ();
 			this.managePackageButton.Hide ();
-			this.packageInfoFrameVBox.Hide ();
 			this.Hide ();
 			this.packageSourceComboBox.Changed += new global::System.EventHandler (this.PackageSourceChanged);
 			this.packageSearchEntry.Activated += new global::System.EventHandler (this.PackageSearchEntryActivated);

@@ -153,11 +153,13 @@ namespace MonoDevelop.PackageManagement
 			EnablePackageActionButtons (packageViewModel);
 			
 			this.packageInfoFrameVBox.Visible = true;
+			this.managePackageButtonBox.Visible = true;
 		}
 		
 		void ClearSelectedPackageInformation ()
 		{
 			this.packageInfoFrameVBox.Visible = false;
+			this.managePackageButtonBox.Visible = false;
 		}
 		
 		void EnablePackageActionButtons (PackageViewModel packageViewModel)
