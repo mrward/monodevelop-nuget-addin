@@ -149,12 +149,25 @@ namespace MonoDevelop.PackageManagement
 			this.packageLastUpdatedTextBox.Text = packageViewModel.GetLastPublishedDisplayText ();
 			this.packageDownloadsTextBox.Text = packageViewModel.GetDownloadCountDisplayText ();
 			this.packageDescriptionTextView.Buffer.Text = packageViewModel.Description;
+			
+			EnablePackageActionButtons (packageViewModel);
+			
 			this.packageInfoFrameVBox.Visible = true;
 		}
 		
 		void ClearSelectedPackageInformation ()
 		{
 			this.packageInfoFrameVBox.Visible = false;
+		}
+		
+		void EnablePackageActionButtons (PackageViewModel packageViewModel)
+		{
+			this.addPackageButton.Visible = !packageViewModel.IsManaged;
+			this.removePackageButton.Visible = !packageViewModel.IsManaged;
+			this.managePackageButton.Visible = packageViewModel.IsManaged;
+			
+			this.addPackageButton.Sensitive = !packageViewModel.IsAdded;
+			this.removePackageButton.Sensitive = packageViewModel.IsAdded;
 		}
 		
 		void ViewModelPropertyChanged (object sender, PropertyChangedEventArgs e)
@@ -183,6 +196,24 @@ namespace MonoDevelop.PackageManagement
 				ImageService.GetPixbuf ("md-nuget-package", IconSize.Dnd),
 				packageViewModel.GetDisplayTextMarkup (),
 				packageViewModel);
+		}
+		
+		void OnAddPackageButtonClicked (object sender, EventArgs e)
+		{
+			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
+			packageViewModel.AddPackage ();
+		}
+		
+		void RemovePackageButtonClicked (object sender, EventArgs e)
+		{
+			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
+			packageViewModel.RemovePackage ();
+		}
+		
+		void ManagePackagesButtonClicked (object sender, EventArgs e)
+		{
+			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
+			packageViewModel.ManagePackage ();
 		}
 	}
 }

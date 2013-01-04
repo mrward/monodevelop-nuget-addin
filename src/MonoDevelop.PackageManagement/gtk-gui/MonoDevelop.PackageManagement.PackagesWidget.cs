@@ -32,6 +32,10 @@ namespace MonoDevelop.PackageManagement
 		private global::Gtk.Label packageDownloadsLabel;
 		private global::Gtk.Label packageDownloadsTextBox;
 		private global::Gtk.TextView packageDescriptionTextView;
+		private global::Gtk.HButtonBox managePackageButtonBox;
+		private global::Gtk.Button addPackageButton;
+		private global::Gtk.Button removePackageButton;
+		private global::Gtk.Button managePackageButton;
 		
 		protected virtual void Build ()
 		{
@@ -272,23 +276,69 @@ namespace MonoDevelop.PackageManagement
 			this.packageInfoFrameVBox.Add (this.packageDescriptionTextView);
 			global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageDescriptionTextView]));
 			w31.Position = 4;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.managePackageButtonBox = new global::Gtk.HButtonBox ();
+			this.managePackageButtonBox.Name = "managePackageButtonBox";
+			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
+			this.addPackageButton = new global::Gtk.Button ();
+			this.addPackageButton.CanFocus = true;
+			this.addPackageButton.Name = "addPackageButton";
+			this.addPackageButton.UseUnderline = true;
+			this.addPackageButton.Label = global::Mono.Unix.Catalog.GetString ("Add");
+			this.managePackageButtonBox.Add (this.addPackageButton);
+			global::Gtk.ButtonBox.ButtonBoxChild w32 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.addPackageButton]));
+			w32.Expand = false;
+			w32.Fill = false;
+			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
+			this.removePackageButton = new global::Gtk.Button ();
+			this.removePackageButton.CanFocus = true;
+			this.removePackageButton.Name = "removePackageButton";
+			this.removePackageButton.UseUnderline = true;
+			this.removePackageButton.Label = global::Mono.Unix.Catalog.GetString ("Remove");
+			this.managePackageButtonBox.Add (this.removePackageButton);
+			global::Gtk.ButtonBox.ButtonBoxChild w33 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.removePackageButton]));
+			w33.Position = 1;
+			w33.Expand = false;
+			w33.Fill = false;
+			// Container child managePackageButtonBox.Gtk.ButtonBox+ButtonBoxChild
+			this.managePackageButton = new global::Gtk.Button ();
+			this.managePackageButton.CanFocus = true;
+			this.managePackageButton.Name = "managePackageButton";
+			this.managePackageButton.UseUnderline = true;
+			this.managePackageButton.Label = global::Mono.Unix.Catalog.GetString ("Manage");
+			this.managePackageButtonBox.Add (this.managePackageButton);
+			global::Gtk.ButtonBox.ButtonBoxChild w34 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.managePackageButtonBox [this.managePackageButton]));
+			w34.Position = 2;
+			w34.Expand = false;
+			w34.Fill = false;
+			this.packageInfoFrameVBox.Add (this.managePackageButtonBox);
+			global::Gtk.Box.BoxChild w35 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.managePackageButtonBox]));
+			w35.Position = 5;
+			w35.Expand = false;
+			w35.Fill = false;
 			w18.Add (this.packageInfoFrameVBox);
 			this.packageInfoFrameVBoxScrolledWindow.Add (w18);
 			this.packageInfoFrameAlignment.Add (this.packageInfoFrameVBoxScrolledWindow);
 			this.packageInfoFrame.Add (this.packageInfoFrameAlignment);
 			this.packageInfoVBox.Add (this.packageInfoFrame);
-			global::Gtk.Box.BoxChild w36 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
-			w36.Position = 2;
+			global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
+			w40.Position = 2;
 			this.mainPane.Add (this.packageInfoVBox);
 			this.Add (this.mainPane);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
+			this.addPackageButton.Hide ();
+			this.removePackageButton.Hide ();
+			this.managePackageButton.Hide ();
 			this.packageInfoFrameVBox.Hide ();
 			this.Hide ();
 			this.packageSourceComboBox.Changed += new global::System.EventHandler (this.PackageSourceChanged);
 			this.packageSearchEntry.Activated += new global::System.EventHandler (this.PackageSearchEntryActivated);
 			this.packageSearchButton.Clicked += new global::System.EventHandler (this.SearchButtonClicked);
+			this.addPackageButton.Clicked += new global::System.EventHandler (this.OnAddPackageButtonClicked);
+			this.removePackageButton.Clicked += new global::System.EventHandler (this.RemovePackageButtonClicked);
+			this.managePackageButton.Clicked += new global::System.EventHandler (this.ManagePackagesButtonClicked);
 		}
 	}
 }
