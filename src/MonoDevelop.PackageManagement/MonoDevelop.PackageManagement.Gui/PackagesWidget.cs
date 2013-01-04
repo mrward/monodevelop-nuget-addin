@@ -18,6 +18,7 @@ namespace MonoDevelop.PackageManagement
 		List<PackageSource> packageSources;
 		ListStore packageStore;
 		CellRendererText treeViewColumnTextRenderer;
+		const int PackageViewModelColumn = 2;
 		
 		public PackagesWidget ()
 		{
@@ -30,6 +31,7 @@ namespace MonoDevelop.PackageManagement
 			packageStore = new ListStore (typeof (Pixbuf), typeof (string), typeof(PackageViewModel));
 			packagesTreeView.Model = packageStore;
 			packagesTreeView.AppendColumn (CreateTreeViewColumn ());
+			packagesTreeView.Selection.Changed += PackagesTreeViewSelectionChanged;
 		}
 		
 		TreeViewColumn CreateTreeViewColumn ()
@@ -42,7 +44,7 @@ namespace MonoDevelop.PackageManagement
 			
 			treeViewColumnTextRenderer = new CellRendererText ();
 			treeViewColumnTextRenderer.WrapMode = Pango.WrapMode.Word;
-			treeViewColumnTextRenderer.WrapWidth = 300;
+			treeViewColumnTextRenderer.WrapWidth = 250;
 			
 			column.PackStart (treeViewColumnTextRenderer, true);
 			column.AddAttribute (treeViewColumnTextRenderer, "markup", column: 1);
@@ -50,11 +52,17 @@ namespace MonoDevelop.PackageManagement
 			return column;
 		}
 		
+		void PackagesTreeViewSelectionChanged(object sender, EventArgs e)
+		{
+			ShowSelectedPackage ();
+		}
+		
 		public void LoadViewModel (PackagesViewModel viewModel)
 		{
 			this.viewModel = viewModel;
 			
 			this.packageSearchHBox.Visible = viewModel.IsSearchable;
+			ClearSelectedPackageInformation ();
 			PopulatePackageSources ();
 			viewModel.PropertyChanged += ViewModelPropertyChanged;
 		}
@@ -114,7 +122,41 @@ namespace MonoDevelop.PackageManagement
 			viewModel.SearchTerms = this.packageSearchEntry.Text;
 			viewModel.SearchCommand.Execute (null);
 		}
-
+		
+		void ShowSelectedPackage ()
+		{
+			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
+			if (packageViewModel != null) {
+				ShowPackageInformation (packageViewModel);
+			} else {
+				ClearSelectedPackageInformation ();
+			}
+		}
+		
+		PackageViewModel GetSelectedPackageViewModel ()
+		{
+			TreeIter item;
+			if (packagesTreeView.Selection.GetSelected (out item)) {
+				return packageStore.GetValue (item, PackageViewModelColumn) as PackageViewModel;
+			}
+			return null;
+		}
+		
+		void ShowPackageInformation (PackageViewModel packageViewModel)
+		{
+			this.packageVersionTextBox.Text = packageViewModel.Version.ToString ();
+			this.packageCreatedByTextBox.Text = packageViewModel.GetAuthors ();
+			this.packageLastUpdatedTextBox.Text = packageViewModel.GetLastPublishedDisplayText ();
+			this.packageDownloadsTextBox.Text = packageViewModel.GetDownloadCountDisplayText ();
+			this.packageDescriptionTextView.Buffer.Text = packageViewModel.Description;
+			this.packageInfoFrameVBox.Visible = true;
+		}
+		
+		void ClearSelectedPackageInformation ()
+		{
+			this.packageInfoFrameVBox.Visible = false;
+		}
+		
 		void ViewModelPropertyChanged (object sender, PropertyChangedEventArgs e)
 		{
 			this.packagesListTextView.Buffer.Text += "PropertyChanged: " + e.PropertyName + "\r\n";

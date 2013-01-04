@@ -456,9 +456,30 @@ namespace ICSharpCode.PackageManagement
 		
 		static readonly string DisplayTextMarkupFormat = "<span weight='bold'>{0}</span>\n{1}";
 		
-		public string GetDisplayTextMarkup()
+		public string GetDisplayTextMarkup ()
 		{
 			return MarkupString.Format (DisplayTextMarkupFormat, package.Id, package.Summary);
+		}
+		
+		public string GetAuthors()
+		{
+			return String.Join (", ", Authors);
+		}
+		
+		public string GetLastPublishedDisplayText()
+		{
+			if (HasLastPublished) {
+				return LastPublished.Value.ToString ();
+			}
+			return String.Empty;
+		}
+		
+		public string GetDownloadCountDisplayText()
+		{
+			if (HasDownloadCount) {
+				return DownloadCount.ToString ();
+			}
+			return String.Empty;
 		}
 	}
 }

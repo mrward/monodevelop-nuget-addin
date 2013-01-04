@@ -15,8 +15,23 @@ namespace MonoDevelop.PackageManagement
 		private global::Gtk.HBox packageSearchHBox;
 		private global::Gtk.Entry packageSearchEntry;
 		private global::Gtk.Button packageSearchButton;
-		private global::Gtk.ScrolledWindow GtkScrolledWindow1;
-		private global::Gtk.TextView packageInfoTextView;
+		private global::Gtk.Frame packageInfoFrame;
+		private global::Gtk.Alignment packageInfoFrameAlignment;
+		private global::Gtk.ScrolledWindow packageInfoFrameVBoxScrolledWindow;
+		private global::Gtk.VBox packageInfoFrameVBox;
+		private global::Gtk.HBox packageCreatedByHBox;
+		private global::Gtk.Label packageCreatedByLabel;
+		private global::Gtk.Label packageCreatedByTextBox;
+		private global::Gtk.HBox packageVersionHBox;
+		private global::Gtk.Label packageVersionLabel;
+		private global::Gtk.Label packageVersionTextBox;
+		private global::Gtk.HBox packageLastUpdatedHBox;
+		private global::Gtk.Label packageLastUpdatedLabel;
+		private global::Gtk.Label packageLastUpdatedTextBox;
+		private global::Gtk.HBox packageDownloadsHBox;
+		private global::Gtk.Label packageDownloadsLabel;
+		private global::Gtk.Label packageDownloadsTextBox;
+		private global::Gtk.TextView packageDescriptionTextView;
 		
 		protected virtual void Build ()
 		{
@@ -117,22 +132,159 @@ namespace MonoDevelop.PackageManagement
 			w17.Expand = false;
 			w17.Fill = false;
 			// Container child packageInfoVBox.Gtk.Box+BoxChild
-			this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
-			this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
-			this.GtkScrolledWindow1.ShadowType = ((global::Gtk.ShadowType)(1));
-			// Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
-			this.packageInfoTextView = new global::Gtk.TextView ();
-			this.packageInfoTextView.CanFocus = true;
-			this.packageInfoTextView.Name = "packageInfoTextView";
-			this.GtkScrolledWindow1.Add (this.packageInfoTextView);
-			this.packageInfoVBox.Add (this.GtkScrolledWindow1);
-			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.GtkScrolledWindow1]));
-			w19.Position = 2;
+			this.packageInfoFrame = new global::Gtk.Frame ();
+			this.packageInfoFrame.Name = "packageInfoFrame";
+			this.packageInfoFrame.ShadowType = ((global::Gtk.ShadowType)(0));
+			this.packageInfoFrame.LabelYalign = 0F;
+			// Container child packageInfoFrame.Gtk.Container+ContainerChild
+			this.packageInfoFrameAlignment = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
+			this.packageInfoFrameAlignment.Name = "packageInfoFrameAlignment";
+			// Container child packageInfoFrameAlignment.Gtk.Container+ContainerChild
+			this.packageInfoFrameVBoxScrolledWindow = new global::Gtk.ScrolledWindow ();
+			this.packageInfoFrameVBoxScrolledWindow.Name = "packageInfoFrameVBoxScrolledWindow";
+			this.packageInfoFrameVBoxScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child packageInfoFrameVBoxScrolledWindow.Gtk.Container+ContainerChild
+			global::Gtk.Viewport w18 = new global::Gtk.Viewport ();
+			w18.ShadowType = ((global::Gtk.ShadowType)(0));
+			// Container child GtkViewport.Gtk.Container+ContainerChild
+			this.packageInfoFrameVBox = new global::Gtk.VBox ();
+			this.packageInfoFrameVBox.Name = "packageInfoFrameVBox";
+			this.packageInfoFrameVBox.Spacing = 6;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.packageCreatedByHBox = new global::Gtk.HBox ();
+			this.packageCreatedByHBox.Name = "packageCreatedByHBox";
+			this.packageCreatedByHBox.Spacing = 6;
+			// Container child packageCreatedByHBox.Gtk.Box+BoxChild
+			this.packageCreatedByLabel = new global::Gtk.Label ();
+			this.packageCreatedByLabel.Name = "packageCreatedByLabel";
+			this.packageCreatedByLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<span weight=\'bold\'>Created by:</span>");
+			this.packageCreatedByLabel.UseMarkup = true;
+			this.packageCreatedByHBox.Add (this.packageCreatedByLabel);
+			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.packageCreatedByHBox [this.packageCreatedByLabel]));
+			w19.Position = 0;
+			w19.Expand = false;
+			w19.Fill = false;
+			// Container child packageCreatedByHBox.Gtk.Box+BoxChild
+			this.packageCreatedByTextBox = new global::Gtk.Label ();
+			this.packageCreatedByTextBox.Name = "packageCreatedByTextBox";
+			this.packageCreatedByTextBox.Selectable = true;
+			this.packageCreatedByHBox.Add (this.packageCreatedByTextBox);
+			global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.packageCreatedByHBox [this.packageCreatedByTextBox]));
+			w20.Position = 1;
+			w20.Expand = false;
+			w20.Fill = false;
+			this.packageInfoFrameVBox.Add (this.packageCreatedByHBox);
+			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageCreatedByHBox]));
+			w21.Position = 0;
+			w21.Expand = false;
+			w21.Fill = false;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.packageVersionHBox = new global::Gtk.HBox ();
+			this.packageVersionHBox.Name = "packageVersionHBox";
+			this.packageVersionHBox.Spacing = 6;
+			// Container child packageVersionHBox.Gtk.Box+BoxChild
+			this.packageVersionLabel = new global::Gtk.Label ();
+			this.packageVersionLabel.Name = "packageVersionLabel";
+			this.packageVersionLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<span weight=\'bold\'>Version:</span>");
+			this.packageVersionLabel.UseMarkup = true;
+			this.packageVersionHBox.Add (this.packageVersionLabel);
+			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.packageVersionHBox [this.packageVersionLabel]));
+			w22.Position = 0;
+			w22.Expand = false;
+			w22.Fill = false;
+			// Container child packageVersionHBox.Gtk.Box+BoxChild
+			this.packageVersionTextBox = new global::Gtk.Label ();
+			this.packageVersionTextBox.Name = "packageVersionTextBox";
+			this.packageVersionTextBox.Selectable = true;
+			this.packageVersionHBox.Add (this.packageVersionTextBox);
+			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.packageVersionHBox [this.packageVersionTextBox]));
+			w23.Position = 1;
+			w23.Expand = false;
+			w23.Fill = false;
+			this.packageInfoFrameVBox.Add (this.packageVersionHBox);
+			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageVersionHBox]));
+			w24.Position = 1;
+			w24.Expand = false;
+			w24.Fill = false;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.packageLastUpdatedHBox = new global::Gtk.HBox ();
+			this.packageLastUpdatedHBox.Name = "packageLastUpdatedHBox";
+			this.packageLastUpdatedHBox.Spacing = 6;
+			// Container child packageLastUpdatedHBox.Gtk.Box+BoxChild
+			this.packageLastUpdatedLabel = new global::Gtk.Label ();
+			this.packageLastUpdatedLabel.Name = "packageLastUpdatedLabel";
+			this.packageLastUpdatedLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<span weight=\'bold\'>Last Updated:</span>");
+			this.packageLastUpdatedLabel.UseMarkup = true;
+			this.packageLastUpdatedHBox.Add (this.packageLastUpdatedLabel);
+			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.packageLastUpdatedHBox [this.packageLastUpdatedLabel]));
+			w25.Position = 0;
+			w25.Expand = false;
+			w25.Fill = false;
+			// Container child packageLastUpdatedHBox.Gtk.Box+BoxChild
+			this.packageLastUpdatedTextBox = new global::Gtk.Label ();
+			this.packageLastUpdatedTextBox.Name = "packageLastUpdatedTextBox";
+			this.packageLastUpdatedTextBox.Selectable = true;
+			this.packageLastUpdatedHBox.Add (this.packageLastUpdatedTextBox);
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.packageLastUpdatedHBox [this.packageLastUpdatedTextBox]));
+			w26.Position = 1;
+			w26.Expand = false;
+			w26.Fill = false;
+			this.packageInfoFrameVBox.Add (this.packageLastUpdatedHBox);
+			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageLastUpdatedHBox]));
+			w27.Position = 2;
+			w27.Expand = false;
+			w27.Fill = false;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.packageDownloadsHBox = new global::Gtk.HBox ();
+			this.packageDownloadsHBox.Name = "packageDownloadsHBox";
+			this.packageDownloadsHBox.Spacing = 6;
+			// Container child packageDownloadsHBox.Gtk.Box+BoxChild
+			this.packageDownloadsLabel = new global::Gtk.Label ();
+			this.packageDownloadsLabel.Name = "packageDownloadsLabel";
+			this.packageDownloadsLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<span weight=\'bold\'>Downloads:</span>");
+			this.packageDownloadsLabel.UseMarkup = true;
+			this.packageDownloadsHBox.Add (this.packageDownloadsLabel);
+			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.packageDownloadsHBox [this.packageDownloadsLabel]));
+			w28.Position = 0;
+			w28.Expand = false;
+			w28.Fill = false;
+			// Container child packageDownloadsHBox.Gtk.Box+BoxChild
+			this.packageDownloadsTextBox = new global::Gtk.Label ();
+			this.packageDownloadsTextBox.Name = "packageDownloadsTextBox";
+			this.packageDownloadsTextBox.Selectable = true;
+			this.packageDownloadsHBox.Add (this.packageDownloadsTextBox);
+			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.packageDownloadsHBox [this.packageDownloadsTextBox]));
+			w29.Position = 1;
+			w29.Expand = false;
+			w29.Fill = false;
+			this.packageInfoFrameVBox.Add (this.packageDownloadsHBox);
+			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageDownloadsHBox]));
+			w30.Position = 3;
+			w30.Expand = false;
+			w30.Fill = false;
+			// Container child packageInfoFrameVBox.Gtk.Box+BoxChild
+			this.packageDescriptionTextView = new global::Gtk.TextView ();
+			this.packageDescriptionTextView.CanFocus = true;
+			this.packageDescriptionTextView.Name = "packageDescriptionTextView";
+			this.packageDescriptionTextView.Editable = false;
+			this.packageDescriptionTextView.CursorVisible = false;
+			this.packageDescriptionTextView.WrapMode = ((global::Gtk.WrapMode)(2));
+			this.packageInfoFrameVBox.Add (this.packageDescriptionTextView);
+			global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.packageInfoFrameVBox [this.packageDescriptionTextView]));
+			w31.Position = 4;
+			w18.Add (this.packageInfoFrameVBox);
+			this.packageInfoFrameVBoxScrolledWindow.Add (w18);
+			this.packageInfoFrameAlignment.Add (this.packageInfoFrameVBoxScrolledWindow);
+			this.packageInfoFrame.Add (this.packageInfoFrameAlignment);
+			this.packageInfoVBox.Add (this.packageInfoFrame);
+			global::Gtk.Box.BoxChild w36 = ((global::Gtk.Box.BoxChild)(this.packageInfoVBox [this.packageInfoFrame]));
+			w36.Position = 2;
 			this.mainPane.Add (this.packageInfoVBox);
 			this.Add (this.mainPane);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
+			this.packageInfoFrameVBox.Hide ();
 			this.Hide ();
 			this.packageSourceComboBox.Changed += new global::System.EventHandler (this.PackageSourceChanged);
 			this.packageSearchEntry.Activated += new global::System.EventHandler (this.PackageSearchEntryActivated);
