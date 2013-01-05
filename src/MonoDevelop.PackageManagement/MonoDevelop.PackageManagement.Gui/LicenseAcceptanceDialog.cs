@@ -1,5 +1,5 @@
-﻿// 
-// LicenseAcceptanceService.cs
+// 
+// LicenseAcceptanceDialog.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,26 +27,37 @@
 //
 
 using System;
-using System.Collections.Generic;
-using MonoDevelop.Ide;
-using MonoDevelop.PackageManagement;
+using ICSharpCode.PackageManagement;
 using NuGet;
 
-namespace ICSharpCode.PackageManagement
+namespace MonoDevelop.PackageManagement
 {
-	public class LicenseAcceptanceService : ILicenseAcceptanceService
+	public partial class LicenseAcceptanceDialog : Gtk.Dialog
 	{
-		public bool AcceptLicenses(IEnumerable<IPackage> packages)
+		LicenseAcceptanceViewModel viewModel;
+
+		public LicenseAcceptanceDialog (LicenseAcceptanceViewModel viewModel)
 		{
-			LicenseAcceptanceDialog dialog = CreateLicenseAcceptanceDialog(packages);
-			int result = MessageService.ShowCustomDialog(dialog);
-			return result == (int)Gtk.ResponseType.Ok;
+			this.Build ();
+			this.viewModel = viewModel;
+			this.subTitleHBoxForSinglePackage.Visible = viewModel.HasOnePackage;
+			this.subTitleHBoxForMultiplePackages.Visible = viewModel.HasMultiplePackages;
+			AddPackages ();
 		}
-		
-		LicenseAcceptanceDialog CreateLicenseAcceptanceDialog(IEnumerable<IPackage> packages)
+
+		void AddPackages ()
 		{
-			var viewModel = new LicenseAcceptanceViewModel(packages);
-			return new LicenseAcceptanceDialog(viewModel);
+			foreach (IPackage package in viewModel.Packages) {
+				AddPackageWidget (package);
+			}
+			this.packagesVBox.ShowAll ();
+		}
+
+		void AddPackageWidget (IPackage package)
+		{
+			var widget = new PackageLicenseWidget (package);
+			this.packagesVBox.Add (widget);
 		}
 	}
 }
+

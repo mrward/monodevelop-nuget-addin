@@ -1,5 +1,5 @@
 ﻿// 
-// LicenseAcceptanceService.cs
+// LicenseAcceptanceViewModel.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -28,25 +28,30 @@
 
 using System;
 using System.Collections.Generic;
-using MonoDevelop.Ide;
-using MonoDevelop.PackageManagement;
+using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class LicenseAcceptanceService : ILicenseAcceptanceService
+	public class LicenseAcceptanceViewModel : ViewModelBase<LicenseAcceptanceViewModel>
 	{
-		public bool AcceptLicenses(IEnumerable<IPackage> packages)
+		IList<IPackage> packages;
+		
+		public LicenseAcceptanceViewModel(IEnumerable<IPackage> packages)
 		{
-			LicenseAcceptanceDialog dialog = CreateLicenseAcceptanceDialog(packages);
-			int result = MessageService.ShowCustomDialog(dialog);
-			return result == (int)Gtk.ResponseType.Ok;
+			this.packages = packages.ToList();
 		}
 		
-		LicenseAcceptanceDialog CreateLicenseAcceptanceDialog(IEnumerable<IPackage> packages)
-		{
-			var viewModel = new LicenseAcceptanceViewModel(packages);
-			return new LicenseAcceptanceDialog(viewModel);
+		public IEnumerable<IPackage> Packages {
+			get { return packages; }
+		}
+		
+		public bool HasOnePackage {
+			get { return packages.Count == 1; }
+		}
+		
+		public bool HasMultiplePackages {
+			get { return packages.Count > 1; }
 		}
 	}
 }

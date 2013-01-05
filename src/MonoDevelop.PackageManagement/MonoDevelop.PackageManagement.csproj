@@ -118,6 +118,7 @@
     <Compile Include="MonoDevelop.PackageManagement\ITaskFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IThreadSafePackageManagementEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\LicenseAcceptanceService.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\LicenseAcceptanceViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\MachinePackageCache.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesUserPrompts.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesViewModel.cs" />
@@ -215,6 +216,10 @@
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackagesWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.HyperlinkWidget.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\HyperlinkWidget.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\LicenseAcceptanceDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.LicenseAcceptanceDialog.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\PackageLicenseWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackageLicenseWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />
