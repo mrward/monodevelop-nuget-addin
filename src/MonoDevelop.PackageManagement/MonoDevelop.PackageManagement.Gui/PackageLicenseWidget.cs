@@ -7,27 +7,19 @@ namespace MonoDevelop.PackageManagement
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class PackageLicenseWidget : Gtk.Bin
 	{
-		public PackageLicenseWidget (IPackage package)
+		public PackageLicenseWidget (PackageLicenseViewModel viewModel)
 		{
 			this.Build ();
-			this.DisplayPackage (package);
+			this.DisplayPackage (viewModel);
 		}
 
-		void DisplayPackage (IPackage package)
+		void DisplayPackage (PackageLicenseViewModel viewModel)
 		{
-			this.packageIdLabel.Markup = GetPackageIdMarkup (package.Id);
-			this.packageSummaryTextView.Buffer.Text = GetPackageSummary (package);
-			this.licenseHyperlinkWidget.Uri = package.LicenseUrl.ToString ();
+			this.packageIdLabel.Markup = GetPackageIdMarkup (viewModel.Id);
+			this.packageSummaryTextView.Buffer.Text = viewModel.Summary;
+			this.licenseHyperlinkWidget.Uri = viewModel.LicenseUrl.ToString ();
 		}
-
-		string GetPackageSummary (IPackage package)
-		{
-			if (!(String.IsNullOrEmpty (package.Summary))) {
-				return package.Summary;
-			}
-			return package.Description;
-		}
-
+		
 		string GetPackageIdMarkup (string id)
 		{
 			string format = "<span weight='bold'>{0}</span>";

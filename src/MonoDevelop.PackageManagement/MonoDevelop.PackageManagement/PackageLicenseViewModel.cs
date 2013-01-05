@@ -1,5 +1,5 @@
 ﻿// 
-// LicenseAcceptanceViewModel.cs
+// PackageLicenseViewModel.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,33 +27,29 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class LicenseAcceptanceViewModel : ViewModelBase<LicenseAcceptanceViewModel>
+	public class PackageLicenseViewModel : ViewModelBase<PackageLicenseViewModel>
 	{
-		IList<PackageLicenseViewModel> packages;
+		IPackage package;
 		
-		public LicenseAcceptanceViewModel(IEnumerable<IPackage> packages)
+		public PackageLicenseViewModel(IPackage package)
 		{
-			this.packages = packages
-				.Select(p => new PackageLicenseViewModel(p))
-				.ToList();
+			this.package = package;
 		}
 		
-		public IEnumerable<PackageLicenseViewModel> Packages {
-			get { return packages; }
+		public string Id {
+			get { return package.Id; }
 		}
 		
-		public bool HasOnePackage {
-			get { return packages.Count == 1; }
+		public string Summary {
+			get { return package.SummaryOrDescription(); }
 		}
 		
-		public bool HasMultiplePackages {
-			get { return packages.Count > 1; }
+		public Uri LicenseUrl {
+			get { return package.LicenseUrl; }
 		}
 	}
 }

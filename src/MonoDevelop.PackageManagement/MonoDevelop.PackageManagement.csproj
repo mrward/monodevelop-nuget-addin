@@ -88,6 +88,7 @@
     <Compile Include="MonoDevelop.PackageManagement\InstalledPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\InstallPackageAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageActionRunner.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageFromRepository.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagementEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagementFileService.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesViewTitle.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageActionRunner.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageFromRepository.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\PackageLicenseViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageManagementEnumerableExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageManagementOptionsViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageManagementSelectedProject.cs" />

@@ -1,5 +1,5 @@
 ﻿// 
-// LicenseAcceptanceViewModel.cs
+// IPackageExtensions.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,33 +27,20 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class LicenseAcceptanceViewModel : ViewModelBase<LicenseAcceptanceViewModel>
+	public static class IPackageExtensions
 	{
-		IList<PackageLicenseViewModel> packages;
-		
-		public LicenseAcceptanceViewModel(IEnumerable<IPackage> packages)
+		/// <summary>
+		/// Returns description if summary is missing.
+		/// </summary>
+		public static string SummaryOrDescription(this IPackage package)
 		{
-			this.packages = packages
-				.Select(p => new PackageLicenseViewModel(p))
-				.ToList();
-		}
-		
-		public IEnumerable<PackageLicenseViewModel> Packages {
-			get { return packages; }
-		}
-		
-		public bool HasOnePackage {
-			get { return packages.Count == 1; }
-		}
-		
-		public bool HasMultiplePackages {
-			get { return packages.Count > 1; }
+			if (String.IsNullOrEmpty(package.Summary))
+				return package.Description;
+			return package.Summary;
 		}
 	}
 }

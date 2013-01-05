@@ -47,13 +47,13 @@ namespace MonoDevelop.PackageManagement
 
 		void AddPackages ()
 		{
-			foreach (IPackage package in viewModel.Packages) {
+			foreach (PackageLicenseViewModel package in viewModel.Packages) {
 				AddPackageWidget (package);
 			}
 			this.packagesVBox.ShowAll ();
 		}
 
-		void AddPackageWidget (IPackage package)
+		void AddPackageWidget (PackageLicenseViewModel package)
 		{
 			var widget = new PackageLicenseWidget (package);
 			this.packagesVBox.Add (widget);
