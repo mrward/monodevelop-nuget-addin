@@ -222,6 +222,8 @@
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.LicenseAcceptanceDialog.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageLicenseWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackageLicenseWidget.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\SelectProjectsDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.SelectProjectsDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />

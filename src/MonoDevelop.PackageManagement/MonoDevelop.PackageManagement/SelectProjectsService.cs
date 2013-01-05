@@ -28,6 +28,8 @@
 
 using System;
 using System.Collections.Generic;
+using MonoDevelop.Ide;
+using MonoDevelop.PackageManagement;
 
 namespace ICSharpCode.PackageManagement
 {
@@ -35,22 +37,15 @@ namespace ICSharpCode.PackageManagement
 	{
 		public bool SelectProjects(IEnumerable<IPackageManagementSelectedProject> projects)
 		{
-			//SelectProjectsView view = CreateSelectProjectsView(projects);
-			//return view.ShowDialog() ?? false;
-			return false;
+			SelectProjectsDialog dialog = CreateSelectProjectsDialog(projects);
+			int result = MessageService.ShowCustomDialog(dialog);
+			return result == (int)Gtk.ResponseType.Ok;
 		}
 		
-//		SelectProjectsView CreateSelectProjectsView(IEnumerable<IPackageManagementSelectedProject> projects)
-//		{
-//			var viewModel = new SelectProjectsViewModel(projects);
-//			return CreateSelectProjectsView(viewModel);
-//		}
-//		
-//		SelectProjectsView CreateSelectProjectsView(SelectProjectsViewModel viewModel)
-//		{
-//			var view = new SelectProjectsView();
-//			view.DataContext = viewModel;
-//			return view;
-//		}
+		SelectProjectsDialog CreateSelectProjectsDialog(IEnumerable<IPackageManagementSelectedProject> projects)
+		{
+			var viewModel = new SelectProjectsViewModel(projects);
+			return new SelectProjectsDialog(viewModel);
+		}
 	}
 }
