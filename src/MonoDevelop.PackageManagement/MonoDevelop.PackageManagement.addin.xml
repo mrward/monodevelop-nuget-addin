@@ -44,4 +44,14 @@
 	<Extension path="/MonoDevelop/Core/StockIcons">
 		<StockIcon stockid="md-nuget-package" resource="packageicon.png" />
 	</Extension>
+	
+	<Extension path="/MonoDevelop/Ide/GlobalOptionsDialog">
+		<Section id="NuGetPackageManagement" _label="NuGet">
+			<Section
+				id="PackageSources"
+				_label="Package Sources"
+				fill = "true"
+				class="MonoDevelop.PackageManagement.Gui.PackageSourcesOptionsPanel" />
+		</Section>
+	</Extension>
 </Addin>

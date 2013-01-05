@@ -1,5 +1,5 @@
-﻿// 
-// FolderBrowser.cs
+// 
+// PackageSourcesOptionPanel.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,19 +27,27 @@
 //
 
 using System;
-using MonoDevelop.Components;
+using ICSharpCode.PackageManagement;
+using MonoDevelop.Ide.Gui.Dialogs;
 
-namespace ICSharpCode.PackageManagement
+namespace MonoDevelop.PackageManagement.Gui
 {
-	public class FolderBrowser : IFolderBrowser
+	public class PackageSourcesOptionsPanel : OptionsPanel
 	{
-		public string SelectFolder ()
+		PackageManagementViewModels viewModels;
+
+		public override Gtk.Widget CreatePanelWidget()
 		{
-			var dialog = new SelectFolderDialog ();
-			if (dialog.Run ()) {
-				return dialog.SelectedFile;
-			}
-			return null;
+			viewModels = new PackageManagementViewModels ();
+			viewModels.RegisteredPackageSourcesViewModel.Load ();
+			
+			return new PackageSourcesWidget (viewModels.RegisteredPackageSourcesViewModel);
+		}
+		
+		public override void ApplyChanges()
+		{
+			viewModels.RegisteredPackageSourcesViewModel.Save ();
 		}
 	}
 }
+
