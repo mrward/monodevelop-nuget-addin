@@ -53,6 +53,7 @@ namespace MonoDevelop.PackageManagement
 			this.packageIdVBox.Add (this.licenseHyperlinkWidget);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.packageIdVBox [this.licenseHyperlinkWidget]));
 			w3.Position = 1;
+			w3.Expand = false;
 			// Container child packageIdVBox.Gtk.Box+BoxChild
 			this.fillerLabel = new global::Gtk.Label ();
 			this.fillerLabel.Name = "fillerLabel";
