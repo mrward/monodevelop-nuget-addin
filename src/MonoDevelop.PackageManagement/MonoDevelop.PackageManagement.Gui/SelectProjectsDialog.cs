@@ -27,6 +27,7 @@ namespace MonoDevelop.PackageManagement
 			projectsStore = new ListStore (typeof (bool), typeof (string), typeof (IPackageManagementSelectedProject));
 			projectsTreeView.Model = projectsStore;
 			projectsTreeView.AppendColumn (CreateTreeViewColumn ());
+			projectsTreeView.Selection.Changed += ProjectsTreeViewSelectionChanged;
 		}
 		
 		TreeViewColumn CreateTreeViewColumn ()
@@ -44,8 +45,19 @@ namespace MonoDevelop.PackageManagement
 			
 			return column;
 		}
-
-		void SelectedProjectCheckBoxToggled(object o, ToggledArgs args)
+		
+		void ProjectsTreeViewSelectionChanged (object sender, EventArgs e)
+		{
+			TreeIter iter;
+			if (projectsTreeView.Selection.GetSelected (out iter)) {
+				var project = projectsStore.GetValue (iter, SelectedProjectColumn) as IPackageManagementSelectedProject;
+				if (!project.IsEnabled) {
+					projectsTreeView.Selection.UnselectIter (iter);
+				}
+			}
+		}
+		
+		void SelectedProjectCheckBoxToggled (object o, ToggledArgs args)
 		{
 			TreeIter iter;
 			projectsStore.GetIterFromString (out iter, args.Path);
