@@ -56,19 +56,24 @@ namespace MonoDevelop.PackageManagement
 		
 		void AddProjectsToTreeView ()
 		{
-			foreach (IPackageManagementSelectedProject project in GetEnabledProjects ()) {
+			foreach (IPackageManagementSelectedProject project in viewModel.Projects) {
 				AddProjectToTreeView (project);
 			}
 		}
 		
-		IEnumerable<IPackageManagementSelectedProject> GetEnabledProjects ()
-		{
-			return viewModel.Projects.Where(project => project.IsEnabled);
-		}
-		
 		void AddProjectToTreeView (IPackageManagementSelectedProject project)
 		{
-			projectsStore.AppendValues (project.IsSelected, project.Name, project);
+			projectsStore.AppendValues (project.IsSelected, GetProjectNameMarkup (project), project);
+		}
+		
+		string GetProjectNameMarkup (IPackageManagementSelectedProject project)
+		{
+			if (project.IsEnabled) {
+				return project.Name;
+			}
+			
+			string format = "<span foreground='lightgrey'>{0}</span>";
+			return MarkupString.Format (format, project.Name);
 		}
 	}
 }
