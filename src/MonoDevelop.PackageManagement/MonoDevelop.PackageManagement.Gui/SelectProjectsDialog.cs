@@ -50,8 +50,10 @@ namespace MonoDevelop.PackageManagement
 			TreeIter iter;
 			projectsStore.GetIterFromString (out iter, args.Path);
 			var project = projectsStore.GetValue (iter, SelectedProjectColumn) as IPackageManagementSelectedProject;
-			project.IsSelected = !project.IsSelected;
-			projectsStore.SetValue (iter, SelectedCheckBoxColumn, project.IsSelected);
+			if (project.IsEnabled) {
+				project.IsSelected = !project.IsSelected;
+				projectsStore.SetValue (iter, SelectedCheckBoxColumn, project.IsSelected);
+			}
 		}
 		
 		void AddProjectsToTreeView ()
