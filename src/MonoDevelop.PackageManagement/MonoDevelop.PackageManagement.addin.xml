@@ -10,6 +10,7 @@
 
 	<Runtime>
 		<Import assembly="MonoDevelop.PackageManagement.dll" />
+		<Import assembly="NuGet.Core.dll" />
 	</Runtime>
 
 	<Dependencies>
