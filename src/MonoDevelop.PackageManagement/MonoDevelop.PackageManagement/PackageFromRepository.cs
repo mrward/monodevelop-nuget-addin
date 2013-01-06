@@ -194,5 +194,10 @@ namespace ICSharpCode.PackageManagement
 		{
 			return package.GetSupportedFrameworks();
 		}
+		
+		public override string ToString()
+		{
+			return package.ToString();
+		}
 	}
 }
