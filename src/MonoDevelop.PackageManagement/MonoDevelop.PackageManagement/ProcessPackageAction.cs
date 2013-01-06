@@ -68,7 +68,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void Execute()
 		{
-			TempLoggingService.LogInfo("Action.Execute");
 			BeforeExecute();
 			//if (PackageScriptRunner != null) {
 			//	ExecuteWithScriptRunner();

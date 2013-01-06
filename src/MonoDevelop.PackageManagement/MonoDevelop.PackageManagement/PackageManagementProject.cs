@@ -115,7 +115,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void InstallPackage(IPackage package, InstallPackageAction installAction)
 		{
-			TempLoggingService.LogInfo("Project.InstallPackage");
 			packageManager.InstallPackage(package, installAction);
 		}
 		

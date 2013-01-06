@@ -42,7 +42,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void Log(MessageLevel level, string message, params object[] args)
 		{
-			TempLoggingService.LogInfo(message, args);
 			packageManagementEvents.OnPackageOperationMessageLogged(level, message, args);
 		}
 	}

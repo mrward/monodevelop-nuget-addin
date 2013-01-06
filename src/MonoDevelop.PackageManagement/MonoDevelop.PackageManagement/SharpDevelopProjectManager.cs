@@ -44,7 +44,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public bool IsInstalled(string packageId)
 		{
-			TempLoggingService.LogInfo("ProjectManager.IsInstalled: " + packageId + ", " + LocalRepository.Exists(packageId));
 			return LocalRepository.Exists(packageId);
 		}
 	}

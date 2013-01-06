@@ -77,7 +77,6 @@ namespace ICSharpCode.PackageManagement
 			if (targetFramework == null) {
 				targetFramework = new ProjectTargetFramework(project);
 			}
-			TempLoggingService.LogInfo("GetTargetFramework: " + targetFramework.TargetFrameworkName.ToString());
 			return targetFramework.TargetFrameworkName;
 		}
 		
@@ -87,13 +86,11 @@ namespace ICSharpCode.PackageManagement
 		
 		public dynamic GetPropertyValue(string propertyName)
 		{
-			TempLoggingService.LogInfo("GetPropertyValue: " + propertyName);
 			return project.GetEvaluatedProperty(propertyName);
 		}
 		
 		public void AddReference(string referencePath, Stream stream)
 		{
-			TempLoggingService.LogInfo("AddReference: " + referencePath);
 			ProjectReference assemblyReference = CreateReference(referencePath);
 			AddReferenceToProject(assemblyReference);
 		}
@@ -124,12 +121,10 @@ namespace ICSharpCode.PackageManagement
 		void DebugLogFormat(string format, params object[] args)
 		{
 			Logger.Log(MessageLevel.Debug, format, args);
-			TempLoggingService.LogInfo(format, args);
 		}
 		
 		public bool ReferenceExists(string name)
 		{
-			TempLoggingService.LogInfo("ReferenceExists: " + name);
 			ProjectReference referenceProjectItem = FindReference(name);
 			if (referenceProjectItem != null) {
 				return true;
@@ -192,7 +187,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public bool IsSupportedFile(string path)
 		{
-			TempLoggingService.LogInfo("IsSupportedFile: " + path);
 			if (project.IsWebProject()) {
 				return !IsAppConfigFile(path);
 			}
@@ -217,7 +211,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public override void AddFile(string path, Stream stream)
 		{
-			TempLoggingService.LogInfo("AddFile: " + path);
 			PhysicalFileSystemAddFile(path, stream);
 			AddFileToProject(path);
 		}
@@ -260,7 +253,6 @@ namespace ICSharpCode.PackageManagement
 		
 		void AddFileProjectItemToProject(string path)
 		{
-			TempLoggingService.LogInfo("AddFileProjectItemToProject: " + path);
 			ProjectFile fileItem = CreateFileProjectItem(path);
 			project.AddFile(fileItem);
 			projectService.Save(project);
@@ -285,7 +277,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public override void DeleteDirectory(string path, bool recursive)
 		{
-			TempLoggingService.LogInfo("DeleteDirectory: " + path);
 			string directory = GetFullPath(path);
 			fileService.RemoveDirectory(directory);
 			projectService.Save(project);
@@ -294,7 +285,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public override void DeleteFile(string path)
 		{
-			TempLoggingService.LogInfo("DeleteFile: " + path);
 			string fileName = GetFullPath(path);
 			project.Files.Remove(fileName);
 			fileService.RemoveFile(fileName);
@@ -330,7 +320,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void AddFrameworkReference(string name)
 		{
-			TempLoggingService.LogInfo("AddFrameworkReference: " + name);
 			ProjectReference assemblyReference = CreateGacReference(name);
 			AddReferenceToProject(assemblyReference);
 		}
@@ -342,7 +331,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public string ResolvePath(string path)
 		{
-			TempLoggingService.LogInfo("ResolvePath: " + path);
 			return path;
 		}
 	}

@@ -51,7 +51,6 @@ namespace ICSharpCode.PackageManagement
 		
 		protected override void ExecuteCore()
 		{
-			TempLoggingService.LogInfo("Action.ExecuteCore");
 			Project.InstallPackage(Package, this);
 			OnParentPackageInstalled();
 		}

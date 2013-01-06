@@ -28,6 +28,7 @@
 
 using System;
 using System.Collections.Generic;
+using MonoDevelop.Core;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
@@ -38,7 +39,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void OnPackageOperationsStarting()
 		{
-			TempLoggingService.LogInfo("Package operations starting");
 			if (PackageOperationsStarting != null) {
 				PackageOperationsStarting(this, new EventArgs());
 			}
@@ -48,7 +48,7 @@ namespace ICSharpCode.PackageManagement
 		
 		public void OnPackageOperationError(Exception ex)
 		{
-			TempLoggingService.LogInfo("Package operation error: " + ex.ToString());
+			LoggingService.LogInfo("Package operation error: " + ex.ToString());
 			if (PackageOperationError != null) {
 				PackageOperationError(this, new PackageOperationExceptionEventArgs(ex));
 			}
@@ -70,7 +70,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void OnParentPackageInstalled(IPackage package)
 		{
-			TempLoggingService.LogInfo("Package installed: " + package.Id);
 			if (ParentPackageInstalled != null) {
 				ParentPackageInstalled(this, new ParentPackageOperationEventArgs(package));
 			}
@@ -80,7 +79,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void OnParentPackageUninstalled(IPackage package)
 		{
-			TempLoggingService.LogInfo("Package uninstalled: " + package.Id);
 			if (ParentPackageUninstalled != null) {
 				ParentPackageUninstalled(this, new ParentPackageOperationEventArgs(package));
 			}

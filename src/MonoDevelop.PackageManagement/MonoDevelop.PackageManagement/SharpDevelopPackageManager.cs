@@ -90,7 +90,6 @@ namespace ICSharpCode.PackageManagement
 		
 		public void InstallPackage(IPackage package, InstallPackageAction installAction)
 		{
-			TempLoggingService.LogInfo("InstallPackage operations.Count: " + installAction.Operations.Count());
 			foreach (PackageOperation operation in installAction.Operations) {
 				Execute(operation);
 			}
@@ -157,19 +156,16 @@ namespace ICSharpCode.PackageManagement
 		
 		protected override void OnInstalling(PackageOperationEventArgs e)
 		{
-			TempLoggingService.LogInfo("OnInstalling: " + e.Package.Id);
 			base.OnInstalling(e);
 		}
 		
 		protected override void OnInstalled(PackageOperationEventArgs e)
 		{
-			TempLoggingService.LogInfo("OnInstalled: " + e.Package.Id);
 			base.OnInstalled(e);
 		}
 		
 		protected override void OnExpandFiles(PackageOperationEventArgs e)
 		{
-			TempLoggingService.LogInfo("OnExpandFiles: " + e.Package.Id);
 			base.OnExpandFiles(e);
 		}
 	}

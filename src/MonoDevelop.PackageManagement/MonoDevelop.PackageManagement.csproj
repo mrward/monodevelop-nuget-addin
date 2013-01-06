@@ -152,7 +152,6 @@
     <Compile Include="MonoDevelop.PackageManagement\SelectProjectsService.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SelectProjectsViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\MarkupString.cs" />
-    <Compile Include="MonoDevelop.PackageManagement\TempLoggingService.cs" />
     <Compile Include="MonoDevelop.PackageManagement\OpenDotNetProjects.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageFiles.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageFilesForOperations.cs" />
