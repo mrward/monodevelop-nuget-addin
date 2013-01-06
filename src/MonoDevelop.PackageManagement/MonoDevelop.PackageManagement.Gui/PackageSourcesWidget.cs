@@ -24,6 +24,7 @@ namespace MonoDevelop.PackageManagement
 			this.InitializeTreeView ();
 			this.LoadPackageSources ();
 			this.viewModel.PackageSourceViewModels.CollectionChanged += PackageSourceViewModelsCollectionChanged;
+			UpdateEnabledButtons ();
 		}
 		
 		void InitializeTreeView ()
