@@ -106,8 +106,8 @@ namespace MonoDevelop.PackageManagement
 		
 		void PopulatePackageSources ()
 		{
-			this.packageSourceComboBox.Visible = viewModel.IsSearchable;
-			if (viewModel.IsSearchable) {
+			this.packageSourceComboBox.Visible = viewModel.ShowPackageSources;
+			if (viewModel.ShowPackageSources) {
 				for (int index = 0; index < PackageSources.Count; ++index) {
 					PackageSource packageSource = PackageSources [index];
 					this.packageSourceComboBox.InsertText (index, packageSource.Name);

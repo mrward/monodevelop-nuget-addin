@@ -43,7 +43,7 @@ namespace ICSharpCode.PackageManagement
 		public UpdatedPackagesViewModel(
 			IPackageManagementSolution solution,
 			IRegisteredPackageRepositories registeredPackageRepositories,
-			UpdatedPackageViewModelFactory packageViewModelFactory,			
+			UpdatedPackageViewModelFactory packageViewModelFactory,
 			ITaskFactory taskFactory)
 			: base(
 				registeredPackageRepositories,
@@ -51,14 +51,15 @@ namespace ICSharpCode.PackageManagement
 				taskFactory)
 		{
 			this.selectedProjects = new PackageManagementSelectedProjects(solution);
+			ShowPackageSources = registeredPackageRepositories.HasMultiplePackageSources;
 		}
 		
 		protected override void UpdateRepositoryBeforeReadPackagesTaskStarts()
 		{
 			try {
-				IPackageRepository aggregateRepository = RegisteredPackageRepositories.CreateAggregateRepository();
-				IQueryable<IPackage> installedPackages = GetInstalledPackages(aggregateRepository);
-				updatedPackages = new UpdatedPackages(installedPackages, aggregateRepository);
+				IPackageRepository repository = RegisteredPackageRepositories.ActiveRepository;
+				IQueryable<IPackage> installedPackages = GetInstalledPackages(repository);
+				updatedPackages = new UpdatedPackages(installedPackages, repository);
 			} catch (Exception ex) {
 				errorMessage = ex.Message;
 			}
