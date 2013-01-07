@@ -6,7 +6,7 @@
        url         = "https://github.com/mrward/monodevelop-nuget-addin"
        description = "NuGet Package Management"
        category    = "IDE extensions"
-       version     = "0.1">
+       version     = "0.2">
 
 	<Runtime>
 		<Import assembly="MonoDevelop.PackageManagement.dll" />
