@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2012-2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -94,13 +94,13 @@ namespace ICSharpCode.PackageManagement
 		
 		public IPackageRepository CreateAggregateRepository()
 		{
-			IEnumerable<IPackageRepository> allRepositories = CreateAllRepositories();
+			IEnumerable<IPackageRepository> allRepositories = CreateAllEnabledRepositories();
 			return CreateAggregateRepository(allRepositories);
 		}
 		
-		IEnumerable<IPackageRepository> CreateAllRepositories()
+		IEnumerable<IPackageRepository> CreateAllEnabledRepositories()
 		{
-			foreach (PackageSource source in registeredPackageSources) {
+			foreach (PackageSource source in registeredPackageSources.GetEnabledPackageSources()) {
 				yield return CreateRepository(source.Source);
 			}
 		}
