@@ -216,11 +216,23 @@ namespace MonoDevelop.PackageManagement
 		{
 			this.packageStore.Clear ();
 			
+			if (viewModel.HasError) {
+				AddErrorToTreeView ();
+			}
+			
 			foreach (PackageViewModel packageViewModel in viewModel.PackageViewModels) {
 				AppendPackageToTreeView (packageViewModel);
 			}
 		}
-
+		
+		void AddErrorToTreeView ()
+		{
+			packageStore.AppendValues (
+				 ImageService.GetPixbuf (Gtk.Stock.DialogError, IconSize.Menu),
+				 viewModel.ErrorMessage,
+				 null);
+		}
+		
 		void PackageSearchEntryActivated (object sender, EventArgs e)
 		{
 			Search ();
