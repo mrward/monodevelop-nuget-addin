@@ -370,7 +370,7 @@ namespace ICSharpCode.PackageManagement
 				foreach (PackageSource packageSource in registeredPackageRepositories.PackageSources.GetEnabledPackageSources()) {
 					yield return packageSource;
 				}
-				if (registeredPackageRepositories.PackageSources.HasMultiplePackageSources) {
+				if (registeredPackageRepositories.PackageSources.HasMultipleEnabledPackageSources) {
 					yield return RegisteredPackageSourceSettings.AggregatePackageSource;
 				}
 			}
