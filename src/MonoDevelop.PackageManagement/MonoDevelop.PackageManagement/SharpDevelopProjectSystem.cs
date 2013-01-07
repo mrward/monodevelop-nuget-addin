@@ -262,7 +262,10 @@ namespace ICSharpCode.PackageManagement
 		{
 			//TODO custom tool?
 			string fullPath = GetFullPath(path);
-			return new ProjectFile(fullPath);
+			string buildAction = project.GetDefaultBuildAction(fullPath);
+			return new ProjectFile(fullPath) {
+				BuildAction = buildAction
+			};
 		}
 		
 		void LogAddedFileToProject(string fileName)
