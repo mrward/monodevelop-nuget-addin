@@ -38,15 +38,47 @@ namespace ICSharpCode.PackageManagement
 		
 		public static bool IsWebProject(this DotNetProject project)
 		{
-			//TODO
-			//return project.HasProjectType(WebApplication) || project.HasProjectType(WebSite);
-			return false;
+			return project.HasProjectType(WebApplication) || project.HasProjectType(WebSite);
 		}
 		
 		public static string GetEvaluatedProperty(this DotNetProject project, string name)
 		{
 			//TODO
 			return String.Empty;
+		}
+		
+		public static bool HasProjectType(this DotNetProject project, Guid projectTypeGuid)
+		{
+			foreach (string guid in project.GetProjectTypeGuids()) {
+				if (IsMatch(projectTypeGuid, guid)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public static string[] GetProjectTypeGuids(this DotNetProject project)
+		{
+			string projectTypeGuids = project.GetProjectTypeGuidPropertyValue();
+			return projectTypeGuids.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+		}
+		
+		static bool IsMatch(Guid guid, string guidStringToMatch)
+		{
+			Guid result;
+			if (Guid.TryParse(guidStringToMatch, out result)) {
+				return guid == result;
+			}
+			return false;
+		}
+		
+		public static string GetProjectTypeGuidPropertyValue(this DotNetProject project)
+		{
+			string propertyValue = null;
+			if (project.ExtendedProperties.Contains("ProjectTypeGuids")) {
+				propertyValue = project.ExtendedProperties["ProjectTypeGuids"] as String;
+			}
+			return propertyValue ?? String.Empty;
 		}
 	}
 }
