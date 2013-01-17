@@ -4,12 +4,26 @@ This is a port of the [SharpDevelop NuGet package management addin](http://commu
 
 It uses a custom build of [NuGet.Core.dll](https://github.com/mrward/nuget/tree/monodevelop), based on the original NuGet source code taken from the mono-build branch available from [CodePlex](http://nuget.codeplex.com), and also some code from the latest version of the Mono runtime library.
 
+For more information see the [announcement blog post](http://community.sharpdevelop.net/blogs/mattward/archive/2013/01/07/MonoDevelopNuGetAddin.aspx).
+
 # Requirements
 
  * MonoDevelop 3.0.5
  * Mono 2.10.9 or above
  * mono-winfxcore (required by NuGet.Core)
  * mono-wcf (required by NuGet.Core)
+
+# Installation
+
+If you want to build from source then compile using MonoDevelop and then copy the assemblies and .addin file into:
+
+    ~/.local/share/MonoDevelop-3.0/LocalInstall/AddIns/MonoDevelop.PackageManagement
+
+Alternatively the addin is provided as a pre-compiled binary available to download from a custom MonoDevelop repository:
+
+    http://mrward.github.com/monodevelop-nuget-addin-repository/3.0.5/main.mrep
+
+You can add this repository to MonoDevelop via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins).
 
 # Opening the Manage Packages Dialog
 
@@ -58,6 +72,5 @@ See the original post on [NuGet on Mono](http://monomvc.wordpress.com/2012/03/06
 
 # Todo
 
-Share the core parts of the source code between SharpDevelop 5 and MonoDevelop. Main differences are UI and project system, but the majority of the code was used without modification.
-
-
+  * Share the core parts of the source code between SharpDevelop 5 and MonoDevelop. Main differences are UI and project system, but the majority of the code was used without modification.
+  * Seek integration of this plugin into the main MonoDevelop addins repository.
