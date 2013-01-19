@@ -49,9 +49,14 @@
 	<Extension path="/MonoDevelop/Ide/GlobalOptionsDialog">
 		<Section id="NuGetPackageManagement" _label="NuGet">
 			<Section
+				id="General"
+				_label="General"
+				fill="true"
+				class="MonoDevelop.PackageManagement.Gui.PackageManagementOptionsPanel" />
+			<Section
 				id="PackageSources"
 				_label="Package Sources"
-				fill = "true"
+				fill="true"
 				class="MonoDevelop.PackageManagement.Gui.PackageSourcesOptionsPanel" />
 		</Section>
 	</Extension>
