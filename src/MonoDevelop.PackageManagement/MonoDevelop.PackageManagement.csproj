@@ -229,6 +229,8 @@
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageManagementOptionsPanel.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageManagementOptionsWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackageManagementOptionsWidget.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\PagedResultsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PagedResultsWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />

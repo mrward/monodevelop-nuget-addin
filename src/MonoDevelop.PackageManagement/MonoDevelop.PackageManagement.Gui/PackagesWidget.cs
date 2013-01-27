@@ -93,6 +93,9 @@ namespace MonoDevelop.PackageManagement
 			ClearSelectedPackageInformation ();
 			PopulatePackageSources ();
 			viewModel.PropertyChanged += ViewModelPropertyChanged;
+
+			this.pagedResultsWidget.LoadPackagesViewModel (viewModel);
+			this.pagedResultsHBox.Visible = viewModel.IsPaged;
 		}
 		
 		List<PackageSource> PackageSources {
@@ -223,6 +226,8 @@ namespace MonoDevelop.PackageManagement
 			foreach (PackageViewModel packageViewModel in viewModel.PackageViewModels) {
 				AppendPackageToTreeView (packageViewModel);
 			}
+
+			this.pagedResultsHBox.Visible = viewModel.IsPaged;
 		}
 		
 		void AddErrorToTreeView ()
