@@ -469,7 +469,7 @@ namespace ICSharpCode.PackageManagement
 		public string GetLastPublishedDisplayText()
 		{
 			if (HasLastPublished) {
-				return LastPublished.Value.ToString ();
+				return LastPublished.Value.Date.ToShortDateString ();
 			}
 			return String.Empty;
 		}
