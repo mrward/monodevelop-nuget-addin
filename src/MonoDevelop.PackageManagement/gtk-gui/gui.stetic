@@ -536,6 +536,79 @@
                                     <property name="AutoSize">True</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <widget class="Gtk.HBox" id="packageDependenciesHBox">
+                                    <property name="MemberName" />
+                                    <property name="Spacing">6</property>
+                                    <child>
+                                      <widget class="Gtk.Label" id="packageDependenciesLabel">
+                                        <property name="MemberName" />
+                                        <property name="LabelProp" translatable="yes">&lt;span weight='bold'&gt;Dependencies:&lt;/span&gt;</property>
+                                        <property name="UseMarkup">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">0</property>
+                                        <property name="AutoSize">True</property>
+                                        <property name="Expand">False</property>
+                                        <property name="Fill">False</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="Gtk.Label" id="packageDependenciesNoneLabel">
+                                        <property name="MemberName" />
+                                        <property name="LabelProp" translatable="yes">None</property>
+                                        <property name="Selectable">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">1</property>
+                                        <property name="AutoSize">True</property>
+                                        <property name="Expand">False</property>
+                                        <property name="Fill">False</property>
+                                      </packing>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="Position">7</property>
+                                    <property name="AutoSize">True</property>
+                                    <property name="Expand">False</property>
+                                    <property name="Fill">False</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="Gtk.HBox" id="packageDependenciesListHBox">
+                                    <property name="MemberName" />
+                                    <property name="Spacing">6</property>
+                                    <property name="BorderWidth">2</property>
+                                    <child>
+                                      <widget class="Gtk.Label" id="packageDependenciesListLabel">
+                                        <property name="MemberName" />
+                                        <property name="UseMarkup">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">0</property>
+                                        <property name="AutoSize">True</property>
+                                        <property name="Expand">False</property>
+                                        <property name="Fill">False</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="Gtk.Label" id="packageDependenciesListFillerLabel">
+                                        <property name="MemberName" />
+                                        <property name="Selectable">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">1</property>
+                                        <property name="AutoSize">False</property>
+                                      </packing>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="Position">8</property>
+                                    <property name="AutoSize">True</property>
+                                    <property name="Expand">False</property>
+                                    <property name="Fill">False</property>
+                                  </packing>
+                                </child>
                               </widget>
                             </child>
                           </widget>

@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
@@ -480,6 +481,17 @@ namespace ICSharpCode.PackageManagement
 				return DownloadCount.ToString ();
 			}
 			return String.Empty;
+		}
+
+		public string GetPackageDependenciesDisplayText ()
+		{
+			var displayText = new StringBuilder ();
+			foreach (PackageDependencySet dependencySet in Dependencies) {
+				foreach (PackageDependency dependency in dependencySet.Dependencies) {
+					displayText.AppendLine (dependency.ToString ());
+				}
+			}
+			return displayText.ToString ();
 		}
 	}
 }

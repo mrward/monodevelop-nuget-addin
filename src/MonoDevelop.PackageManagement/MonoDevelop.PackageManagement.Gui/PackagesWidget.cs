@@ -182,7 +182,10 @@ namespace MonoDevelop.PackageManagement
 			this.packageDescriptionTextView.Buffer.Text = packageViewModel.Description;
 			ShowUri (this.moreInformationButton, packageViewModel.ProjectUrl);
 			ShowUri (this.viewLicenseTermsButton, packageViewModel.LicenseUrl);
-			
+			this.packageDependenciesListHBox.Visible = packageViewModel.HasDependencies;
+			this.packageDependenciesNoneLabel.Visible = !packageViewModel.HasDependencies;
+			this.packageDependenciesListLabel.Text = packageViewModel.GetPackageDependenciesDisplayText ();
+
 			EnablePackageActionButtons (packageViewModel);
 			
 			this.packageInfoFrameVBox.Visible = true;
