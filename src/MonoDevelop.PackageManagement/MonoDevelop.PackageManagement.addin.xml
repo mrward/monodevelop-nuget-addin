@@ -8,6 +8,10 @@
        category    = "IDE extensions"
        version     = "0.4">
 
+	<Header>
+		<ReleaseNotesFile>ReleaseNotes.txt</ReleaseNotesFile>
+	</Header>
+	
 	<Runtime>
 		<Import assembly="MonoDevelop.PackageManagement.dll" />
 		<Import assembly="NuGet.Core.dll" />
