@@ -1,6 +1,6 @@
-# NuGet Addin for MonoDevelop
+# NuGet Addin for MonoDevelop and Xamarin Studio
 
-This is a port of the [SharpDevelop NuGet package management addin](http://community.sharpdevelop.net/blogs/mattward/archive/2011/01/23/NuGetSupportInSharpDevelop.aspx) that works with MonoDevelop under Windows and Linux. It adds a Manage Packages dialog to MonoDevelop where you can install, update or uninstall NuGet packages.
+This is a port of the [SharpDevelop NuGet package management addin](http://community.sharpdevelop.net/blogs/mattward/archive/2011/01/23/NuGetSupportInSharpDevelop.aspx) that works with MonoDevelop and Xamarin Studio under Windows, Mac and Linux. It adds a Manage Packages dialog to MonoDevelop and Xamarin Studio where you can install, update or uninstall NuGet packages.
 
 It uses a custom build of [NuGet.Core.dll](https://github.com/mrward/nuget/tree/monodevelop), based on the original NuGet source code taken from the mono-build branch available from [CodePlex](http://nuget.codeplex.com), and also some code from the latest version of the Mono runtime library.
 
@@ -8,7 +8,7 @@ For more information see the [announcement blog post](http://community.sharpdeve
 
 # Requirements
 
- * MonoDevelop 3.0.5
+ * MonoDevelop 3.0.5 or Xamarin Studio (MonoDevelop 4.0).
  * Mono 2.10.9 or above
  * mono-winfxcore (required by NuGet.Core)
  * mono-wcf (required by NuGet.Core)
@@ -19,11 +19,17 @@ If you want to build from source then compile using MonoDevelop and then copy th
 
     ~/.local/share/MonoDevelop-3.0/LocalInstall/AddIns/MonoDevelop.PackageManagement
 
-Alternatively the addin is provided as a pre-compiled binary available to download from a custom MonoDevelop repository:
+Alternatively the addin is provided as a pre-compiled binary available to download from a custom MonoDevelop repository.
+
+For MonoDevelop 3.0.5:
 
     http://mrward.github.com/monodevelop-nuget-addin-repository/3.0.5/main.mrep
 
-You can add this repository to MonoDevelop via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins).
+For Xamarin Studio (MonoDevelop 4.0):
+
+    http://mrward.github.com/monodevelop-nuget-addin-repository/4.0/main.mrep
+
+You can add this repository to MonoDevelop or Xamarin Studio via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins).
 
 # Opening the Manage Packages Dialog
 
@@ -57,7 +63,7 @@ One way to check what assemblies are missing is to open NuGet.Core.dll in MonoDe
 
 NuGet.Core.dll depends on
 
- 1.  System.Data.Services.Client v4.0.0.0
+ 1. System.Data.Services.Client v4.0.0.0
  2. WindowsBase v4.0.0.0
   
 WindowsBase is in the mono-winfxcore package. Whilst System.Data.Services.Client is in the mono-wcf package.
