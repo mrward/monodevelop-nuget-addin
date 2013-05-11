@@ -60,6 +60,7 @@ namespace MonoDevelop.PackageManagement
 			packagesTreeView.Model = packageStore;
 			packagesTreeView.AppendColumn (CreateTreeViewColumn ());
 			packagesTreeView.Selection.Changed += PackagesTreeViewSelectionChanged;
+			includePrereleaseCheckButton.Clicked += IncludePrereleaseCheckButtonClicked;
 		}
 		
 		TreeViewColumn CreateTreeViewColumn ()
@@ -80,14 +81,21 @@ namespace MonoDevelop.PackageManagement
 			return column;
 		}
 		
-		void PackagesTreeViewSelectionChanged(object sender, EventArgs e)
+		void PackagesTreeViewSelectionChanged (object sender, EventArgs e)
 		{
 			ShowSelectedPackage ();
 		}
-		
+
+		void IncludePrereleaseCheckButtonClicked (object sender, EventArgs e)
+		{
+			viewModel.IncludePrerelease = !viewModel.IncludePrerelease;
+		}
+
 		public void LoadViewModel (PackagesViewModel viewModel)
 		{
 			this.viewModel = viewModel;
+			
+			this.includePrereleaseCheckButton.Visible = viewModel.ShowPrerelease;
 			
 			this.packageSearchHBox.Visible = viewModel.IsSearchable;
 			ClearSelectedPackageInformation ();

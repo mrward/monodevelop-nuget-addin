@@ -47,6 +47,7 @@ namespace ICSharpCode.PackageManagement
 		ITaskFactory taskFactory;
 		IEnumerable<IPackage> allPackages;
 		ITask<PackagesForSelectedPageResult> task;
+		bool includePrerelease;
 
 		public PackagesViewModel(
 			IRegisteredPackageRepositories registeredPackageRepositories,
@@ -290,7 +291,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			var repository = registeredPackageRepositories.ActiveRepository;
 			var packageFromRepository = new PackageFromRepository(package, repository);
-			return packageViewModelFactory.CreatePackageViewModel(packageFromRepository);
+			return packageViewModelFactory.CreatePackageViewModel(this, packageFromRepository);
 		}
 		
 		public int SelectedPageNumber {
@@ -386,5 +387,18 @@ namespace ICSharpCode.PackageManagement
 				}
 			}
 		}
+		
+		public bool IncludePrerelease {
+			get { return includePrerelease; }
+			set {
+				if (includePrerelease != value) {
+					includePrerelease = value;
+					ReadPackages();
+					OnPropertyChanged(null);
+				}
+			}
+		}
+		
+		public bool ShowPrerelease { get; set; }
 	}
 }

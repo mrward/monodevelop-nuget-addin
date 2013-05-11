@@ -53,9 +53,10 @@ namespace ICSharpCode.PackageManagement
 			this.Logger = new PackageManagementLogger(packageManagementEvents);
 		}
 		
-		public virtual PackageViewModel CreatePackageViewModel(IPackageFromRepository package)
+		public virtual PackageViewModel CreatePackageViewModel(PackagesViewModel parent, IPackageFromRepository package)
 		{
 			return new PackageViewModel(
+				parent,
 				package,
 				SelectedProjects,
 				PackageManagementEvents,

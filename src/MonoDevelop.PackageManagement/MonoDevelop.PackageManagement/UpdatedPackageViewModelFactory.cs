@@ -41,9 +41,10 @@ namespace ICSharpCode.PackageManagement
 			selectedProjectsForUpdatedPackages = new SelectedProjectsForUpdatedPackages(Solution);
 		}
 		
-		public override PackageViewModel CreatePackageViewModel(IPackageFromRepository package)
+		public override PackageViewModel CreatePackageViewModel(PackagesViewModel parent, IPackageFromRepository package)
 		{
 			return new UpdatedPackageViewModel(
+				parent,
 				package,
 				selectedProjectsForUpdatedPackages,
 				PackageManagementEvents,

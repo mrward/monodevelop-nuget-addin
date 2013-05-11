@@ -52,6 +52,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			this.selectedProjects = new PackageManagementSelectedProjects(solution);
 			ShowPackageSources = true;
+			ShowPrerelease = true;
 		}
 		
 		protected override void UpdateRepositoryBeforeReadPackagesTaskStarts()
@@ -85,7 +86,7 @@ namespace ICSharpCode.PackageManagement
 		
 		IQueryable<IPackage> GetUpdatedPackages()
 		{
-			return updatedPackages.GetUpdatedPackages().AsQueryable();
+			return updatedPackages.GetUpdatedPackages(IncludePrerelease).AsQueryable();
 		}
 	}
 }
