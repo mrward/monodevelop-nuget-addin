@@ -103,6 +103,7 @@
     <Compile Include="MonoDevelop.PackageManagement\IPackageOperationResolverFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryCache.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelFactory.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelParent.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IProcess.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IProjectBrowserUpdater.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPropertyService.cs" />

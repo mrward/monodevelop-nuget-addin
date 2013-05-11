@@ -58,11 +58,11 @@ namespace ICSharpCode.PackageManagement
 		
 		public string SearchTerms { get; set; }
 		
-		public IEnumerable<IPackage> GetUpdatedPackages()
+		public IEnumerable<IPackage> GetUpdatedPackages(bool includePrerelease = false)
 		{
 			IQueryable<IPackage> localPackages = installedPackages;
 			localPackages = FilterPackages(localPackages);
-			return GetUpdatedPackages(sourceRepository, localPackages);
+			return GetUpdatedPackages(sourceRepository, localPackages, includePrerelease);
 		}
 		
 		IQueryable<IPackage> GetInstalledPackages()
@@ -75,9 +75,9 @@ namespace ICSharpCode.PackageManagement
 			return localPackages.Find(SearchTerms);
 		}
 		
-		IEnumerable<IPackage> GetUpdatedPackages(IPackageRepository sourceRepository, IQueryable<IPackage> localPackages)
+		IEnumerable<IPackage> GetUpdatedPackages(IPackageRepository sourceRepository, IQueryable<IPackage> localPackages, bool includePrerelease)
 		{
-			return sourceRepository.GetUpdates(localPackages, false, false);
+			return sourceRepository.GetUpdates(localPackages, includePrerelease, false);
 		}
 	}
 }

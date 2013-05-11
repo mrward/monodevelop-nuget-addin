@@ -1,5 +1,5 @@
 ﻿// 
-// IPackageViewModelFactory.cs
+// IPackageFromRepository.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,17 +27,11 @@
 //
 
 using System;
-using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public interface IPackageViewModelFactory
+	public interface IPackageViewModelParent
 	{
-		PackageViewModel CreatePackageViewModel(IPackageViewModelParent parent, IPackageFromRepository package);
-		
-		IPackageManagementSolution Solution { get; }
-		PackageManagementSelectedProjects SelectedProjects { get; }
-		IPackageManagementEvents PackageManagementEvents { get; }
-		IPackageActionRunner PackageActionRunner { get; }
+		bool IncludePrerelease { get; }
 	}
 }

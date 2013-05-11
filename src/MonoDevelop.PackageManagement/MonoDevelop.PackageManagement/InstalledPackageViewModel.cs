@@ -35,12 +35,13 @@ namespace ICSharpCode.PackageManagement
 	public class InstalledPackageViewModel : PackageViewModel
 	{
 		public InstalledPackageViewModel(
+			IPackageViewModelParent parent,
 			IPackageFromRepository package,
 			SelectedProjectsForInstalledPackages selectedProjects,
 			IPackageManagementEvents packageManagementEvents,
 			IPackageActionRunner actionRunner,
 			ILogger logger)
-			: base(package, selectedProjects, packageManagementEvents, actionRunner, logger)
+			: base(parent, package, selectedProjects, packageManagementEvents, actionRunner, logger)
 		{
 		}
 		
