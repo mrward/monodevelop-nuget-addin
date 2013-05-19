@@ -86,15 +86,6 @@ namespace ICSharpCode.PackageManagement
 			return UseDefaultIfNullOrEmpty(TargetFrameworkMoniker.Profile, String.Empty);
 		}
 		
-		string GetEvaluatedPropertyOrDefault(string propertyName, string defaultPropertyValue)
-		{
-			string propertyValue = project.GetEvaluatedProperty(propertyName);
-			if (String.IsNullOrEmpty(propertyValue)) {
-				return defaultPropertyValue;
-			}
-			return propertyValue;
-		}
-		
 		public FrameworkName TargetFrameworkName {
 			get { return targetFramework; }
 		}
