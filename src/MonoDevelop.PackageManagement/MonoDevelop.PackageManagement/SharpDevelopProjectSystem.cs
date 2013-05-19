@@ -339,10 +339,21 @@ namespace ICSharpCode.PackageManagement
 		
 		public void AddImport(string targetPath, ProjectImportLocation location)
 		{
+			string relativeTargetPath = GetRelativePath(targetPath);
+			project.AddImportIfMissing(relativeTargetPath, location);
+			projectService.Save(project);
+		}
+
+		string GetRelativePath(string path)
+		{
+			return FileService.AbsoluteToRelativePath(project.BaseDirectory, path);
 		}
 		
 		public void RemoveImport(string targetPath)
 		{
+			string relativeTargetPath = GetRelativePath(targetPath);
+			project.RemoveImport(relativeTargetPath);
+			projectService.Save(project);
 		}
 	}
 }

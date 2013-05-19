@@ -125,6 +125,7 @@
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesUserPrompts.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesViewTitle.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\MSBuildProjectExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageActionRunner.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageFromRepository.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageLicenseViewModel.cs" />
