@@ -85,7 +85,7 @@ namespace ICSharpCode.PackageManagement
 		public void LogAddingPackage()
 		{
 			string message = GetFormattedStartPackageOperationMessage(AddingPackageMessageFormat);
-			LogInformation(message);			
+			LogInformation(message);
 		}
 		
 		string GetFormattedStartPackageOperationMessage(string format)
@@ -113,7 +113,12 @@ namespace ICSharpCode.PackageManagement
 		public void LogManagingPackage()
 		{
 			string message =  GetFormattedStartPackageOperationMessage(ManagingPackageMessageFormat);
-			LogInformation(message);			
+			LogInformation(message);
+		}
+		
+		public FileConflictResolution ResolveFileConflict(string message)
+		{
+			return FileConflictResolution.IgnoreAll;
 		}
 	}
 }
