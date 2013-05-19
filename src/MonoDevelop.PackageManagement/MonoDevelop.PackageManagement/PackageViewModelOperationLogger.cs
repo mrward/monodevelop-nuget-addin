@@ -118,7 +118,7 @@ namespace ICSharpCode.PackageManagement
 		
 		public FileConflictResolution ResolveFileConflict(string message)
 		{
-			return FileConflictResolution.IgnoreAll;
+			return logger.ResolveFileConflict(message);
 		}
 	}
 }

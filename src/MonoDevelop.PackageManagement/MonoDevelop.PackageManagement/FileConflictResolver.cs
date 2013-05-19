@@ -1,10 +1,10 @@
 ﻿// 
-// PackageManagementLogger.cs
+// FileConflictResolver.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,27 +27,49 @@
 //
 
 using System;
+using MonoDevelop.Ide;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class PackageManagementLogger : ILogger
+	public class FileConflictResolver : IFileConflictResolver
 	{
-		IPackageManagementEvents packageManagementEvents;
+		static AlertButton YesToAllButton = new AlertButton ("Yes to All");
+		static AlertButton NoToAllButton = new AlertButton ("No to All");
 		
-		public PackageManagementLogger(IPackageManagementEvents packageManagementEvents)
-		{
-			this.packageManagementEvents = packageManagementEvents;
-		}
+		AlertButton[] buttons = new AlertButton[] {
+			AlertButton.Yes,
+			YesToAllButton,
+			AlertButton.No,
+			NoToAllButton
+		};
 		
-		public void Log(MessageLevel level, string message, params object[] args)
-		{
-			packageManagementEvents.OnPackageOperationMessageLogged(level, message, args);
-		}
+		const int YesButtonIndex = 0;
+		const int YesToAllButtonIndex = 1;
+		const int NoButtonIndex = 2;
+		const int NoToAllButtonIndex = 3;
 		
 		public FileConflictResolution ResolveFileConflict(string message)
 		{
-			return packageManagementEvents.OnResolveFileConflict(message);
+			AlertButton result = MessageService.AskQuestion(
+				"File Conflict",
+				message,
+				NoButtonIndex, // "No" is default accept button.
+				buttons);
+			return MapResultToFileConflictResolution(result);
+		}
+		
+		FileConflictResolution MapResultToFileConflictResolution(AlertButton result)
+		{
+			if (result == AlertButton.Yes) {
+				return FileConflictResolution.Overwrite;
+			} else if (result == YesToAllButton) {
+				return FileConflictResolution.OverwriteAll;
+			} else if (result == NoToAllButton) {
+				return FileConflictResolution.IgnoreAll;
+			} else {
+				return FileConflictResolution.Ignore;
+			}
 		}
 	}
 }

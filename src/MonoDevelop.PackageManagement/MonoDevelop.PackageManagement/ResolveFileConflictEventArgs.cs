@@ -1,10 +1,10 @@
 ﻿// 
-// IPackageManagementEvents.cs
+// ResolveFileConflictEventArgs.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,29 +27,19 @@
 //
 
 using System;
-using System.Collections.Generic;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public interface IPackageManagementEvents
+	public class ResolveFileConflictEventArgs : EventArgs
 	{
-		event EventHandler PackageOperationsStarting;
-		event EventHandler<AcceptLicensesEventArgs> AcceptLicenses;
-		event EventHandler<SelectProjectsEventArgs> SelectProjects;
-		event EventHandler<ResolveFileConflictEventArgs> ResolveFileConflict;
-		event EventHandler<PackageOperationExceptionEventArgs> PackageOperationError;
-		event EventHandler<ParentPackageOperationEventArgs> ParentPackageInstalled;
-		event EventHandler<ParentPackageOperationEventArgs> ParentPackageUninstalled;
-		event EventHandler<PackageOperationMessageLoggedEventArgs> PackageOperationMessageLogged;
-	
-		void OnPackageOperationsStarting();
-		void OnPackageOperationError(Exception ex);
-		bool OnAcceptLicenses(IEnumerable<IPackage> packages);
-		void OnParentPackageInstalled(IPackage package);
-		void OnParentPackageUninstalled(IPackage package);
-		void OnPackageOperationMessageLogged(MessageLevel level, string message, params object[] args);
-		bool OnSelectProjects(IEnumerable<IPackageManagementSelectedProject> selectedProjects);
-		FileConflictResolution OnResolveFileConflict(string message);
+		public ResolveFileConflictEventArgs(string message)
+		{
+			this.Message = message;
+			this.Resolution = FileConflictResolution.Ignore;
+		}
+		
+		public string Message { get; private set; }
+		public FileConflictResolution Resolution { get; set; }
 	}
 }

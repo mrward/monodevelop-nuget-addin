@@ -172,5 +172,15 @@ namespace ICSharpCode.PackageManagement
 		{
 			return unsafeEvents.OnSelectProjects(selectedProjects);
 		}
+		
+		public event EventHandler<ResolveFileConflictEventArgs> ResolveFileConflict {
+			add { unsafeEvents.ResolveFileConflict += value; }
+			remove { unsafeEvents.ResolveFileConflict -= value; }
+		}
+		
+		public FileConflictResolution OnResolveFileConflict(string message)
+		{
+			return unsafeEvents.OnResolveFileConflict(message);
+		}
 	}
 }
