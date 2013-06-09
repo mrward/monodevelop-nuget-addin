@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2012-2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,6 +27,7 @@
 //
 
 using System;
+using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
@@ -54,6 +55,17 @@ namespace ICSharpCode.PackageManagement
 			outputMessagesView = new PackageManagementOutputMessagesView(packageManagementEvents);
 			solution = new PackageManagementSolution(registeredPackageRepositories, packageManagementEvents);
 			packageActionRunner = new PackageActionRunner(packageManagementEvents);
+			
+			InitializeCredentialProvider();
+		}
+		
+		static void InitializeCredentialProvider()
+		{
+			ISettings settings = Settings.LoadDefaultSettings(null);
+			var packageSourceProvider = new PackageSourceProvider(settings);
+			var credentialProvider = new SettingsCredentialProvider(new MonoDevelopCredentialProvider(), packageSourceProvider);
+			
+			HttpClient.DefaultCredentialProvider = credentialProvider;
 		}
 		
 		public static PackageManagementOptions Options {
