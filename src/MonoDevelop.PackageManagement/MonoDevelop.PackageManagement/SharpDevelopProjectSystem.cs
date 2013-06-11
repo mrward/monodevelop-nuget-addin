@@ -136,7 +136,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			string referenceName = GetReferenceName(name);
 			foreach (ProjectReference referenceProjectItem in project.References) {
-				string projectReferenceName = GetReferenceName(referenceProjectItem.Reference);
+				string projectReferenceName = GetProjectReferenceName(referenceProjectItem.Reference);
 				if (IsMatchIgnoringCase(projectReferenceName, referenceName)) {
 					return referenceProjectItem;
 				}
@@ -150,6 +150,18 @@ namespace ICSharpCode.PackageManagement
 				return Path.GetFileNameWithoutExtension(name);
 			}
 			return name;
+		}
+		
+		string GetProjectReferenceName(string name)
+		{
+			string referenceName = GetReferenceName(name);
+			return GetAssemblyShortName(referenceName);
+		}
+		
+		string GetAssemblyShortName(string name)
+		{
+			string[] parts = name.Split(',');
+			return parts[0];
 		}
 		
 		bool HasDllOrExeFileExtension(string name)
