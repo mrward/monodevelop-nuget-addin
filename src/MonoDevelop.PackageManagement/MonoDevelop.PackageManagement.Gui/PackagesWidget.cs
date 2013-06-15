@@ -104,6 +104,8 @@ namespace MonoDevelop.PackageManagement
 
 			this.pagedResultsWidget.LoadPackagesViewModel (viewModel);
 			this.pagedResultsHBox.Visible = viewModel.IsPaged;
+
+			this.updateAllPackagesButtonBox.Visible = viewModel.IsUpdateAllPackagesEnabled;
 		}
 		
 		List<PackageSource> PackageSources {
@@ -280,6 +282,11 @@ namespace MonoDevelop.PackageManagement
 		{
 			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
 			packageViewModel.ManagePackage ();
+		}
+		
+		void UpdateAllPackagesButtonClicked (object sender, EventArgs e)
+		{
+			viewModel.UpdateAllPackagesCommand.Execute (null);
 		}
 	}
 }

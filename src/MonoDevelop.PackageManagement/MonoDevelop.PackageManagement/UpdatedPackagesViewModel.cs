@@ -53,6 +53,7 @@ namespace ICSharpCode.PackageManagement
 			this.selectedProjects = new PackageManagementSelectedProjects(solution);
 			ShowPackageSources = true;
 			ShowPrerelease = true;
+			ShowUpdateAllPackages = true;
 		}
 		
 		protected override void UpdateRepositoryBeforeReadPackagesTaskStarts()

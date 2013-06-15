@@ -321,6 +321,33 @@
               </packing>
             </child>
             <child>
+              <widget class="Gtk.HButtonBox" id="updateAllPackagesButtonBox">
+                <property name="MemberName" />
+                <property name="Size">1</property>
+                <property name="LayoutStyle">End</property>
+                <child>
+                  <widget class="Gtk.Button" id="updateAllPackagesButton">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextOnly</property>
+                    <property name="Label" translatable="yes">Update All</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="UpdateAllPackagesButtonClicked" />
+                  </widget>
+                  <packing>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">3</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
               <widget class="Gtk.Frame" id="packageInfoFrame">
                 <property name="MemberName" />
                 <property name="ShadowType">None</property>
@@ -635,7 +662,7 @@
                 </child>
               </widget>
               <packing>
-                <property name="Position">3</property>
+                <property name="Position">4</property>
                 <property name="AutoSize">False</property>
               </packing>
             </child>
@@ -694,7 +721,7 @@
               </widget>
               <packing>
                 <property name="PackType">End</property>
-                <property name="Position">4</property>
+                <property name="Position">5</property>
                 <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>

@@ -70,12 +70,14 @@ namespace ICSharpCode.PackageManagement
 			ShowPreviousPageCommand = new DelegateCommand(param => ShowPreviousPage());
 			ShowPageCommand = new DelegateCommand(param => ExecuteShowPageCommand(param));
 			SearchCommand = new DelegateCommand(param => Search());
+			UpdateAllPackagesCommand = new DelegateCommand(param => UpdateAllPackages());
 		}
 		
 		public ICommand ShowNextPageCommand { get; private set; }
 		public ICommand ShowPreviousPageCommand { get; private set; }
 		public ICommand ShowPageCommand { get; private set; }
 		public ICommand SearchCommand { get; private set; }
+		public ICommand UpdateAllPackagesCommand { get; private set; }
 		
 		public void Dispose()
 		{
@@ -387,7 +389,48 @@ namespace ICSharpCode.PackageManagement
 				}
 			}
 		}
+
+		public bool ShowUpdateAllPackages { get; set; }
 		
+		public bool IsUpdateAllPackagesEnabled {
+			get {
+				return ShowUpdateAllPackages;
+				//return ShowUpdateAllPackages && (TotalItems > 1);
+			}
+		}
+		
+		void UpdateAllPackages()
+		{
+			try {
+				TryUpdatingAllPackages();
+			} catch (Exception ex) {
+				ReportError(ex);
+				LogError(ex);
+			}
+		}
+		
+		void LogError(Exception ex)
+		{
+			//packageViewModelFactory
+			//	.Logger
+			//	.Log(MessageLevel.Error, ex.ToString());
+		}
+		
+		void ReportError(Exception ex)
+		{
+			//packageViewModelFactory
+			//	.PackageManagementEvents
+			//	.OnPackageOperationError(ex);
+		}
+		
+		protected virtual void TryUpdatingAllPackages()
+		{
+		}
+		
+		//protected IPackageActionRunner ActionRunner {
+		//	get { return packageViewModelFactory.PackageActionRunner; }
+		//}
+
 		public bool IncludePrerelease {
 			get { return includePrerelease; }
 			set {
