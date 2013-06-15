@@ -36,23 +36,23 @@ namespace ICSharpCode.PackageManagement
 	{
 		IPackageManagementEvents packageManagementEvents;
 		
-		public PackageActionRunner( IPackageManagementEvents packageManagementEvents)
+		public PackageActionRunner(IPackageManagementEvents packageManagementEvents)
 		{
 			this.packageManagementEvents = packageManagementEvents;
 		}
 		
-		public void Run(IEnumerable<ProcessPackageAction> actions)
+		public void Run(IEnumerable<IPackageAction> actions)
 		{
 			if (ShouldRunActionsInConsole(actions)) {
 				ReportScriptsWillNotBeRun();
 			}
 			
-			foreach (ProcessPackageAction action in actions) {
+			foreach (IPackageAction action in actions) {
 				action.Execute();
 			}
 		}
 		
-		bool ShouldRunActionsInConsole(IEnumerable<ProcessPackageAction> actions)
+		bool ShouldRunActionsInConsole(IEnumerable<IPackageAction> actions)
 		{
 			foreach (ProcessPackageAction action in actions) {
 				if (ShouldRunActionInConsole(action)) {
@@ -62,7 +62,7 @@ namespace ICSharpCode.PackageManagement
 			return false;
 		}
 		
-		public void Run(ProcessPackageAction action)
+		public void Run(IPackageAction action)
 		{
 			if (ShouldRunActionInConsole(action)) {
 				ReportScriptsWillNotBeRun();
@@ -71,7 +71,7 @@ namespace ICSharpCode.PackageManagement
 			action.Execute();
 		}
 		
-		bool ShouldRunActionInConsole(ProcessPackageAction action)
+		bool ShouldRunActionInConsole(IPackageAction action)
 		{
 			return action.HasPackageScriptsToRun();
 		}

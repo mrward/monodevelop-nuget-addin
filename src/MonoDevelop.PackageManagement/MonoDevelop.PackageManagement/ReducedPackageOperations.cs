@@ -1,5 +1,5 @@
 ﻿// 
-// UpdatePackageAction.cs
+// ReducedPackageOperations.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -28,46 +28,50 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public class UpdatePackageAction : ProcessPackageOperationsAction, IUpdatePackageSettings
+	public class ReducedPackageOperations
 	{
-		public UpdatePackageAction(
-			IPackageManagementProject project,
-			IPackageManagementEvents packageManagementEvents)
-			: base(project, packageManagementEvents)
+		IPackageOperationResolver resolver;
+		IList<PackageOperation> operations;
+		IEnumerable<IPackage> packages;
+		
+		public ReducedPackageOperations(IPackageOperationResolver resolver, IEnumerable<IPackage> packages)
 		{
-			UpdateDependencies = true;
-			UpdateIfPackageDoesNotExistInProject = true;
+			this.resolver = resolver;
+			this.packages = packages;
+			this.operations = new List<PackageOperation>();
 		}
 		
-		public bool UpdateDependencies { get; set; }
-		public bool UpdateIfPackageDoesNotExistInProject { get; set; }
-		
-		protected override IEnumerable<PackageOperation> GetPackageOperations()
-		{
-			var installAction = Project.CreateInstallPackageAction();
-			installAction.AllowPrereleaseVersions = AllowPrereleaseVersions;
-			installAction.IgnoreDependencies = !UpdateDependencies;
-			return Project.GetInstallPackageOperations(Package, installAction);
+		public IEnumerable<PackageOperation> Operations {
+			get { return operations; }
 		}
 		
-		protected override void ExecuteCore()
+		public void Reduce()
 		{
-			if (ShouldUpdatePackage()) {
-				Project.UpdatePackage(Package, this);
-				OnParentPackageInstalled();
+			foreach (IPackage package in packages) {
+				if (!InstallOperationExists(package)) {
+					operations.AddRange(resolver.ResolveOperations(package));
+				}
 			}
+			
+			operations = operations.Reduce();
 		}
 		
-		bool ShouldUpdatePackage()
+		bool InstallOperationExists(IPackage package)
 		{
-			if (!UpdateIfPackageDoesNotExistInProject) {
-				return PackageIdExistsInProject();
-			}
-			return true;
+			var installOperation = new PackageOperation(package, PackageAction.Install);
+			return operations.Any(operation => IsMatch(installOperation, operation));
+		}
+		
+		bool IsMatch(PackageOperation x, PackageOperation y)
+		{
+			return (x.Package.Id == y.Package.Id) &&
+				(x.Package.Version == y.Package.Version) &&
+				(x.Action == y.Action);
 		}
 	}
 }

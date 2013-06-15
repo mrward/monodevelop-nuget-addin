@@ -389,13 +389,12 @@ namespace ICSharpCode.PackageManagement
 				}
 			}
 		}
-
+		
 		public bool ShowUpdateAllPackages { get; set; }
 		
 		public bool IsUpdateAllPackagesEnabled {
 			get {
-				return ShowUpdateAllPackages;
-				//return ShowUpdateAllPackages && (TotalItems > 1);
+				return ShowUpdateAllPackages && (TotalItems > 1);
 			}
 		}
 		
@@ -411,26 +410,26 @@ namespace ICSharpCode.PackageManagement
 		
 		void LogError(Exception ex)
 		{
-			//packageViewModelFactory
-			//	.Logger
-			//	.Log(MessageLevel.Error, ex.ToString());
+			packageViewModelFactory
+				.Logger
+				.Log(MessageLevel.Error, ex.ToString());
 		}
 		
 		void ReportError(Exception ex)
 		{
-			//packageViewModelFactory
-			//	.PackageManagementEvents
-			//	.OnPackageOperationError(ex);
+			packageViewModelFactory
+				.PackageManagementEvents
+				.OnPackageOperationError(ex);
 		}
 		
 		protected virtual void TryUpdatingAllPackages()
 		{
 		}
 		
-		//protected IPackageActionRunner ActionRunner {
-		//	get { return packageViewModelFactory.PackageActionRunner; }
-		//}
-
+		protected IPackageActionRunner ActionRunner {
+			get { return packageViewModelFactory.PackageActionRunner; }
+		}
+		
 		public bool IncludePrerelease {
 			get { return includePrerelease; }
 			set {

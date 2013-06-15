@@ -31,7 +31,7 @@ using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public abstract class ProcessPackageAction
+	public abstract class ProcessPackageAction : IPackageAction
 	{
 		IPackageManagementEvents packageManagementEvents;
 		

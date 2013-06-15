@@ -39,5 +39,6 @@ namespace ICSharpCode.PackageManagement
 		PackageManagementSelectedProjects SelectedProjects { get; }
 		IPackageManagementEvents PackageManagementEvents { get; }
 		IPackageActionRunner PackageActionRunner { get; }
+		ILogger Logger { get; }
 	}
 }
