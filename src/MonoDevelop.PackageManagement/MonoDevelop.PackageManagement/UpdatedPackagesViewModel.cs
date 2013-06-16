@@ -55,9 +55,22 @@ namespace ICSharpCode.PackageManagement
 			this.selectedProjects = new PackageManagementSelectedProjects(solution);
 			this.logger = packageViewModelFactory.Logger;
 			this.packageManagementEvents = packageViewModelFactory.PackageManagementEvents;
+			
+			packageManagementEvents.ParentPackagesUpdated += PackagesUpdated;
+			
 			ShowPackageSources = true;
 			ShowUpdateAllPackages = true;
 			ShowPrerelease = true;
+		}
+		
+		void PackagesUpdated(object sender, EventArgs e)
+		{
+			ReadPackages();
+		}
+		
+		protected override void OnDispose()
+		{
+			packageManagementEvents.ParentPackagesUpdated -= PackagesUpdated;
 		}
 		
 		protected override void UpdateRepositoryBeforeReadPackagesTaskStarts()
