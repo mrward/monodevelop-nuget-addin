@@ -401,6 +401,7 @@ namespace ICSharpCode.PackageManagement
 		void UpdateAllPackages()
 		{
 			try {
+				packageViewModelFactory.PackageManagementEvents.OnPackageOperationsStarting();
 				TryUpdatingAllPackages();
 			} catch (Exception ex) {
 				ReportError(ex);
