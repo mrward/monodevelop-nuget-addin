@@ -38,11 +38,15 @@ namespace ICSharpCode.PackageManagement
 		List<IPackageFromRepository> packages = new List<IPackageFromRepository>();
 		List<PackageOperation> operations = new List<PackageOperation>();
 		List<IPackageManagementProject> projects;
+		IPackageManagementEvents packageManagementEvents;
 		
-		public UpdateSolutionPackagesAction(IPackageManagementSolution solution)
+		public UpdateSolutionPackagesAction(
+			IPackageManagementSolution solution,
+			IPackageManagementEvents packageManagementEvents)
 		{
 			this.Solution = solution;
 			this.UpdateDependencies = true;
+			this.packageManagementEvents = packageManagementEvents;
 		}
 		
 		public IPackageManagementSolution Solution { get; private set; }
@@ -100,6 +104,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			RunPackageOperations();
 			UpdatePackageReferences();
+			packageManagementEvents.OnParentPackagesUpdated(Packages);
 		}
 		
 		void RunPackageOperations()

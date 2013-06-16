@@ -151,6 +151,7 @@
     <Compile Include="MonoDevelop.PackageManagement\PackageViewModelOperationLogger.cs" />
     <Compile Include="MonoDevelop.PackageManagement\Page.cs" />
     <Compile Include="MonoDevelop.PackageManagement\Pages.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\ParentPackagesOperationEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\Process.cs" />
     <Compile Include="MonoDevelop.PackageManagement\RecentPackagesViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ReducedPackageOperations.cs" />

@@ -36,10 +36,14 @@ namespace ICSharpCode.PackageManagement
 	{
 		List<IPackage> packages = new List<IPackage>();
 		List<PackageOperation> operations = new List<PackageOperation>();
+		IPackageManagementEvents packageManagementEvents;
 		
-		public UpdatePackagesAction(IPackageManagementProject project)
+		public UpdatePackagesAction(
+			IPackageManagementProject project,
+			IPackageManagementEvents packageManagementEvents)
 		{
 			Project = project;
+			this.packageManagementEvents = packageManagementEvents;
 			UpdateDependencies = true;
 		}
 		
@@ -85,6 +89,7 @@ namespace ICSharpCode.PackageManagement
 		protected virtual void ExecuteCore()
 		{
 			Project.UpdatePackages(this);
+			packageManagementEvents.OnParentPackagesUpdated(Packages);
 		}
 		
 //		void ExecuteWithScriptRunner()

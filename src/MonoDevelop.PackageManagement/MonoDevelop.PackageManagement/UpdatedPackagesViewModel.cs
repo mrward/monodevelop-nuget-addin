@@ -40,6 +40,7 @@ namespace ICSharpCode.PackageManagement
 		UpdatedPackages updatedPackages;
 		string errorMessage = String.Empty;
 		ILogger logger;
+		IPackageManagementEvents packageManagementEvents;
 		
 		public UpdatedPackagesViewModel(
 			IPackageManagementSolution solution,
@@ -53,6 +54,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			this.selectedProjects = new PackageManagementSelectedProjects(solution);
 			this.logger = packageViewModelFactory.Logger;
+			this.packageManagementEvents = packageViewModelFactory.PackageManagementEvents;
 			ShowPackageSources = true;
 			ShowUpdateAllPackages = true;
 			ShowPrerelease = true;
@@ -94,7 +96,7 @@ namespace ICSharpCode.PackageManagement
 		
 		protected override void TryUpdatingAllPackages()
 		{
-			var factory = new UpdatePackagesActionFactory(logger);
+			var factory = new UpdatePackagesActionFactory(logger, packageManagementEvents);
 			IUpdatePackagesAction action = factory.CreateAction(selectedProjects, GetPackagesFromViewModels());
 			ActionRunner.Run(action);
 		}
