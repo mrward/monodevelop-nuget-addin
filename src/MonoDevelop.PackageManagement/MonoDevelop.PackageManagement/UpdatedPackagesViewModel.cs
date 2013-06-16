@@ -55,6 +55,7 @@ namespace ICSharpCode.PackageManagement
 			this.logger = packageViewModelFactory.Logger;
 			ShowPackageSources = true;
 			ShowUpdateAllPackages = true;
+			ShowPrerelease = true;
 		}
 		
 		protected override void UpdateRepositoryBeforeReadPackagesTaskStarts()
