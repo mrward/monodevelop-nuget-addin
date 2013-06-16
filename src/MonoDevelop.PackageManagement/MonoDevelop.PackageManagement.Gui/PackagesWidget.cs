@@ -241,7 +241,7 @@ namespace MonoDevelop.PackageManagement
 			}
 
 			this.pagedResultsHBox.Visible = viewModel.IsPaged;
-			this.updateAllPackagesButtonBox.Visible = viewModel.ShowUpdateAllPackages;
+			this.updateAllPackagesButtonBox.Visible = viewModel.IsUpdateAllPackagesEnabled;
 		}
 		
 		void AddErrorToTreeView ()
