@@ -219,6 +219,7 @@
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackageAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdateSolutionPackagesAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ViewModelBase.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\ManagePackagesDialog.cs" />

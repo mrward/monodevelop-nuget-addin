@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2012-2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -35,5 +35,6 @@ namespace ICSharpCode.PackageManagement
 	{
 		IPackagePathResolver PathResolver { get; }
 		bool IsInstalled(string packageId);
+		bool HasOlderPackageInstalled(IPackage package);
 	}
 }
