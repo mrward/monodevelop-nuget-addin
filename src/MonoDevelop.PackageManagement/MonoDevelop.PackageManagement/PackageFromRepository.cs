@@ -207,5 +207,15 @@ namespace ICSharpCode.PackageManagement
 		public Version MinClientVersion {
 			get { return package.MinClientVersion; }
 		}
+		
+		public Uri GalleryUrl {
+			get {
+				var dataServicePackage = package as DataServicePackage;
+				if (dataServicePackage != null) {
+					return dataServicePackage.GalleryDetailsUrl;
+				}
+				return null;
+			}
+		}
 	}
 }

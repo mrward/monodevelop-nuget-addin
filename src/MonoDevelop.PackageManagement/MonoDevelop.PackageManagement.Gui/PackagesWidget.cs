@@ -190,6 +190,9 @@ namespace MonoDevelop.PackageManagement
 			this.packageLastUpdatedTextBox.Text = packageViewModel.GetLastPublishedDisplayText ();
 			this.packageDownloadsTextBox.Text = packageViewModel.GetDownloadCountDisplayText ();
 			this.packageDescriptionTextView.Buffer.Text = packageViewModel.Description;
+			this.packageIdTextBox.Text = packageViewModel.Id;
+			this.packageIdTextBox.Visible = packageViewModel.HasNoGalleryUrl;
+			ShowUri (this.packageIdButton, packageViewModel.GalleryUrl, packageViewModel.Id);
 			ShowUri (this.moreInformationButton, packageViewModel.ProjectUrl);
 			ShowUri (this.viewLicenseTermsButton, packageViewModel.LicenseUrl);
 			this.packageDependenciesListHBox.Visible = packageViewModel.HasDependencies;
@@ -206,6 +209,12 @@ namespace MonoDevelop.PackageManagement
 		{
 			this.packageInfoFrameVBox.Visible = false;
 			this.managePackageButtonBox.Visible = false;
+		}
+		
+		void ShowUri (HyperlinkWidget hyperlinkWidget, Uri uri, string label)
+		{
+			hyperlinkWidget.Label = label;
+			ShowUri (hyperlinkWidget, uri);
 		}
 		
 		void ShowUri (HyperlinkWidget hyperlinkWidget, Uri uri)
