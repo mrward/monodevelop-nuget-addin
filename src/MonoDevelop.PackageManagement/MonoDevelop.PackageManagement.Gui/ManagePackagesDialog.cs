@@ -36,10 +36,12 @@ namespace MonoDevelop.PackageManagement
 	{
 		ManagePackagesViewModel viewModel;
 		IPackageManagementEvents packageManagementEvents;
+		string messagesExpanderDefaultLabel;
 		
 		public ManagePackagesDialog (ManagePackagesViewModel viewModel, IPackageManagementEvents packageManagementEvents)
 		{
 			this.Build ();
+			this.messagesExpanderDefaultLabel = messagesExpander.Label;
 			
 			this.viewModel = viewModel;
 			this.packageManagementEvents = packageManagementEvents;
@@ -51,12 +53,14 @@ namespace MonoDevelop.PackageManagement
 		{
 			packageManagementEvents.PackageOperationMessageLogged += PackageOperationMessageLogged;
 			packageManagementEvents.PackageOperationError += PackageOperationError;
+			packageManagementEvents.PackageOperationsStarting += PackageOperationsStarting;
 		}
 		
 		void RemovePackageManagementEventHandlers ()
 		{
 			packageManagementEvents.PackageOperationMessageLogged -= PackageOperationMessageLogged;
 			packageManagementEvents.PackageOperationError -= PackageOperationError;
+			packageManagementEvents.PackageOperationsStarting -= PackageOperationsStarting;
 		}
 
 		void PackageOperationMessageLogged (object sender, PackageOperationMessageLoggedEventArgs e)
@@ -64,9 +68,17 @@ namespace MonoDevelop.PackageManagement
 			AppendMessage (e.Message.ToString ());
 		}
 		
-		void PackageOperationError(object sender, PackageOperationExceptionEventArgs e)
+		void PackageOperationError (object sender, PackageOperationExceptionEventArgs e)
 		{
+			messagesExpander.Label = e.Exception.Message;
+			ResizeMessagesExpanderLabelWidthToFullDialogWidth ();
 			AppendMessage (e.Exception.Message);
+		}
+		
+		void PackageOperationsStarting (object sender, EventArgs e)
+		{
+			ResetMessageExpanderLabelWidthToDefault ();
+			messagesExpander.Label = messagesExpanderDefaultLabel;
 		}
 		
 		void AppendMessage (string message)
@@ -96,6 +108,26 @@ namespace MonoDevelop.PackageManagement
 		{
 			var child = this.VBox [this.messagesExpander] as Box.BoxChild;
 			child.Expand = this.messagesExpander.Expanded;
+		}
+		
+		void ResetMessageExpanderLabelWidthToDefault ()
+		{
+			messagesExpander.LabelWidget.WidthRequest = 0;
+		}
+		
+		void ResizeMessagesExpanderLabelWidthToFullDialogWidth ()
+		{
+			var label = messagesExpander.LabelWidget as Label;
+			label.WidthRequest = GetDialogWidth () - 20;
+			label.Wrap = true;
+		}
+		
+		int GetDialogWidth ()
+		{
+			int width;
+			int height;
+			GetSize (out width, out height);
+			return width;
 		}
 	}
 }
