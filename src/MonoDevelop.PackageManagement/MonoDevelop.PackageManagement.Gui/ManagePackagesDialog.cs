@@ -118,7 +118,7 @@ namespace MonoDevelop.PackageManagement
 		void ResizeMessagesExpanderLabelWidthToFullDialogWidth ()
 		{
 			var label = messagesExpander.LabelWidget as Label;
-			label.WidthRequest = GetDialogWidth () - 20;
+			label.WidthRequest = GetDialogWidth () - 30;
 			label.Wrap = true;
 		}
 		
