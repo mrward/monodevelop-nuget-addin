@@ -6,8 +6,8 @@ Tests to be run on Windows, Linux and Mac before publishing addin.
 
 1. Install NUnit package into a project with solution in same folder
  
-    MySolution.sln
-    MyProject.csproj
+        MySolution.sln
+        MyProject.csproj
 
 2. Check relative path to reference added in project is correct.
 3. Should be "packages\NUnit...."
@@ -16,8 +16,8 @@ Tests to be run on Windows, Linux and Mac before publishing addin.
 
 1. Install NUnit package into a project with a solution is in a folder below project
 
-    MySolution.sln 
-    MyProject/MyProject.csproj
+        MySolution.sln 
+        MyProject/MyProject.csproj
 
 2. Check relative path to reference added in project is correct.
 3. Should be "..\packages\NUnit...."
@@ -41,7 +41,7 @@ Tests to be run on Windows, Linux and Mac before publishing addin.
 2. Check that an error is shown on Linux and Mac.
 3. Use custom NuGet.exe build to add credentials for authenticated feed.
 
-      mono --runtime=v4.0.30319 NuGet.exe sources update  -name FeedName -username user -password pass
+          mono --runtime=v4.0.30319 NuGet.exe sources update  -name FeedName -username user -password pass
 
 4. Open Manage Packages dialog and view packages from authenticated feed.
 5. Packages can be viewed and installed from authenticated feed.
