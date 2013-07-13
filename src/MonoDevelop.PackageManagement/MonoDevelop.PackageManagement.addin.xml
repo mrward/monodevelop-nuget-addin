@@ -4,9 +4,9 @@
        author      = "Matt Ward"
        copyright   = "MIT X11"
        url         = "https://github.com/mrward/monodevelop-nuget-addin"
-       description = "NuGet Package Management"
+       description = "Provides support for adding and maintaining NuGet packages in your project. New features include support for pre-release packages, XML Document Transformations and a file conflict dialog. The addin uses NuGet 2.6"
        category    = "IDE extensions"
-       version     = "0.4">
+       version     = "0.5">
 
 	<Header>
 		<ReleaseNotesFile>ReleaseNotes.txt</ReleaseNotesFile>
@@ -14,6 +14,7 @@
 	
 	<Runtime>
 		<Import assembly="MonoDevelop.PackageManagement.dll" />
+		<Import assembly="Microsoft.Web.XmlTransform.dll" />
 		<Import assembly="NuGet.Core.dll" />
 	</Runtime>
 
