@@ -76,6 +76,7 @@
     <Compile Include="MonoDevelop.PackageManagement\DefaultProjectTemplatePackageSource.cs" />
     <Compile Include="MonoDevelop.PackageManagement\DelegateCommand.cs" />
     <Compile Include="MonoDevelop.PackageManagement\DotNetProjectExtensions.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\FileConflictResolver.cs" />
     <Compile Include="MonoDevelop.PackageManagement\FolderBrowser.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ICommand.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ICompilerMessageView.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="MonoDevelop.PackageManagement\InstalledPackageViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\InstalledPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\InstallPackageAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageActionRunner.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageFromRepository.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="MonoDevelop.PackageManagement\IPackageOperationResolverFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryCache.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelFactory.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelParent.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IProcess.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IProjectBrowserUpdater.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPropertyService.cs" />
@@ -118,12 +121,17 @@
     <Compile Include="MonoDevelop.PackageManagement\ITask.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ITaskFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IThreadSafePackageManagementEvents.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IUpdatePackageActions.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IUpdatePackagesAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IUpdatePackageSettings.cs" />
     <Compile Include="MonoDevelop.PackageManagement\LicenseAcceptanceService.cs" />
     <Compile Include="MonoDevelop.PackageManagement\LicenseAcceptanceViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\MachinePackageCache.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesUserPrompts.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ManagePackagesViewTitle.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\MonoDevelopCredentialProvider.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\MSBuildProjectExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageActionRunner.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageFromRepository.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageLicenseViewModel.cs" />
@@ -143,9 +151,12 @@
     <Compile Include="MonoDevelop.PackageManagement\PackageViewModelOperationLogger.cs" />
     <Compile Include="MonoDevelop.PackageManagement\Page.cs" />
     <Compile Include="MonoDevelop.PackageManagement\Pages.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\ParentPackagesOperationEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\Process.cs" />
     <Compile Include="MonoDevelop.PackageManagement\RecentPackagesViewModel.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\ReducedPackageOperations.cs" />
     <Compile Include="MonoDevelop.PackageManagement\RegisteredPackageSourcesViewModel.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\ResolveFileConflictEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SelectedProjectsForInstalledPackages.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SelectedProjectsForUpdatedPackages.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SelectProjectsEventArgs.cs" />
@@ -209,6 +220,9 @@
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackageViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackageAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesActionFactory.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdateSolutionPackagesAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ViewModelBase.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\ManagePackagesDialog.cs" />

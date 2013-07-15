@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2012 Matthew Ward
+// Copyright (C) 2012-2013 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,6 +28,8 @@
 
 using System;
 using MonoDevelop.Projects;
+using MonoDevelop.Projects.Formats.MSBuild;
+using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
@@ -79,6 +81,30 @@ namespace ICSharpCode.PackageManagement
 				propertyValue = project.ExtendedProperties["ProjectTypeGuids"] as String;
 			}
 			return propertyValue ?? String.Empty;
+		}
+		
+		public static void AddImportIfMissing(
+			this DotNetProject project,
+			string importedProjectFile,
+			ProjectImportLocation importLocation)
+		{
+			var msbuildProject = new MSBuildProject ();
+			msbuildProject.Load (project.FileName);
+			msbuildProject.AddImportIfMissing (importedProjectFile, importLocation, GetCondition (importedProjectFile));
+			msbuildProject.Save (project.FileName);
+		}
+
+		static string GetCondition(string importedProjectFile)
+		{
+			return String.Format("Exists('{0}')", importedProjectFile);
+		}
+
+		public static void RemoveImport(this DotNetProject project, string importedProjectFile)
+		{
+			var msbuildProject = new MSBuildProject ();
+			msbuildProject.Load (project.FileName);
+			msbuildProject.RemoveImportIfExists (importedProjectFile);
+			msbuildProject.Save (project.FileName);
 		}
 	}
 }

@@ -55,7 +55,7 @@ namespace ICSharpCode.PackageManagement
 			base.BeforeExecute();
 			GetPackageOperationsIfMissing();
 		}
-				
+		
 		void GetPackageOperationsIfMissing()
 		{
 			if (Operations == null) {

@@ -50,10 +50,16 @@ namespace ICSharpCode.PackageManagement
 		{
 			this.solution = solution;
 			this.packageManagementEvents = packageManagementEvents;
+			
+			RegisterEvents();
+			TryGetActiveProject();
+		}
+		
+		void RegisterEvents()
+		{
 			packageManagementEvents.ParentPackageInstalled += InstalledPackagesChanged;
 			packageManagementEvents.ParentPackageUninstalled += InstalledPackagesChanged;
-			
-			TryGetActiveProject();
+			packageManagementEvents.ParentPackagesUpdated += InstalledPackagesChanged;
 		}
 		
 		void TryGetActiveProject()
@@ -74,6 +80,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			packageManagementEvents.ParentPackageInstalled -= InstalledPackagesChanged;
 			packageManagementEvents.ParentPackageUninstalled -= InstalledPackagesChanged;
+			packageManagementEvents.ParentPackagesUpdated -= InstalledPackagesChanged;
 		}
 		
 		protected override IQueryable<IPackage> GetAllPackages()

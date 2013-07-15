@@ -50,6 +50,7 @@ namespace ICSharpCode.PackageManagement
 			unsafeEvents.PackageOperationError += RaisePackageOperationErrorEventIfHasSubscribers;
 			unsafeEvents.ParentPackageInstalled += RaiseParentPackageInstalledEventIfHasSubscribers;
 			unsafeEvents.ParentPackageUninstalled += RaiseParentPackageUninstalledEventIfHasSubscribers;
+			unsafeEvents.ParentPackagesUpdated += RaiseParentPackagesUpdatedEventIfHasSubscribers;
 		}
 		
 		public void Dispose()
@@ -63,6 +64,7 @@ namespace ICSharpCode.PackageManagement
 			unsafeEvents.PackageOperationError -= RaisePackageOperationErrorEventIfHasSubscribers;
 			unsafeEvents.ParentPackageInstalled -= RaiseParentPackageInstalledEventIfHasSubscribers;
 			unsafeEvents.ParentPackageUninstalled -= RaiseParentPackageUninstalledEventIfHasSubscribers;
+			unsafeEvents.ParentPackagesUpdated -= RaiseParentPackagesUpdatedEventIfHasSubscribers;
 		}
 		
 		void RaisePackageOperationStartingEventIfHasSubscribers(object sender, EventArgs e)
@@ -171,6 +173,35 @@ namespace ICSharpCode.PackageManagement
 		public bool OnSelectProjects(IEnumerable<IPackageManagementSelectedProject> selectedProjects)
 		{
 			return unsafeEvents.OnSelectProjects(selectedProjects);
+		}
+		
+		public event EventHandler<ResolveFileConflictEventArgs> ResolveFileConflict {
+			add { unsafeEvents.ResolveFileConflict += value; }
+			remove { unsafeEvents.ResolveFileConflict -= value; }
+		}
+		
+		public FileConflictResolution OnResolveFileConflict(string message)
+		{
+			return unsafeEvents.OnResolveFileConflict(message);
+		}
+		
+		public event EventHandler<ParentPackagesOperationEventArgs> ParentPackagesUpdated;
+		
+		public void OnParentPackagesUpdated(IEnumerable<IPackage> packages)
+		{
+			unsafeEvents.OnParentPackagesUpdated(packages);
+		}
+		
+		void RaiseParentPackagesUpdatedEventIfHasSubscribers(object sender, ParentPackagesOperationEventArgs e)
+		{
+			if (ParentPackagesUpdated != null) {
+				RaiseParentPackagesUpdatedEvent(sender, e);
+			}
+		}
+		
+		void RaiseParentPackagesUpdatedEvent(object sender, ParentPackagesOperationEventArgs e)
+		{
+			ParentPackagesUpdated(sender, e);
 		}
 	}
 }

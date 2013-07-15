@@ -38,15 +38,16 @@ namespace ICSharpCode.PackageManagement
 {
 	public class PackageManagementSelectedProjects
 	{
-		IPackageManagementSolution solution;
 		bool? singleProjectSelected;
 		Project singleDotNetProjectSelected;
 		
 		public PackageManagementSelectedProjects(IPackageManagementSolution solution)
 		{
-			this.solution = solution;
+			this.Solution = solution;
 			GetHasSingleProjectSelected();
 		}
+		
+		public IPackageManagementSolution Solution { get; private set; }
 		
 		public IEnumerable<IPackageManagementSelectedProject> GetProjects(IPackageFromRepository package)
 		{
@@ -69,13 +70,13 @@ namespace ICSharpCode.PackageManagement
 		
 		void GetHasSingleProjectSelected()
 		{
-			singleDotNetProjectSelected = solution.GetActiveDotNetProject();
+			singleDotNetProjectSelected = Solution.GetActiveDotNetProject();
 			singleProjectSelected = singleDotNetProjectSelected != null;
 		}
 		
 		IEnumerable<Project> GetOpenProjects()
 		{
-			return solution.GetDotNetProjects();
+			return Solution.GetDotNetProjects();
 		}
 		
 		IPackageManagementSelectedProject GetSingleProjectSelected(IPackageFromRepository package)
@@ -85,7 +86,7 @@ namespace ICSharpCode.PackageManagement
 		
 		IPackageManagementSelectedProject CreateSelectedProject(Project dotNetProject, IPackageFromRepository package)
 		{
-			IPackageManagementProject project = solution.GetProject(package.Repository, dotNetProject);
+			IPackageManagementProject project = Solution.GetProject(package.Repository, dotNetProject);
 			return CreateSelectedProject(project, package);
 		}
 		
@@ -113,7 +114,7 @@ namespace ICSharpCode.PackageManagement
 			if (HasSingleProjectSelected()) {
 				return false;
 			}
-			return solution.HasMultipleProjects();
+			return Solution.HasMultipleProjects();
 		}
 		
 		public string SelectionName {
@@ -135,7 +136,7 @@ namespace ICSharpCode.PackageManagement
 		
 		string GetSolutionFileNameWithoutFullPath()
 		{
-			return Path.GetFileName(solution.FileName);
+			return Path.GetFileName(Solution.FileName);
 		}
 		
 		/// <summary>
@@ -152,12 +153,12 @@ namespace ICSharpCode.PackageManagement
 		
 		public bool IsPackageInstalledInSolution(IPackage package)
 		{
-			return solution.IsPackageInstalled(package);
+			return Solution.IsPackageInstalled(package);
 		}
 		
 		public IQueryable<IPackage> GetPackagesInstalledInSolution()
 		{
-			return solution.GetPackages();
+			return Solution.GetPackages();
 		}
 		
 		public IQueryable<IPackage> GetInstalledPackages(IPackageRepository sourceRepository)
@@ -172,7 +173,7 @@ namespace ICSharpCode.PackageManagement
 		public IPackageManagementProject GetSingleProjectSelected(IPackageRepository repository)
 		{
 			if (HasSingleProjectSelected()) {
-				return solution.GetProject(repository, singleDotNetProjectSelected);
+				return Solution.GetProject(repository, singleDotNetProjectSelected);
 			}
 			return null;
 		}

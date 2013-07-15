@@ -44,5 +44,10 @@ namespace ICSharpCode.PackageManagement
 		{
 			packageManagementEvents.OnPackageOperationMessageLogged(level, message, args);
 		}
+		
+		public FileConflictResolution ResolveFileConflict(string message)
+		{
+			return packageManagementEvents.OnResolveFileConflict(message);
+		}
 	}
 }

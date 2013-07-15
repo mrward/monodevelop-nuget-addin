@@ -60,6 +60,7 @@ namespace MonoDevelop.PackageManagement
 			packagesTreeView.Model = packageStore;
 			packagesTreeView.AppendColumn (CreateTreeViewColumn ());
 			packagesTreeView.Selection.Changed += PackagesTreeViewSelectionChanged;
+			includePrereleaseCheckButton.Clicked += IncludePrereleaseCheckButtonClicked;
 		}
 		
 		TreeViewColumn CreateTreeViewColumn ()
@@ -80,14 +81,21 @@ namespace MonoDevelop.PackageManagement
 			return column;
 		}
 		
-		void PackagesTreeViewSelectionChanged(object sender, EventArgs e)
+		void PackagesTreeViewSelectionChanged (object sender, EventArgs e)
 		{
 			ShowSelectedPackage ();
 		}
-		
+
+		void IncludePrereleaseCheckButtonClicked (object sender, EventArgs e)
+		{
+			viewModel.IncludePrerelease = !viewModel.IncludePrerelease;
+		}
+
 		public void LoadViewModel (PackagesViewModel viewModel)
 		{
 			this.viewModel = viewModel;
+			
+			this.includePrereleaseCheckButton.Visible = viewModel.ShowPrerelease;
 			
 			this.packageSearchHBox.Visible = viewModel.IsSearchable;
 			ClearSelectedPackageInformation ();
@@ -96,6 +104,8 @@ namespace MonoDevelop.PackageManagement
 
 			this.pagedResultsWidget.LoadPackagesViewModel (viewModel);
 			this.pagedResultsHBox.Visible = viewModel.IsPaged;
+
+			this.updateAllPackagesButtonBox.Visible = viewModel.IsUpdateAllPackagesEnabled;
 		}
 		
 		List<PackageSource> PackageSources {
@@ -180,6 +190,9 @@ namespace MonoDevelop.PackageManagement
 			this.packageLastUpdatedTextBox.Text = packageViewModel.GetLastPublishedDisplayText ();
 			this.packageDownloadsTextBox.Text = packageViewModel.GetDownloadCountDisplayText ();
 			this.packageDescriptionTextView.Buffer.Text = packageViewModel.Description;
+			this.packageIdTextBox.Text = packageViewModel.Id;
+			this.packageIdTextBox.Visible = packageViewModel.HasNoGalleryUrl;
+			ShowUri (this.packageIdButton, packageViewModel.GalleryUrl, packageViewModel.Id);
 			ShowUri (this.moreInformationButton, packageViewModel.ProjectUrl);
 			ShowUri (this.viewLicenseTermsButton, packageViewModel.LicenseUrl);
 			this.packageDependenciesListHBox.Visible = packageViewModel.HasDependencies;
@@ -196,6 +209,12 @@ namespace MonoDevelop.PackageManagement
 		{
 			this.packageInfoFrameVBox.Visible = false;
 			this.managePackageButtonBox.Visible = false;
+		}
+		
+		void ShowUri (HyperlinkWidget hyperlinkWidget, Uri uri, string label)
+		{
+			hyperlinkWidget.Label = label;
+			ShowUri (hyperlinkWidget, uri);
 		}
 		
 		void ShowUri (HyperlinkWidget hyperlinkWidget, Uri uri)
@@ -231,6 +250,7 @@ namespace MonoDevelop.PackageManagement
 			}
 
 			this.pagedResultsHBox.Visible = viewModel.IsPaged;
+			this.updateAllPackagesButtonBox.Visible = viewModel.IsUpdateAllPackagesEnabled;
 		}
 		
 		void AddErrorToTreeView ()
@@ -272,6 +292,11 @@ namespace MonoDevelop.PackageManagement
 		{
 			PackageViewModel packageViewModel = GetSelectedPackageViewModel ();
 			packageViewModel.ManagePackage ();
+		}
+		
+		void UpdateAllPackagesButtonClicked (object sender, EventArgs e)
+		{
+			viewModel.UpdateAllPackagesCommand.Execute (null);
 		}
 	}
 }

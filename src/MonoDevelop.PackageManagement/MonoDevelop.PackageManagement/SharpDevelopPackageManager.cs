@@ -28,7 +28,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
@@ -90,9 +89,7 @@ namespace ICSharpCode.PackageManagement
 		
 		public void InstallPackage(IPackage package, InstallPackageAction installAction)
 		{
-			foreach (PackageOperation operation in installAction.Operations) {
-				Execute(operation);
-			}
+			RunPackageOperations(installAction.Operations);
 			AddPackageReference(package, installAction.IgnoreDependencies, installAction.AllowPrereleaseVersions);
 		}
 		
@@ -143,30 +140,53 @@ namespace ICSharpCode.PackageManagement
 		
 		public void UpdatePackage(IPackage package, UpdatePackageAction updateAction)
 		{
-			foreach (PackageOperation operation in updateAction.Operations) {
-				Execute(operation);
-			}
+			RunPackageOperations(updateAction.Operations);
 			UpdatePackageReference(package, updateAction);
 		}
 		
-		void UpdatePackageReference(IPackage package, UpdatePackageAction updateAction)
+		public void UpdatePackageReference(IPackage package, IUpdatePackageSettings settings)
 		{
-			ProjectManager.UpdatePackageReference(package.Id, package.Version, updateAction.UpdateDependencies, updateAction.AllowPrereleaseVersions);		
+			UpdatePackageReference(package, settings.UpdateDependencies, settings.AllowPrereleaseVersions);
 		}
 		
-		protected override void OnInstalling(PackageOperationEventArgs e)
+		void UpdatePackageReference(IPackage package, bool updateDependencies, bool allowPrereleaseVersions)
 		{
-			base.OnInstalling(e);
+			ProjectManager.UpdatePackageReference(package.Id, package.Version, updateDependencies, allowPrereleaseVersions);
 		}
 		
-		protected override void OnInstalled(PackageOperationEventArgs e)
+		public void UpdatePackages(UpdatePackagesAction updateAction)
 		{
-			base.OnInstalled(e);
+			RunPackageOperations(updateAction.Operations);
+			foreach (IPackage package in updateAction.Packages) {
+				UpdatePackageReference(package, updateAction);
+			}
 		}
 		
-		protected override void OnExpandFiles(PackageOperationEventArgs e)
+		public IEnumerable<PackageOperation> GetUpdatePackageOperations(
+			IEnumerable<IPackage> packages,
+			IUpdatePackageSettings settings)
 		{
-			base.OnExpandFiles(e);
+			IPackageOperationResolver resolver = CreateUpdatePackageOperationResolver(settings);
+			
+			var reducedOperations = new ReducedPackageOperations(resolver, packages);
+			reducedOperations.Reduce();
+			return reducedOperations.Operations;
+		}
+		
+		IPackageOperationResolver CreateUpdatePackageOperationResolver(IUpdatePackageSettings settings)
+		{
+			return packageOperationResolverFactory.CreateUpdatePackageOperationResolver(
+				LocalRepository,
+				SourceRepository,
+				Logger,
+				settings);
+		}
+		
+		public void RunPackageOperations(IEnumerable<PackageOperation> operations)
+		{
+			foreach (PackageOperation operation in operations) {
+				Execute(operation);
+			}
 		}
 	}
 }

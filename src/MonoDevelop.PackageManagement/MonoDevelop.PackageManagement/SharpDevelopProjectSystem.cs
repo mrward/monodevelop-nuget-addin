@@ -136,7 +136,7 @@ namespace ICSharpCode.PackageManagement
 		{
 			string referenceName = GetReferenceName(name);
 			foreach (ProjectReference referenceProjectItem in project.References) {
-				string projectReferenceName = GetReferenceName(referenceProjectItem.Reference);
+				string projectReferenceName = GetProjectReferenceName(referenceProjectItem.Reference);
 				if (IsMatchIgnoringCase(projectReferenceName, referenceName)) {
 					return referenceProjectItem;
 				}
@@ -150,6 +150,18 @@ namespace ICSharpCode.PackageManagement
 				return Path.GetFileNameWithoutExtension(name);
 			}
 			return name;
+		}
+		
+		string GetProjectReferenceName(string name)
+		{
+			string referenceName = GetReferenceName(name);
+			return GetAssemblyShortName(referenceName);
+		}
+		
+		string GetAssemblyShortName(string name)
+		{
+			string[] parts = name.Split(',');
+			return parts[0];
 		}
 		
 		bool HasDllOrExeFileExtension(string name)
@@ -245,7 +257,7 @@ namespace ICSharpCode.PackageManagement
 			return IsMatchIgnoringCase(directoryName, "bin");
 		}
 		
-		bool FileExistsInProject(string path)
+		public bool FileExistsInProject(string path)
 		{
 			string fullPath = GetFullPath(path);
 			return project.IsFileInProject(fullPath);
@@ -335,6 +347,25 @@ namespace ICSharpCode.PackageManagement
 		public string ResolvePath(string path)
 		{
 			return path;
+		}
+		
+		public void AddImport(string targetPath, ProjectImportLocation location)
+		{
+			string relativeTargetPath = GetRelativePath(targetPath);
+			project.AddImportIfMissing(relativeTargetPath, location);
+			projectService.Save(project);
+		}
+
+		string GetRelativePath(string path)
+		{
+			return FileService.AbsoluteToRelativePath(project.BaseDirectory, path);
+		}
+		
+		public void RemoveImport(string targetPath)
+		{
+			string relativeTargetPath = GetRelativePath(targetPath);
+			project.RemoveImport(relativeTargetPath);
+			projectService.Save(project);
 		}
 	}
 }
