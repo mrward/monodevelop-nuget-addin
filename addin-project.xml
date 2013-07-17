@@ -1,4 +1,4 @@
-<AddinProject appVersion="4.0">
+<AddinProject appVersion="4.1">
   <Project platforms="Mac Linux Win32">
     <AddinFile>bin/MonoDevelop.PackageManagement.dll</AddinFile>
     <BuildFile>src/MonoDevelop.PackageManagement.sln</BuildFile>
