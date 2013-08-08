@@ -103,6 +103,7 @@
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagerFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageOperationResolverFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryCache.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryFactoryEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelParent.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IProcess.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="MonoDevelop.PackageManagement\PackageManagementTask.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageManagementTaskFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageManagementViewModels.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\PackageRepositoryFactoryEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackagesForSelectedPageResult.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackageSourceViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\PackagesViewModel.cs" />
@@ -202,6 +204,7 @@
     <Compile Include="MonoDevelop.PackageManagement\RegisteredPackageSourceSettings.cs" />
     <Compile Include="MonoDevelop.PackageManagement\RegisteredProjectTemplatePackageSources.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SettingsFactory.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\MonoDevelopHttpUserAgent.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SharpDevelopPackageManager.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SharpDevelopPackageManagerFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\SharpDevelopPackageRepositoryFactory.cs" />
@@ -223,6 +226,7 @@
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesActionFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdateSolutionPackagesAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UserAgentGeneratorForRepositoryRequests.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ViewModelBase.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\ManagePackagesDialog.cs" />
