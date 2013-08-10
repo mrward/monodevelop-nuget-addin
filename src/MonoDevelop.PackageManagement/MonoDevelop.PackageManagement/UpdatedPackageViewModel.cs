@@ -49,5 +49,10 @@ namespace ICSharpCode.PackageManagement
 		{
 			return project.CreateUpdatePackageAction();
 		}
+		
+		protected override IDisposable StartInstallOperation(IPackageFromRepository package)
+		{
+			return package.StartUpdateOperation();
+		}
 	}
 }
