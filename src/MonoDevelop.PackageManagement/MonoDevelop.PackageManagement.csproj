@@ -92,6 +92,7 @@
     <Compile Include="MonoDevelop.PackageManagement\IPackageActionRunner.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageFromRepository.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageFromRepositoryExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagementEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagementFileService.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagementOutputMessagesView.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="MonoDevelop.PackageManagement\IPackageManagerFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageOperationResolverFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryCache.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryExtensions.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageRepositoryFactoryEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IPackageViewModelParent.cs" />
