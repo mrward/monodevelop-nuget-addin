@@ -205,9 +205,11 @@ namespace ICSharpCode.PackageManagement
 		{
 			ClearReportedMessages();
 			logger.LogAddingPackage();
+			
 			using (IDisposable operation = StartInstallOperation(package)) {
 				TryInstallingPackage();
 			}
+			
 			logger.LogAfterPackageOperationCompletes();
 		}
 		
@@ -375,7 +377,11 @@ namespace ICSharpCode.PackageManagement
 		{
 			ClearReportedMessages();
 			logger.LogManagingPackage();
-			TryInstallingPackagesForSelectedProjects(projects);
+			
+			using (IDisposable operation = StartInstallOperation(package)) {
+				TryInstallingPackagesForSelectedProjects(projects);
+			}
+			
 			logger.LogAfterPackageOperationCompletes();
 			OnPropertyChanged(model => model.IsAdded);
 		}
