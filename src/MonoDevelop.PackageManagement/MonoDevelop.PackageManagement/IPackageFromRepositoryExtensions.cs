@@ -27,6 +27,7 @@
 //
 
 using System;
+using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
@@ -34,12 +35,20 @@ namespace ICSharpCode.PackageManagement
 	{
 		public static IDisposable StartInstallOperation(this IPackageFromRepository package)
 		{
-			return package.Repository.StartInstallOperation(package.Id);
+			return package.Repository.StartInstallOperation(package.Id, GetVersion(package.Version));
 		}
 		
 		public static IDisposable StartUpdateOperation(this IPackageFromRepository package)
 		{
-			return package.Repository.StartUpdateOperation(package.Id);
+			return package.Repository.StartUpdateOperation(package.Id, GetVersion(package.Version));
+		}
+		
+		static string GetVersion(SemanticVersion version)
+		{
+			if (version != null) {
+				return version.ToString();
+			}
+			return null;
 		}
 	}
 }
