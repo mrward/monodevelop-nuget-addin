@@ -15,7 +15,7 @@ For more information see the [announcement blog post](http://community.sharpdeve
 
 # Installation
 
-The addin is available from a custom MonoDevelop addin repository. You can add this repository to MonoDevelop or Xamarin Studio via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins). To open the Add-in Manager dialog on Windows and on Linux select **Add-in Manager** from the**Tools** menu. On the Mac open the **Xamarin Studio** menu and select **Add-in Manager**. In the Add-in Manager dialog select the **Gallery** tab. Click the down arrow next to the repositories drop down list and select **Manage Repositories** to open the Add-in Repository Management dialog. Click the **Add** button. Copy the MonoDevelop NuGet addin repository url, shown below, that corresponds to your MonoDevelop version, and paste it into the **Url** text box.
+The addin is available from a custom MonoDevelop addin repository. You can add this repository to MonoDevelop or Xamarin Studio via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins). To open the Add-in Manager dialog on Windows and on Linux select **Add-in Manager** from the **Tools** menu. On the Mac open the **Xamarin Studio** menu and select **Add-in Manager**. In the Add-in Manager dialog select the **Gallery** tab. Click the down arrow next to the repositories drop down list and select **Manage Repositories** to open the Add-in Repository Management dialog. Click the **Add** button. Copy the MonoDevelop NuGet addin repository url, shown below, that corresponds to your MonoDevelop version, and paste it into the **Url** text box.
 
 For Xamarin Studio 4.1:
 
