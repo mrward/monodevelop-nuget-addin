@@ -1,3 +1,10 @@
+{{0.6, 2013-08-24}}
+
+Updated to NuGet 2.7
+Add support for restoring NuGet packages.
+Added message to show that the Manage Packages dialog is looking for packages.
+Fixed rootnamespace not being replaced in source code transforms.
+
 {{0.5, 2013-07-14}}
 
 Update to NuGet 2.6

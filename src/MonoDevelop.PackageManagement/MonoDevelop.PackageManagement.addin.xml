@@ -4,7 +4,7 @@
        author      = "Matt Ward"
        copyright   = "MIT X11"
        url         = "https://github.com/mrward/monodevelop-nuget-addin"
-       description = "Provides support for adding and maintaining NuGet packages in your project. The addin has been updated to NuGet 2.7"
+       description = "Provides support for adding and maintaining NuGet packages in your project. The addin now supports restoring NuGet packages and has been updated to NuGet 2.7"
        category    = "IDE extensions"
        version     = "0.6">
 
@@ -16,6 +16,7 @@
 		<Import assembly="MonoDevelop.PackageManagement.dll" />
 		<Import assembly="Microsoft.Web.XmlTransform.dll" />
 		<Import assembly="NuGet.Core.dll" />
+		<Import file="NuGet.exe" />
 	</Runtime>
 
 	<Dependencies>
@@ -29,12 +30,21 @@
 			_description = "Manage NuGet packages"
 			_label = "_Manage NuGet Packages..."
 			defaultHandler = "MonoDevelop.PackageManagement.Commands.ManagePackagesHandler" />
+		<Command
+			id = "MonoDevelop.PackageManagement.Commands.RestorePackages"
+			_description = "Restore NuGet packages"
+			_label = "_Restore NuGet Packages"
+			defaultHandler = "MonoDevelop.PackageManagement.Commands.RestorePackagesHandler" />
 	</Extension>
 	
 	<Extension path = "/MonoDevelop/Ide/MainMenu/Project">
 		<CommandItem
 			id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 			insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+			insertbefore = "ExportSeparator" />
+		<CommandItem
+			id = "MonoDevelop.PackageManagement.Commands.RestorePackages"
+			insertafter = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 			insertbefore = "ExportSeparator" />
 	</Extension>
 	
@@ -43,6 +53,10 @@
 			<CommandItem
 				id = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 				insertafter = "MonoDevelop.Ide.Commands.ProjectCommands.AddReference"
+				insertbefore = "AddSectionEnd" />
+			<CommandItem
+				id = "MonoDevelop.PackageManagement.Commands.RestorePackages"
+				insertafter = "MonoDevelop.PackageManagement.Commands.ManagePackages"
 				insertbefore = "AddSectionEnd" />
 		</Condition>
 	</Extension>

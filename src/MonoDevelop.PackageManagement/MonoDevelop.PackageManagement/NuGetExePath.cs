@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// NuGetExePath.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,23 +27,20 @@
 //
 
 using System;
-using ICSharpCode.PackageManagement;
-using MonoDevelop.Ide;
+using System.IO;
 
-namespace MonoDevelop.PackageManagement.Commands
+namespace ICSharpCode.PackageManagement
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public static class NuGetExePath
 	{
-		protected override void Run ()
+		public static string GetPath()
 		{
-			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
-			} catch (Exception ex) {
-				MessageService.ShowException (ex);
-			}
+			return Path.Combine(GetDirectory(), "NuGet.exe");
+		}
+		
+		static string GetDirectory()
+		{
+			return Path.GetDirectoryName(typeof(NuGetExePath).Assembly.Location);
 		}
 	}
 }
