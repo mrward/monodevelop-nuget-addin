@@ -8,14 +8,18 @@ For more information see the [announcement blog post](http://community.sharpdeve
 
 # Requirements
 
- * MonoDevelop 3.0, Xamarin Studio 4.0 or MonoDevelop 4.0
+ * MonoDevelop 3.0, Xamarin Studio 4.0 or 4.1, or MonoDevelop 4.0
  * Mono 2.10.9 or above
  * mono-winfxcore (required by NuGet.Core)
  * mono-wcf (required by NuGet.Core)
 
 # Installation
 
-The addin is available from a custom MonoDevelop addin repository. You can add this repository to MonoDevelop or Xamarin Studio via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins). To open the Add-in Manager dialog on Windows and on Linux select **Add-in Manager** from the**Tools** menu. On the Mac open the **Xamarin Studio** menu and select **Add-in Manager**. In the Add-in Manager dialog select the **Gallery** tab. Click the down arrow next to the repositories drop down list and select **Manage Repositories** to open the Add-in Repository Management dialog. Click the **Add** button. Copy the MonoDevelop NuGet addin repository url, shown below, that corresponds to your MonoDevelop version, and paste it into the **Url** text box.
+The addin is available from a custom MonoDevelop addin repository. You can add this repository to MonoDevelop or Xamarin Studio via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins). To open the Add-in Manager dialog on Windows and on Linux select **Add-in Manager** from the **Tools** menu. On the Mac open the **Xamarin Studio** menu and select **Add-in Manager**. In the Add-in Manager dialog select the **Gallery** tab. Click the down arrow next to the repositories drop down list and select **Manage Repositories** to open the Add-in Repository Management dialog. Click the **Add** button. Copy the MonoDevelop NuGet addin repository url, shown below, that corresponds to your MonoDevelop version, and paste it into the **Url** text box.
+
+For Xamarin Studio 4.1:
+
+    http://mrward.github.com/monodevelop-nuget-addin-repository/4.1/main.mrep
 
 For Xamarin Studio 4.0 and MonoDevelop 4.0:
 
@@ -47,7 +51,7 @@ Original SharpDevelop addin code is [LGPL](http://www.gnu.org/licenses/lgpl-2.1.
 
  * OpenSuse 12.2 - Mono 2.10.9
  * Windows 7 - Mono 2.10.9
- * OS X 10.8.2 - Mono 2.10.11
+ * OS X 10.8.2 - Mono 2.10.12
 
 # Issues
 

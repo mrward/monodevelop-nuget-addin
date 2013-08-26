@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// PackageRepositoryFactoryEventArgs.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,23 +27,17 @@
 //
 
 using System;
-using ICSharpCode.PackageManagement;
-using MonoDevelop.Ide;
+using NuGet;
 
-namespace MonoDevelop.PackageManagement.Commands
+namespace ICSharpCode.PackageManagement
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public class PackageRepositoryFactoryEventArgs : EventArgs
 	{
-		protected override void Run ()
+		public PackageRepositoryFactoryEventArgs(IPackageRepository repository)
 		{
-			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
-			} catch (Exception ex) {
-				MessageService.ShowException (ex);
-			}
+			this.Repository = repository;
 		}
+		
+		public IPackageRepository Repository { get; private set; }
 	}
 }

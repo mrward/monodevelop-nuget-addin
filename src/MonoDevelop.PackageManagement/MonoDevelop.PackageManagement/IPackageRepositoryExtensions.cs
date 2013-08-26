@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// IPackageRepositoryExtensions.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,23 +27,20 @@
 //
 
 using System;
-using ICSharpCode.PackageManagement;
-using MonoDevelop.Ide;
+using NuGet;
 
-namespace MonoDevelop.PackageManagement.Commands
+namespace ICSharpCode.PackageManagement
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public static class IPackageRepositoryExtensions
 	{
-		protected override void Run ()
+		public static IDisposable StartInstallOperation(this IPackageRepository repository, string mainPackageId = null, string mainPackageVersion = null)
 		{
-			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
-			} catch (Exception ex) {
-				MessageService.ShowException (ex);
-			}
+			return repository.StartOperation(RepositoryOperationNames.Install, mainPackageId, mainPackageVersion);
+		}
+		
+		public static IDisposable StartUpdateOperation(this IPackageRepository repository, string mainPackageId = null, string mainPackageVersion = null)
+		{
+			return repository.StartOperation(RepositoryOperationNames.Update, mainPackageId, mainPackageVersion);
 		}
 	}
 }

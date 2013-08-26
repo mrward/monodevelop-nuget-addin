@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// RestorePackagesHandler.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -28,22 +28,66 @@
 
 using System;
 using ICSharpCode.PackageManagement;
+using MonoDevelop.Core;
+using MonoDevelop.Core.Execution;
 using MonoDevelop.Ide;
+using MonoDevelop.Ide.Gui;
 
 namespace MonoDevelop.PackageManagement.Commands
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public class RestorePackagesHandler : PackagesCommandHandler
 	{
+		IPackageManagementSolution solution;
+		
+		public RestorePackagesHandler()
+			: this(PackageManagementServices.Solution)
+		{
+		}
+		
+		public RestorePackagesHandler(IPackageManagementSolution solution)
+		{
+			this.solution = solution;
+		}
+		
 		protected override void Run ()
 		{
+			IProgressMonitor progressMonitor = GetRunProcessMonitor();
+			
 			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
+				RestorePackages(progressMonitor);
 			} catch (Exception ex) {
-				MessageService.ShowException (ex);
+				progressMonitor.Log.WriteLine(ex.Message);
+				progressMonitor.Dispose();
 			}
+		}
+		
+		IProgressMonitor GetRunProcessMonitor()
+		{
+			return IdeApp.Workbench.ProgressMonitors.GetOutputProgressMonitor(
+				"NuGet",
+				Stock.RunProgramIcon,
+				true,
+				true);
+		}
+		
+		void RestorePackages(IProgressMonitor progressMonitor)
+		{
+			var commandLine = new NuGetPackageRestoreCommandLine(solution);
+			
+			progressMonitor.Log.WriteLine(commandLine.ToString());
+			
+			RestorePackages(progressMonitor, commandLine);
+		}
+		
+		void RestorePackages(IProgressMonitor progressMonitor, NuGetPackageRestoreCommandLine commandLine)
+		{
+			Runtime.ProcessService.StartConsoleProcess(
+				commandLine.Command,
+				commandLine.Arguments,
+				commandLine.WorkingDirectory,
+				progressMonitor as IConsole,
+				(e, sender) => progressMonitor.Dispose()
+			);
 		}
 	}
 }
