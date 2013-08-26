@@ -1,4 +1,4 @@
-{{0.6, 2013-08-24}}
+{{0.6, 2013-08-26}}
 
 Updated to NuGet 2.7
 Add support for restoring NuGet packages.
