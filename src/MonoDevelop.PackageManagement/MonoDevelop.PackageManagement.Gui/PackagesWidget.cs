@@ -61,6 +61,8 @@ namespace MonoDevelop.PackageManagement
 			packagesTreeView.AppendColumn (CreateTreeViewColumn ());
 			packagesTreeView.Selection.Changed += PackagesTreeViewSelectionChanged;
 			includePrereleaseCheckButton.Clicked += IncludePrereleaseCheckButtonClicked;
+			
+			AddSearchingMessageToTreeView ();
 		}
 		
 		TreeViewColumn CreateTreeViewColumn ()
@@ -79,6 +81,14 @@ namespace MonoDevelop.PackageManagement
 			column.AddAttribute (treeViewColumnTextRenderer, "markup", column: 1);
 			
 			return column;
+		}
+		
+		void AddSearchingMessageToTreeView ()
+		{
+			packageStore.AppendValues (
+				ImageService.GetPixbuf (Gtk.Stock.Info, IconSize.LargeToolbar),
+				Mono.Unix.Catalog.GetString ("Searching..."),
+				null);
 		}
 		
 		void PackagesTreeViewSelectionChanged (object sender, EventArgs e)
@@ -245,6 +255,10 @@ namespace MonoDevelop.PackageManagement
 				AddErrorToTreeView ();
 			}
 			
+			if (viewModel.IsReadingPackages) {
+				AddSearchingMessageToTreeView ();
+			}
+			
 			foreach (PackageViewModel packageViewModel in viewModel.PackageViewModels) {
 				AppendPackageToTreeView (packageViewModel);
 			}
@@ -256,9 +270,9 @@ namespace MonoDevelop.PackageManagement
 		void AddErrorToTreeView ()
 		{
 			packageStore.AppendValues (
-				 ImageService.GetPixbuf (Gtk.Stock.DialogError, IconSize.Menu),
-				 viewModel.ErrorMessage,
-				 null);
+				ImageService.GetPixbuf (Gtk.Stock.DialogError, IconSize.LargeToolbar),
+				viewModel.ErrorMessage,
+				null);
 		}
 		
 		void PackageSearchEntryActivated (object sender, EventArgs e)

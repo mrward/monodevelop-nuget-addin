@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// SharpDevelopHttpUserAgent.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,23 +27,38 @@
 //
 
 using System;
-using ICSharpCode.PackageManagement;
+using MonoDevelop.Core;
 using MonoDevelop.Ide;
+using NuGet;
 
-namespace MonoDevelop.PackageManagement.Commands
+namespace ICSharpCode.PackageManagement
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public class MonoDevelopHttpUserAgent
 	{
-		protected override void Run ()
+		public MonoDevelopHttpUserAgent()
 		{
-			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
-			} catch (Exception ex) {
-				MessageService.ShowException (ex);
-			}
+			CreateUserAgent();
+		}
+		
+		public string Client { get; private set; }
+		public string Host { get; private set; }
+		public string UserAgent { get; private set; }
+		
+		void CreateUserAgent()
+		{
+			Client = BrandingService.ApplicationName;
+			Host = GetHost();
+			UserAgent = HttpUtility.CreateUserAgentString(Client, Host);
+		}
+		
+		string GetHost()
+		{
+			return String.Format("{0}/{1}", Client, IdeApp.Version);
+		}
+		
+		public override string ToString()
+		{
+			return UserAgent;
 		}
 	}
 }

@@ -45,7 +45,9 @@ namespace ICSharpCode.PackageManagement
 		
 		public static string GetEvaluatedProperty(this DotNetProject project, string name)
 		{
-			//TODO
+			if ("RootNamespace".Equals(name, StringComparison.OrdinalIgnoreCase)) {
+				return project.DefaultNamespace;
+			}
 			return String.Empty;
 		}
 		

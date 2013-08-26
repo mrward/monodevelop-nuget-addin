@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// UserAgentGeneratorForRepositoryRequests.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,23 +27,34 @@
 //
 
 using System;
-using ICSharpCode.PackageManagement;
-using MonoDevelop.Ide;
+using NuGet;
 
-namespace MonoDevelop.PackageManagement.Commands
+namespace ICSharpCode.PackageManagement
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public class UserAgentGeneratorForRepositoryRequests
 	{
-		protected override void Run ()
+		MonoDevelopHttpUserAgent userAgent = new MonoDevelopHttpUserAgent();
+		
+		public UserAgentGeneratorForRepositoryRequests(IPackageRepositoryFactoryEvents repositoryFactoryEvents)
 		{
-			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
-			} catch (Exception ex) {
-				MessageService.ShowException (ex);
+			repositoryFactoryEvents.RepositoryCreated += RepositoryCreated;
+		}
+		
+		void RepositoryCreated(object sender, PackageRepositoryFactoryEventArgs e)
+		{
+			RegisterHttpClient(e.Repository as IHttpClientEvents);
+		}
+		
+		void RegisterHttpClient(IHttpClientEvents clientEvents)
+		{
+			if (clientEvents != null) {
+				clientEvents.SendingRequest += SendingRequest;
 			}
+		}
+		
+		void SendingRequest(object sender, WebRequestEventArgs e)
+		{
+			HttpUtility.SetUserAgent(e.Request, userAgent.ToString());
 		}
 	}
 }

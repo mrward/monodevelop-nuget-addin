@@ -1,5 +1,5 @@
 ﻿// 
-// ManagePackagesHandler.cs
+// PackagesCommandHandler.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,23 +27,32 @@
 //
 
 using System;
-using ICSharpCode.PackageManagement;
+using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
+using MonoDevelop.Projects;
 
 namespace MonoDevelop.PackageManagement.Commands
 {
-	public class ManagePackagesHandler : PackagesCommandHandler
+	public abstract class PackagesCommandHandler : CommandHandler
 	{
-		protected override void Run ()
+		protected override void Update (CommandInfo info)
 		{
-			try {
-				var viewModels = new PackageManagementViewModels ();
-				IPackageManagementEvents packageEvents = PackageManagementServices.PackageManagementEvents;
-				var dialog = new ManagePackagesDialog (viewModels.ManagePackagesViewModel, packageEvents);
-				MessageService.ShowCustomDialog (dialog);
-			} catch (Exception ex) {
-				MessageService.ShowException (ex);
+			if (IsDotNetProjectSelected () || IsDotNetSolutionSelected()) {
+				info.Bypass = false;
+			} else {
+				info.Enabled = false;
+				info.Bypass = true;
 			}
+		}
+		
+		bool IsDotNetProjectSelected ()
+		{
+			return IdeApp.ProjectOperations.CurrentSelectedProject is DotNetProject;
+		}
+		
+		bool IsDotNetSolutionSelected ()
+		{
+			return IdeApp.ProjectOperations.CurrentSelectedSolution != null;
 		}
 	}
 }
