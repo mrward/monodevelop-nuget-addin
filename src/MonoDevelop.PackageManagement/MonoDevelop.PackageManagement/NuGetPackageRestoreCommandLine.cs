@@ -59,8 +59,9 @@ namespace ICSharpCode.PackageManagement
 				"--runtime=v4.0 \"{0}\" restore \"{1}\"",
 				NuGetExePath.GetPath(),
 				solution.FileName);
-			
-			Command = "mono";
+
+			var monoPrefix = MonoDevelop.Core.Assemblies.MonoRuntimeInfo.FromCurrentRuntime().Prefix;
+			Command = Path.Combine(monoPrefix, "bin", "mono");
 		}
 		
 		void GenerateWindowsCommandLine(IPackageManagementSolution solution)
