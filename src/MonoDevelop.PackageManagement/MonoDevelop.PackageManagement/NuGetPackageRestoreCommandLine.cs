@@ -61,7 +61,7 @@ namespace ICSharpCode.PackageManagement
 				solution.FileName);
 
 			var monoPrefix = MonoDevelop.Core.Assemblies.MonoRuntimeInfo.FromCurrentRuntime().Prefix;
-			Command = monoPrefix + "/bin/mono";
+			Command = Path.Combine(monoPrefix, "bin", "mono");
 		}
 		
 		void GenerateWindowsCommandLine(IPackageManagementSolution solution)
