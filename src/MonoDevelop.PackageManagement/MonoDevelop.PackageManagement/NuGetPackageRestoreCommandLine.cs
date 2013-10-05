@@ -28,6 +28,7 @@
 
 using System;
 using System.IO;
+using MonoDevelop.Core.Assemblies;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
@@ -60,7 +61,7 @@ namespace ICSharpCode.PackageManagement
 				NuGetExePath.GetPath(),
 				solution.FileName);
 
-			var monoPrefix = MonoDevelop.Core.Assemblies.MonoRuntimeInfo.FromCurrentRuntime().Prefix;
+			string monoPrefix = MonoRuntimeInfo.FromCurrentRuntime().Prefix;
 			Command = Path.Combine(monoPrefix, "bin", "mono");
 		}
 		
