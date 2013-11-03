@@ -1,1 +1,14 @@
 Matt Ward <ward.matt@gmail.com>
+
+Matthew Kowalski <github.com/kwal>
+    Fixed building the project on Mac.
+    Updated addin.xml file with correct GitHub url for project.
+    
+Geoffrey Huntley <github.com/ghuntley>
+    Updated documentation with installation instructions.
+    
+Francisco Ruiz A <github.com/squidge>
+    Updated addin.xml file to work with Xamarin Studio.
+
+Kevin John-Philip <github.com/kjohnphillip>
+    Supported using package restore with different parallel mono environments.

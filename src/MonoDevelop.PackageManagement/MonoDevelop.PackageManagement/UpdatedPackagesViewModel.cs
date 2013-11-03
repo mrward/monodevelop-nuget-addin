@@ -104,7 +104,7 @@ namespace ICSharpCode.PackageManagement
 		
 		IQueryable<IPackage> GetUpdatedPackages()
 		{
-			return updatedPackages.GetUpdatedPackages().AsQueryable();
+			return updatedPackages.GetUpdatedPackages(IncludePrerelease).AsQueryable();
 		}
 		
 		protected override void TryUpdatingAllPackages()
