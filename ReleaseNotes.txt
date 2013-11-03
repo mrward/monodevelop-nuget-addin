@@ -1,3 +1,11 @@
+{{0.7, 2013-11-03}}
+
+Updated to NuGet 2.7.1
+Support PCLs on Linux and Mac.
+Support installing Json.NET into project targeting PCL profile that includes Mono.
+Fix updated pre-release packages not being shown in Updated tab.
+Supported using package restore with different parallel mono environments.
+
 {{0.6, 2013-08-26}}
 
 Updated to NuGet 2.7
