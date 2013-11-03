@@ -14,7 +14,7 @@ Tests to be run on Windows, Linux and Mac before publishing addin.
 
 ## Assembly reference relative paths for project and solution in different folders
 
-1. Install NUnit package into a project with a solution is in a folder below project
+1. Install NUnit package into a project with a solution in a folder below the project
 
         MySolution.sln 
         MyProject/MyProject.csproj
@@ -59,3 +59,10 @@ Known issue with case sensitivity of .config filenames.
 
 1. Install a package with an app.config.install.xdt into a web project.
 3. Check the web.config is updated with the transform.
+
+## PCLs
+
+1. Install Json.NET into a PCL project that targets Profile 104.
+2. Check that the portable version of Json.NET is referenced.
+3. Install a NuGet package (e.g. Antlr3.Runtime.PCL) with only a PCL assembly into a normal .NET 4 project.
+4. Check that the NuGet package installs without any errors.
