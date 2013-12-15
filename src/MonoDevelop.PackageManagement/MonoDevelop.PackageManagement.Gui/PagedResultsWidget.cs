@@ -123,6 +123,14 @@ namespace MonoDevelop.PackageManagement
 			int index = buttons.IndexOf (button);
 			viewModel.ShowPage (viewModel.Pages [index].Number);
 		}
+		
+		protected override void OnDestroyed ()
+		{
+			if (viewModel != null) {
+				viewModel.PropertyChanged -= ViewModelPropertyChanged;
+			}
+			base.OnDestroyed ();
+		}
 	}
 }
 
