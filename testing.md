@@ -66,3 +66,5 @@ Known issue with case sensitivity of .config filenames.
 2. Check that the portable version of Json.NET is referenced.
 3. Install a NuGet package (e.g. Antlr3.Runtime.PCL) with only a PCL assembly into a normal .NET 4 project.
 4. Check that the NuGet package installs without any errors.
+5. Install a NuGet package with only a PCL assembly into a MonoAndroid project when the local system has Mono PCLs installed.
+6. Check that the NuGet package installs without any errors.

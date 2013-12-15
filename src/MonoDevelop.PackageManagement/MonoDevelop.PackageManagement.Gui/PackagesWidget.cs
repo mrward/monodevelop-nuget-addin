@@ -312,6 +312,14 @@ namespace MonoDevelop.PackageManagement
 		{
 			viewModel.UpdateAllPackagesCommand.Execute (null);
 		}
+		
+		protected override void OnDestroyed ()
+		{
+			if (viewModel != null) {
+				viewModel.PropertyChanged -= ViewModelPropertyChanged;
+			}
+			base.OnDestroyed ();
+		}
 	}
 }
 
