@@ -6,6 +6,8 @@ It uses a custom build of [NuGet.Core.dll](https://github.com/mrward/nuget/), ba
 
 For more information see the [announcement blog post](http://community.sharpdevelop.net/blogs/mattward/archive/2013/01/07/MonoDevelopNuGetAddin.aspx).
 
+[Adam Patridge](http://www.patridgedev.com/) has created a [YouTube video](http://www.youtube.com/watch?v=uHbAgbfgQdU) which covers installation and how to use the addin.
+
 # Requirements
 
  * MonoDevelop 3.0, 4.0, 4.2 or Xamarin Studio 4.0, 4.2
