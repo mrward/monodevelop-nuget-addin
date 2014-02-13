@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 
 using MonoDevelop.Projects;
 using NuGet;
@@ -41,6 +42,7 @@ namespace ICSharpCode.PackageManagement
 		ISharpDevelopProjectManager projectManager;
 		IPackageManagementEvents packageManagementEvents;
 		DotNetProject msbuildProject;
+		ProjectTargetFramework targetFramework;
 		
 		public PackageManagementProject(
 			IPackageRepository sourceRepository,
@@ -58,6 +60,18 @@ namespace ICSharpCode.PackageManagement
 		
 		public string Name {
 			get { return msbuildProject.Name; }
+		}
+		
+		public FrameworkName TargetFramework {
+			get { return GetTargetFramework(); }
+		}
+		
+		FrameworkName GetTargetFramework()
+		{
+			if (targetFramework == null) {
+				targetFramework = new ProjectTargetFramework(msbuildProject);
+			}
+			return targetFramework.TargetFrameworkName;
 		}
 		
 		public IPackageRepository SourceRepository { get; private set; }
