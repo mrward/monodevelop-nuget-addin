@@ -4,9 +4,9 @@
        author      = "Matt Ward"
        copyright   = "MIT X11"
        url         = "https://github.com/mrward/monodevelop-nuget-addin"
-       description = "Provides support for adding and maintaining NuGet packages in your project. Updated to use NuGet 2.7.2"
+       description = "Provides support for adding and maintaining NuGet packages in your project. Updated to use NuGet 2.8.1"
        category    = "IDE extensions"
-       version     = "0.8">
+       version     = "0.9">
 
 	<Header>
 		<ReleaseNotesFile>ReleaseNotes.txt</ReleaseNotesFile>
