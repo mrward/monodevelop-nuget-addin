@@ -21,7 +21,7 @@ The addin is available from a custom MonoDevelop addin repository. You can add t
 
 For MonoDevelop and Xamarin Studio 4.0 and 4.2:
 
-    http://mrward.github.com/monodevelop-nuget-addin-repository/4.0/main.mrep
+    mrward.github.com/monodevelop-nuget-addin-repository/4.0/main.mrep
 
 For MonoDevelop 3.0:
 
