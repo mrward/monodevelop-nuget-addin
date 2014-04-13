@@ -1,3 +1,8 @@
+{{0.9, 2014-04-13}}
+
+Updated to NuGet 2.8.1
+Fix target framework for dependency being ignored.
+
 {{0.8, 2013-12-15}}
 
 Updated to NuGet 2.7.2
