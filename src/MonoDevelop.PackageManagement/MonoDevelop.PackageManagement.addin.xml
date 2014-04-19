@@ -79,4 +79,15 @@
 				class="MonoDevelop.PackageManagement.Gui.PackageSourcesOptionsPanel" />
 		</Section>
 	</Extension>
+
+	<Extension path="/MonoDevelop/Ide/Pads">
+		<Pad
+			id="MonoDevelop.PackageManagement.PackageConsolePad"
+			defaultLayout="*"
+			defaultPlacement="Center Bottom"
+			defaultStatus="AutoHide"
+			icon="md-console"
+			class="MonoDevelop.PackageManagement.PackageConsolePad"
+			_label="Package Console" />
+	</Extension>
 </Addin>

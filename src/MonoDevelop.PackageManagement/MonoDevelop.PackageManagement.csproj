@@ -52,25 +52,22 @@
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\ManagePackagesHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\PackagesCommandHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\RestorePackagesHandler.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsolePad.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsoleView.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\NuGetVersion.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AcceptLicensesEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AggregateExceptionErrorMessage.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AvailablePackagesViewModel.cs" />
@@ -256,6 +253,8 @@
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackageManagementOptionsWidget.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PagedResultsWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PagedResultsWidget.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsoleToolbarWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.PackageManagement.PackageConsoleToolbarWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.PackageManagement.addin.xml" />
