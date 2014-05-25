@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 using System;
+using System.Collections.Specialized;
 using Gtk;
 using ICSharpCode.PackageManagement;
 using ICSharpCode.PackageManagement.Scripting;
@@ -37,6 +38,7 @@ namespace MonoDevelop.PackageManagement
 	{
 		Button clearButton;
 		PackageManagementConsoleViewModel viewModel;
+		bool reloadingPackageSources;
 
 		public PackageConsoleToolbarWidget ()
 		{
@@ -62,16 +64,44 @@ namespace MonoDevelop.PackageManagement
 			this.viewModel = viewModel;
 			
 			LoadPackageSources ();
+			RegisterEvents();
+		}
+		
+		void RegisterEvents()
+		{
+			viewModel.PackageSources.CollectionChanged += ViewModelPackageSourcesChanged;
+			packageSourcesComboBox.Changed += PackageSourcesChanged;
 		}
 		
 		void LoadPackageSources ()
 		{
+			ClearPackageSources ();
+			
 			for (int index = 0; index < viewModel.PackageSources.Count; ++index) {
 				PackageSourceViewModel packageSource = viewModel.PackageSources [index];
 				packageSourcesComboBox.InsertText (index, packageSource.Name);
 			}
 			
 			packageSourcesComboBox.Active = GetActivePackageSourceIndexFromViewModel ();
+		}
+
+		void ClearPackageSources ()
+		{
+			int count = packageSourcesComboBox.Model.IterNChildren ();
+			for (int index = 0; index < count; ++index) {
+				packageSourcesComboBox.RemoveText (0);
+			}
+			
+			packageSourcesComboBox.Active = -1;
+		}
+		
+		void ViewModelPackageSourcesChanged (object sender, NotifyCollectionChangedEventArgs e)
+		{
+			reloadingPackageSources = true;
+			
+			LoadPackageSources ();
+			
+			reloadingPackageSources = false;
 		}
 		
 		int GetActivePackageSourceIndexFromViewModel ()
@@ -83,7 +113,29 @@ namespace MonoDevelop.PackageManagement
 				return -1;
 			}
 			
-			return viewModel.PackageSources.IndexOf (viewModel.ActivePackageSource);
+			int index = viewModel.PackageSources.IndexOf (viewModel.ActivePackageSource);
+			if (index >= 0) {
+				return index;
+			}
+			
+			return 0;
+		}
+		
+		void PackageSourcesChanged (object sender, EventArgs e)
+		{
+			if (reloadingPackageSources)
+				return;
+			
+			viewModel.ActivePackageSource = GetSelectedPackageSource ();
+		}
+		
+		PackageSourceViewModel GetSelectedPackageSource ()
+		{
+			if (packageSourcesComboBox.Active == -1) {
+				return null;
+			}
+			
+			return viewModel.PackageSources [packageSourcesComboBox.Active];
 		}
 	}
 }
