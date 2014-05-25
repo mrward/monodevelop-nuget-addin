@@ -30,6 +30,7 @@ using Gtk;
 using ICSharpCode.PackageManagement;
 using ICSharpCode.PackageManagement.Scripting;
 using MonoDevelop.Core;
+using MonoDevelop.Projects;
 
 namespace MonoDevelop.PackageManagement
 {
@@ -39,6 +40,7 @@ namespace MonoDevelop.PackageManagement
 		Button clearButton;
 		PackageManagementConsoleViewModel viewModel;
 		bool reloadingPackageSources;
+		ListStore projectListStore;
 
 		public PackageConsoleToolbarWidget ()
 		{
@@ -64,6 +66,10 @@ namespace MonoDevelop.PackageManagement
 			this.viewModel = viewModel;
 			
 			LoadPackageSources ();
+			
+			SetUpProjectsComboBox ();
+			LoadProjects ();
+			
 			RegisterEvents();
 		}
 		
@@ -71,6 +77,8 @@ namespace MonoDevelop.PackageManagement
 		{
 			viewModel.PackageSources.CollectionChanged += ViewModelPackageSourcesChanged;
 			packageSourcesComboBox.Changed += PackageSourcesChanged;
+			
+			viewModel.Projects.CollectionChanged += ProjectsChanged;
 		}
 		
 		void LoadPackageSources ()
@@ -83,6 +91,12 @@ namespace MonoDevelop.PackageManagement
 			}
 			
 			packageSourcesComboBox.Active = GetActivePackageSourceIndexFromViewModel ();
+		}
+		
+		void SetUpProjectsComboBox ()
+		{
+			projectListStore = new ListStore (typeof (string), typeof(Project));
+			projectsComboBox.Model = projectListStore;
 		}
 
 		void ClearPackageSources ()
@@ -137,6 +151,25 @@ namespace MonoDevelop.PackageManagement
 			
 			return viewModel.PackageSources [packageSourcesComboBox.Active];
 		}
+		
+		void LoadProjects ()
+		{
+			projectListStore.Clear ();
+			
+			foreach (Project project in viewModel.Projects) {
+				projectListStore.AppendValues (project.Name, project);
+			}
+			
+			if (viewModel.Projects.Count > 0) {
+				projectsComboBox.Active = 0;
+			}
+		}
+		
+		void ProjectsChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			LoadProjects();
+		}
+		
 	}
 }
 

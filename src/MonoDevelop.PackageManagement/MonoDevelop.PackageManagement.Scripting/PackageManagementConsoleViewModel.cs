@@ -33,6 +33,7 @@ using System.Collections.Specialized;
 using System.Linq;
 
 using ICSharpCode.Scripting;
+using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using NuGet;
 
@@ -65,7 +66,8 @@ namespace ICSharpCode.PackageManagement.Scripting
 		{
 			packageManagementConsole = console;
 			
-			//projectService.AllProjects.CollectionChanged += OnProjectCollectionChanged;
+			IdeApp.Workspace.SolutionLoaded += SolutionLoaded;
+			IdeApp.Workspace.SolutionUnloaded += SolutionUnloaded;
 			projects = new ObservableCollection<Project>(projectService.GetOpenProjects());
 			
 			CreateCommands();
@@ -73,6 +75,16 @@ namespace ICSharpCode.PackageManagement.Scripting
 			ReceiveNotificationsWhenPackageSourcesUpdated();
 			UpdateDefaultProject();
 			InitConsoleHost();
+		}
+
+		void SolutionUnloaded(object sender, SolutionEventArgs e)
+		{
+			ProjectsChanged(new Project[0]);
+		}
+
+		void SolutionLoaded(object sender, SolutionEventArgs e)
+		{
+			ProjectsChanged(e.Solution.GetAllProjects().OfType<DotNetProject>());
 		}
 		
 		void InitConsoleHost()
@@ -158,16 +170,12 @@ namespace ICSharpCode.PackageManagement.Scripting
 			DefaultProject = this.Projects.FirstOrDefault();
 		}
 		
-//		void OnProjectCollectionChanged(IReadOnlyCollection<IProject> removedItems, IReadOnlyCollection<IProject> addedItems)
-//		{
-//			foreach (var removedProject in removedItems) {
-//				projects.Remove(removedProject);
-//			}
-//			foreach (var addedProject in addedItems) {
-//				projects.Add(addedProject);
-//			}
-//			UpdateDefaultProject();
-//		}
+		void ProjectsChanged(IEnumerable<Project> projects)
+		{
+			Projects.Clear();
+			Projects.AddRange(projects);
+			UpdateDefaultProject();
+		}
 		
 		public ObservableCollection<PackageSourceViewModel> PackageSources {
 			get { return packageSources; }
