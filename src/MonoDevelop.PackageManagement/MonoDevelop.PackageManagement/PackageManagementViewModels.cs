@@ -27,6 +27,7 @@
 //
 
 using System;
+using ICSharpCode.PackageManagement.Scripting;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
@@ -37,6 +38,7 @@ namespace ICSharpCode.PackageManagement
 		RegisteredPackageSourcesViewModel registeredPackageSourcesViewModel;
 		RegisteredPackageSourcesViewModel registeredProjectTemplatePackageSourcesViewModel;
 		PackageManagementOptionsViewModel packageManagementOptionsViewModel;
+		PackageManagementConsoleViewModel packageManagementConsoleViewModel;
 		IPackageManagementSolution solution;
 		IRegisteredPackageRepositories registeredPackageRepositories;
 		
@@ -144,6 +146,27 @@ namespace ICSharpCode.PackageManagement
 				}
 				return packageManagementOptionsViewModel;
 			}
+		}
+		
+		public PackageManagementConsoleViewModel PackageManagementConsoleViewModel {
+			get { 
+				if (packageManagementConsoleViewModel == null) {
+					CreatePackageManagementConsoleViewModel();
+				}
+				return packageManagementConsoleViewModel;
+			}
+		}
+		
+		void CreatePackageManagementConsoleViewModel()
+		{
+			CreateSolution();
+			CreateRegisteredPackageRepositories();
+			var consoleHost = PackageManagementServices.ConsoleHost;
+			packageManagementConsoleViewModel = 
+				new PackageManagementConsoleViewModel(
+					registeredPackageRepositories.PackageSources,
+					PackageManagementServices.ProjectService,
+					consoleHost);
 		}
 	}
 }

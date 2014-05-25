@@ -27,15 +27,18 @@
 //
 
 using System;
+using ICSharpCode.PackageManagement;
+using ICSharpCode.PackageManagement.Scripting;
 using MonoDevelop.Components;
-using MonoDevelop.Ide.Gui;
 using MonoDevelop.Components.Docking;
+using MonoDevelop.Ide.Gui;
 
 namespace MonoDevelop.PackageManagement
 {
 	public class PackageConsolePad : IPadContent
 	{
 		PackageConsoleView view;
+		PackageManagementConsoleViewModel viewModel;
 		PackageConsoleToolbarWidget toolbarWidget;
 		
 		public PackageConsolePad ()
@@ -50,6 +53,15 @@ namespace MonoDevelop.PackageManagement
 		{
 			CreateToolbar (window);
 			CreatePackageConsoleView ();
+			CreatePackageConsoleViewModel ();
+			BindingViewModelToView ();
+		}
+		
+		void CreatePackageConsoleViewModel()
+		{
+			var viewModels = new PackageManagementViewModels ();
+			viewModel = viewModels.PackageManagementConsoleViewModel;
+			viewModel.RegisterConsole (view);
 		}
 
 		void CreateToolbar (IPadWindow window)
@@ -63,7 +75,7 @@ namespace MonoDevelop.PackageManagement
 
 		void ClearButtonClicked(object sender, EventArgs e)
 		{
-			view.Clear ();
+			viewModel.ClearConsole ();
 		}
 
 		void CreatePackageConsoleView ()
@@ -86,6 +98,11 @@ namespace MonoDevelop.PackageManagement
 		
 		public void Dispose ()
 		{
+		}
+		
+		void BindingViewModelToView()
+		{
+			toolbarWidget.LoadViewModel (viewModel);
 		}
 	}
 }

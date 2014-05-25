@@ -27,6 +27,7 @@
 //
 
 using System;
+using ICSharpCode.PackageManagement.Scripting;
 using NuGet;
 
 namespace ICSharpCode.PackageManagement
@@ -44,6 +45,7 @@ namespace ICSharpCode.PackageManagement
 		static readonly RegisteredProjectTemplatePackageSources projectTemplatePackageSources;
 		static readonly PackageRepositoryCache packageRepositoryCache;
 		static readonly UserAgentGeneratorForRepositoryRequests userAgentGenerator;
+		static readonly PackageManagementConsoleHostProvider consoleHostProvider;
 		
 		static PackageManagementServices()
 		{
@@ -57,6 +59,8 @@ namespace ICSharpCode.PackageManagement
 			outputMessagesView = new PackageManagementOutputMessagesView(packageManagementEvents);
 			solution = new PackageManagementSolution(registeredPackageRepositories, packageManagementEvents);
 			packageActionRunner = new PackageActionRunner(packageManagementEvents);
+			
+			consoleHostProvider = new PackageManagementConsoleHostProvider(solution, registeredPackageRepositories);
 			
 			InitializeCredentialProvider();
 		}
@@ -76,6 +80,10 @@ namespace ICSharpCode.PackageManagement
 		
 		public static IPackageManagementSolution Solution {
 			get { return solution; }
+		}
+		
+		public static IPackageManagementConsoleHost ConsoleHost {
+			get { return consoleHostProvider.ConsoleHost; }
 		}
 		
 		public static IRegisteredPackageRepositories RegisteredPackageRepositories {

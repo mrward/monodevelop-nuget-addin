@@ -67,7 +67,13 @@
     <Compile Include="MonoDevelop.PackageManagement.Commands\RestorePackagesHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsolePad.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsoleView.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageManagementConsoleHost.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\IScriptingConsole.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\NuGetVersion.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageManagementConsoleHost.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageManagementConsoleHostProvider.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageManagementConsoleViewModel.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\ScriptingStyle.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AcceptLicensesEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AggregateExceptionErrorMessage.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AvailablePackagesViewModel.cs" />

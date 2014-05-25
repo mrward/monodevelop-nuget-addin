@@ -26,6 +26,8 @@
 //
 using System;
 using Gtk;
+using ICSharpCode.PackageManagement;
+using ICSharpCode.PackageManagement.Scripting;
 using MonoDevelop.Core;
 
 namespace MonoDevelop.PackageManagement
@@ -34,6 +36,7 @@ namespace MonoDevelop.PackageManagement
 	public partial class PackageConsoleToolbarWidget : Gtk.Bin
 	{
 		Button clearButton;
+		PackageManagementConsoleViewModel viewModel;
 
 		public PackageConsoleToolbarWidget ()
 		{
@@ -54,6 +57,34 @@ namespace MonoDevelop.PackageManagement
 		
 		public event EventHandler ClearButtonClicked;
 		
+		public void LoadViewModel (PackageManagementConsoleViewModel viewModel)
+		{
+			this.viewModel = viewModel;
+			
+			LoadPackageSources ();
+		}
+		
+		void LoadPackageSources ()
+		{
+			for (int index = 0; index < viewModel.PackageSources.Count; ++index) {
+				PackageSourceViewModel packageSource = viewModel.PackageSources [index];
+				packageSourcesComboBox.InsertText (index, packageSource.Name);
+			}
+			
+			packageSourcesComboBox.Active = GetActivePackageSourceIndexFromViewModel ();
+		}
+		
+		int GetActivePackageSourceIndexFromViewModel ()
+		{
+			if (viewModel.ActivePackageSource == null) {
+				if (viewModel.PackageSources.Count > 0) {
+					return 0;
+				}
+				return -1;
+			}
+			
+			return viewModel.PackageSources.IndexOf (viewModel.ActivePackageSource);
+		}
 	}
 }
 

@@ -27,29 +27,82 @@
 //
 
 using System;
+using ICSharpCode.PackageManagement;
 using ICSharpCode.PackageManagement.Scripting;
+using ICSharpCode.Scripting;
 using MonoDevelop.Components;
 
 namespace MonoDevelop.PackageManagement
 {
-	public class PackageConsoleView : ConsoleView
+	public class PackageConsoleView : ConsoleView, IScriptingConsole
 	{
 		public PackageConsoleView ()
 		{
-			// HACK - write text before first prompt.
+			// HACK - to allow text to appear before first prompt.
 			PromptString = String.Empty;
 			Clear ();
-			
-			WriteLine ("NuGet {0}", NuGetVersion.Version);
-			WriteLine ("Type 'get-help NuGet' for more information.");
-			
-			PromptString = "PM> ";
-			Prompt (true);
 		}
 		
-		void WriteLine (string format, params object[] args)
+		void WriteOutputLine (string format, params object[] args)
 		{
 			WriteOutput (String.Format (format, args) + Environment.NewLine);
+		}
+		
+		public event EventHandler LineReceived;
+		public bool ScrollToEndWhenTextWritten { get; set; }
+		
+		public void SendLine (string line)
+		{
+		}
+		
+		public void SendText (string text)
+		{
+		}
+		
+		public void WriteLine ()
+		{
+			WriteOutput (String.Empty);
+		}
+		
+		public void WriteLine (string text, ScriptingStyle style)
+		{
+			if (style == ScriptingStyle.Prompt) {
+				WriteOutputLine (text);
+				ConfigurePromptString ();
+				Prompt (true);
+			} else {
+				WriteOutputLine (text);
+			}
+		}
+		
+		void ConfigurePromptString()
+		{
+			PromptString = "PM> ";
+		}
+		
+		public void Write (string text, ScriptingStyle style)
+		{
+			if (style == ScriptingStyle.Prompt) {
+				ConfigurePromptString ();
+				Prompt (false);
+			} else {
+				WriteOutput (text);
+			}
+		}
+		
+		public string ReadLine (int autoIndentSize)
+		{
+			throw new NotImplementedException();
+		}
+		
+		public string ReadFirstUnreadLine ()
+		{
+			throw new NotImplementedException();
+		}
+		
+		public int GetMaximumVisibleColumns ()
+		{
+			return 80;
 		}
 	}
 }
