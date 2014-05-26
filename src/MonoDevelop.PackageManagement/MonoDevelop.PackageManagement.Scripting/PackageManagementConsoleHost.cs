@@ -30,7 +30,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+using ICSharpCode.PackageManagement.EnvDTE;
 using ICSharpCode.Scripting;
+using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using NuGet;
 
@@ -43,39 +45,38 @@ namespace ICSharpCode.PackageManagement.Scripting
 	{
 //		IThread thread;
 		IRegisteredPackageRepositories registeredRepositories;
-//		IPowerShellHostFactory powerShellHostFactory;
-//		IPowerShellHost powerShellHost;
+		IPowerShellHostFactory powerShellHostFactory;
+		IPowerShellHost powerShellHost;
 //		IPackageManagementAddInPath addinPath;
 		IPackageManagementEvents packageEvents;
-//		int autoIndentSize = 0;
 		string prompt = "PM> ";
 		
 		public PackageManagementConsoleHost(
 			IPackageManagementSolution solution,
 			IRegisteredPackageRepositories registeredRepositories,
-			IPackageManagementEvents packageEvents)
-			//IPowerShellHostFactory powerShellHostFactory,
+			IPackageManagementEvents packageEvents,
+			IPowerShellHostFactory powerShellHostFactory)
 			//IPackageManagementAddInPath addinPath)
 		{
 			this.Solution = solution;
 			this.registeredRepositories = registeredRepositories;
-			//this.powerShellHostFactory = powerShellHostFactory;
+			this.powerShellHostFactory = powerShellHostFactory;
 			//this.addinPath = addinPath;
 			this.packageEvents = packageEvents;
 		}
 		
-//		public PackageManagementConsoleHost(
-//			IPackageManagementSolution solution,
-//			IRegisteredPackageRepositories registeredRepositories,
-//			IPackageManagementEvents packageEvents)
-//			: this(
-//				solution,
-//				registeredRepositories,
-//				packageEvents)
-//				//new PowerShellHostFactory(),
-//				//new PackageManagementAddInPath())
-//		{
-//		}
+		public PackageManagementConsoleHost(
+			IPackageManagementSolution solution,
+			IRegisteredPackageRepositories registeredRepositories,
+			IPackageManagementEvents packageEvents)
+			: this(
+				solution,
+				registeredRepositories,
+				packageEvents,
+				new PowerShellHostFactory())
+				//new PackageManagementAddInPath())
+		{
+		}
 		
 		public bool IsRunning { get; private set; }
 		public Project DefaultProject { get; set; }
@@ -112,7 +113,9 @@ namespace ICSharpCode.PackageManagement.Scripting
 		
 		public void Run()
 		{
-			RunSynchronous();
+			DispatchService.BackgroundDispatch(() => {
+				RunSynchronous();
+			});
 //			thread = CreateThread(RunSynchronous);
 //			thread.Start();
 //			IsRunning = true;
@@ -125,40 +128,40 @@ namespace ICSharpCode.PackageManagement.Scripting
 //		
 		void RunSynchronous()
 		{
-//			InitPowerShell();
+			InitPowerShell();
 			WriteInfoBeforeFirstPrompt();
 //			InitializePackageScriptsForOpenSolution();
 			WritePrompt();
 //			ProcessUserCommands();
 		}
 		
-//		void InitPowerShell()
-//		{
-//			CreatePowerShellHost();
+		void InitPowerShell()
+		{
+			CreatePowerShellHost();
 //			AddModulesToImport();
 //			powerShellHost.SetRemoteSignedExecutionPolicy();
 //			UpdateFormatting();
-//			RedefineClearHostFunction();
+			RedefineClearHostFunction();
 //			DefineTabExpansionFunction();
 //			UpdateWorkingDirectory();
-//		}
-//		
-//		void CreatePowerShellHost()
-//		{
-//			var clearConsoleHostCommand = new ClearPackageManagementConsoleHostCommand(this);
-//			powerShellHost = 
-//				powerShellHostFactory.CreatePowerShellHost(
-//					this.ScriptingConsole,
-//					GetNuGetVersion(),
-//					clearConsoleHostCommand,
-//					new DTE());
-//		}
-//		
-//		protected virtual Version GetNuGetVersion()
-//		{
-//			return NuGetVersion.Version;
-//		}
-//		
+		}
+		
+		void CreatePowerShellHost()
+		{
+			var clearConsoleHostCommand = new ClearPackageManagementConsoleHostCommand(this);
+			powerShellHost = 
+				powerShellHostFactory.CreatePowerShellHost(
+					this.ScriptingConsole,
+					GetNuGetVersion(),
+					clearConsoleHostCommand,
+					new DTE());
+		}
+		
+		protected virtual Version GetNuGetVersion()
+		{
+			return NuGetVersion.Version;
+		}
+		
 //		void AddModulesToImport()
 //		{
 //			string module = addinPath.CmdletsAssemblyFileName;
@@ -171,12 +174,12 @@ namespace ICSharpCode.PackageManagement.Scripting
 //			powerShellHost.UpdateFormatting(fileNames);
 //		}
 //		
-//		void RedefineClearHostFunction()
-//		{
-//			string command = "function Clear-Host { $host.PrivateData.ClearHost() }";
-//			powerShellHost.ExecuteCommand(command);
-//		}
-//		
+		void RedefineClearHostFunction()
+		{
+			string command = "function Clear-Host { $host.PrivateData.ClearHost() }";
+			powerShellHost.ExecuteCommand(command);
+		}
+		
 //		void DefineTabExpansionFunction()
 //		{
 //			string command =
@@ -195,8 +198,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 		
 		void WriteNuGetVersionInfo()
 		{
-//			string versionInfo = String.Format("NuGet {0}", powerShellHost.Version);
-			string versionInfo = String.Format("NuGet {0}", NuGetVersion.Version);
+			string versionInfo = String.Format("NuGet {0}", powerShellHost.Version);
 			WriteLine(versionInfo);
 		}
 		
@@ -235,23 +237,16 @@ namespace ICSharpCode.PackageManagement.Scripting
 			return "Type 'get-help NuGet' for more information.";
 		}
 		
-//		void ProcessUserCommands()
-//		{
-//			while (true) {
-//				string line = ScriptingConsole.ReadLine(autoIndentSize);
-//				if (line != null) {
-//					ProcessLine(line);
-//					WritePrompt();
-//				} else {
-//					break;
-//				}
-//			}
-//		}
-//	
-//		void ProcessLine(string line)
-//		{
-//			powerShellHost.ExecuteCommand(line);
-//		}
+		public void ProcessUserInput (string line)
+		{
+			ProcessLine (line);
+			WritePrompt ();
+		}
+	
+		void ProcessLine(string line)
+		{
+			powerShellHost.ExecuteCommand(line);
+		}
 		
 		public IPackageManagementProject GetProject(string packageSource, string projectName)
 		{

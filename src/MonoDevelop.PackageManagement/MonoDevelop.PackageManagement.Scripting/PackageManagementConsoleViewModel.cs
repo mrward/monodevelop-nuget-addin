@@ -222,5 +222,10 @@ namespace ICSharpCode.PackageManagement.Scripting
 //			consoleHost.Dispose();
 //			return !consoleHost.IsRunning;
 //		}
+		
+		public void ProcessUserInput (string line)
+		{
+			consoleHost.ProcessUserInput (line);
+		}
 	}
 }

@@ -86,10 +86,11 @@ namespace MonoDevelop.PackageManagement
 			view.ShowAll ();
 		}
 
-		void OnConsoleInput(object sender, ConsoleInputEventArgs e)
+		void OnConsoleInput (object sender, ConsoleInputEventArgs e)
 		{
-			view.WriteOutput (e.Text);
-			view.Prompt (true);
+			//view.WriteOutput (e.Text);
+			//view.Prompt (true);
+			viewModel.ProcessUserInput (e.Text);
 		}
 		
 		public void RedrawContent ()
@@ -100,7 +101,7 @@ namespace MonoDevelop.PackageManagement
 		{
 		}
 		
-		void BindingViewModelToView()
+		void BindingViewModelToView ()
 		{
 			toolbarWidget.LoadViewModel (viewModel);
 		}

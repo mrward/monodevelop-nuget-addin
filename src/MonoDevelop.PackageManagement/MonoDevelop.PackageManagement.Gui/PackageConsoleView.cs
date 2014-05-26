@@ -31,6 +31,7 @@ using ICSharpCode.PackageManagement;
 using ICSharpCode.PackageManagement.Scripting;
 using ICSharpCode.Scripting;
 using MonoDevelop.Components;
+using MonoDevelop.Ide;
 
 namespace MonoDevelop.PackageManagement
 {
@@ -48,7 +49,6 @@ namespace MonoDevelop.PackageManagement
 			WriteOutput (String.Format (format, args) + Environment.NewLine);
 		}
 		
-		public event EventHandler LineReceived;
 		public bool ScrollToEndWhenTextWritten { get; set; }
 		
 		public void SendLine (string line)
@@ -61,18 +61,22 @@ namespace MonoDevelop.PackageManagement
 		
 		public void WriteLine ()
 		{
-			WriteOutput (String.Empty);
+			DispatchService.GuiSyncDispatch (() => {
+				WriteOutput (String.Empty);
+			});
 		}
 		
 		public void WriteLine (string text, ScriptingStyle style)
 		{
-			if (style == ScriptingStyle.Prompt) {
-				WriteOutputLine (text);
-				ConfigurePromptString ();
-				Prompt (true);
-			} else {
-				WriteOutputLine (text);
-			}
+			DispatchService.GuiSyncDispatch (() => {
+				if (style == ScriptingStyle.Prompt) {
+					WriteOutputLine (text);
+					ConfigurePromptString ();
+					Prompt (true);
+				} else {
+					WriteOutputLine (text);
+				}
+			});
 		}
 		
 		void ConfigurePromptString()
@@ -82,12 +86,14 @@ namespace MonoDevelop.PackageManagement
 		
 		public void Write (string text, ScriptingStyle style)
 		{
-			if (style == ScriptingStyle.Prompt) {
-				ConfigurePromptString ();
-				Prompt (false);
-			} else {
-				WriteOutput (text);
-			}
+			DispatchService.GuiSyncDispatch (() => {
+				if (style == ScriptingStyle.Prompt) {
+					ConfigurePromptString ();
+					Prompt (false);
+				} else {
+					WriteOutput (text);
+				}
+			});
 		}
 		
 		public string ReadLine (int autoIndentSize)

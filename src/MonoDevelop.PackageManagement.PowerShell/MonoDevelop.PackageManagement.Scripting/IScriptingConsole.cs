@@ -1,5 +1,5 @@
 ﻿// 
-// IPackageManagementConsoleHost.cs
+// IScriptingConsole.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,36 +27,21 @@
 //
 
 using System;
-using System.Collections.Generic;
-using ICSharpCode.Scripting;
-using MonoDevelop.Projects;
-using NuGet;
 
-namespace ICSharpCode.PackageManagement.Scripting
+namespace ICSharpCode.Scripting
 {
-	public interface IPackageManagementConsoleHost : IDisposable
+	public interface IScriptingConsole : IDisposable
 	{
-		Project DefaultProject { get; set; }
-		PackageSource ActivePackageSource { get; set; }
-		IScriptingConsole ScriptingConsole { get; set; }
-		IPackageManagementSolution Solution { get; }
-		bool IsRunning { get; }
+		bool ScrollToEndWhenTextWritten { get; set; }
 		
 		void Clear();
-		void WritePrompt();
-		void Run();
-		void ShutdownConsole();
-		void ExecuteCommand(string command);
-		void ProcessUserInput(string line);
-		
-		void SetDefaultRunspace();
-		
-		//IConsoleHostFileConflictResolver CreateFileConflictResolver(FileConflictAction fileConflictAction);
-		
-		IPackageManagementProject GetProject(string packageSource, string projectName);
-		IPackageManagementProject GetProject(IPackageRepository sourceRepository, string projectName);
-		PackageSource GetActivePackageSource(string source);
-		
-		IPackageRepository GetPackageRepository(PackageSource packageSource);
+		void SendLine(string line);
+		void SendText(string text);
+		void WriteLine();
+		void WriteLine(string text, ScriptingStyle style);
+		void Write(string text, ScriptingStyle style);
+		string ReadLine(int autoIndentSize);
+		string ReadFirstUnreadLine();
+		int GetMaximumVisibleColumns();
 	}
 }

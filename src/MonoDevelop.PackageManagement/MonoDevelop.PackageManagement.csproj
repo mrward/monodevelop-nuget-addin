@@ -65,15 +65,15 @@
     <Compile Include="MonoDevelop.PackageManagement.Commands\ManagePackagesHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\PackagesCommandHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\RestorePackagesHandler.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.EnvDTE\DTE.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsolePad.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsoleView.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\ClearPackageManagementConsoleHostCommand.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageManagementConsoleHost.cs" />
-    <Compile Include="MonoDevelop.PackageManagement.Scripting\IScriptingConsole.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\NuGetVersion.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageManagementConsoleHost.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageManagementConsoleHostProvider.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageManagementConsoleViewModel.cs" />
-    <Compile Include="MonoDevelop.PackageManagement.Scripting\ScriptingStyle.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AcceptLicensesEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AggregateExceptionErrorMessage.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AvailablePackagesViewModel.cs" />
@@ -278,6 +278,15 @@
       <Link>ReleaseNotes.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoDevelop.PackageManagement.PowerShell\MonoDevelop.PackageManagement.PowerShell.csproj">
+      <Project>{A406803B-C584-43A3-BCEE-A0BB3132CB5F}</Project>
+      <Name>MonoDevelop.PackageManagement.PowerShell</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MonoDevelop.PackageManagement.EnvDTE" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="PostBuildEvent.proj" />
