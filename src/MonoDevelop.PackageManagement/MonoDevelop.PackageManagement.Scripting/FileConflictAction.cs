@@ -1,10 +1,10 @@
 ﻿// 
-// IScriptingConsole.cs
+// FileConflictAction.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2011-2014 Matthew Ward
+// Copyright (C) 2014 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,20 +28,12 @@
 
 using System;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public enum FileConflictAction
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
-		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		None,
+		Overwrite,
+		Ignore
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// PackageManagementAddInPath.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,43 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public class PackageManagementAddInPath : IPackageManagementAddInPath
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		string cmdletsAssemblyFileName;
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public string CmdletsAssemblyFileName {
+			get {
+				if (cmdletsAssemblyFileName == null) {
+					GetCmdletsAssemblyFileName();
+				}
+				return cmdletsAssemblyFileName;
+			}
+		}
+		
+		void GetCmdletsAssemblyFileName()
+		{
+			cmdletsAssemblyFileName = Path.Combine(AddInDirectory, "MonoDevelop.PackageManagement.Cmdlets.dll");
+		}
+		
+		string AddInDirectory {
+			get {
+				string addinFilename = GetType().Assembly.Location;
+				return Path.GetDirectoryName(addinFilename);
+			}
+		}
+		
+		public IEnumerable<string> GetPowerShellFormattingFileNames()
+		{
+			return Directory.GetFiles(PowerShellScriptsDirectory, "*.ps1xml");
+		}
+		
+		string PowerShellScriptsDirectory {
+			get { return Path.Combine(AddInDirectory, "Scripts"); }
+		}
 	}
 }

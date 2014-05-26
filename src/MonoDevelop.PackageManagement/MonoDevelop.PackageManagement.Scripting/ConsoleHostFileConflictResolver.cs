@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// ConsoleHostFileConflictResolver.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,43 @@
 //
 
 using System;
+using NuGet;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public class ConsoleHostFileConflictResolver : IConsoleHostFileConflictResolver
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		IPackageManagementEvents packageEvents;
+		FileConflictResolution conflictResolution;
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public ConsoleHostFileConflictResolver(
+			IPackageManagementEvents packageEvents,
+			FileConflictAction fileConflictAction)
+		{
+			this.packageEvents = packageEvents;
+			
+			conflictResolution = GetFileConflictResolution(fileConflictAction);
+			packageEvents.ResolveFileConflict += ResolveFileConflict;
+		}
+		
+		void ResolveFileConflict(object sender, ResolveFileConflictEventArgs e)
+		{
+			e.Resolution = conflictResolution;
+		}
+		
+		FileConflictResolution GetFileConflictResolution(FileConflictAction fileConflictAction)
+		{
+			switch (fileConflictAction) {
+				case FileConflictAction.Overwrite:
+					return FileConflictResolution.Overwrite;
+				default:
+					return FileConflictResolution.Ignore;
+			}
+		}
+		
+		public void Dispose()
+		{
+			packageEvents.ResolveFileConflict -= ResolveFileConflict;
+		}
 	}
 }

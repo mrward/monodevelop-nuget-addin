@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// PackageScriptFileName.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,56 @@
 //
 
 using System;
+using System.IO;
+using NuGet;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public abstract class PackageScriptFileName : IPackageScriptFileName
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		IFileSystem fileSystem;
+		string relativeScriptFilePath;
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public PackageScriptFileName(string packageInstallDirectory)
+			: this(new PhysicalFileSystem(packageInstallDirectory))
+		{
+		}
+		
+		public PackageScriptFileName(IFileSystem fileSystem)
+		{
+			this.fileSystem = fileSystem;
+			GetRelativeScriptFilePath();
+		}
+		
+		void GetRelativeScriptFilePath()
+		{
+			relativeScriptFilePath = Path.Combine("tools", Name);
+		}
+		
+		public abstract string Name { get; }
+		
+		public string PackageInstallDirectory {
+			get { return fileSystem.Root; }
+		}
+		
+		public override string ToString()
+		{
+			return fileSystem.GetFullPath(relativeScriptFilePath);
+		}
+		
+		public bool ScriptDirectoryExists()
+		{
+			return fileSystem.DirectoryExists("tools");
+		}
+		
+		public bool FileExists()
+		{
+			return fileSystem.FileExists(relativeScriptFilePath);
+		}
+		
+		public string GetScriptDirectory()
+		{
+			return fileSystem.GetFullPath("tools");
+		}
 	}
 }

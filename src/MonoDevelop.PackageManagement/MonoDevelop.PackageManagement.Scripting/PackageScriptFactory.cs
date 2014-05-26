@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// PackageScriptFactory.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,28 @@
 //
 
 using System;
+using NuGet;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public class PackageScriptFactory : IPackageScriptFactory
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		public IPackageScript CreatePackageInitializeScript(IPackage package, string packageInstallDirectory)
+		{
+			var scriptFileName = new PackageInitializeScriptFileName(packageInstallDirectory);
+			return new PackageInitializeScript(package, scriptFileName);
+		}
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public IPackageScript CreatePackageUninstallScript(IPackage package, string packageInstallDirectory)
+		{
+			var scriptFileName = new PackageUninstallScriptFileName(packageInstallDirectory);
+			return new PackageUninstallScript(package, scriptFileName);
+		}
+		
+		public IPackageScript CreatePackageInstallScript(IPackage package, string packageInstallDirectory)
+		{
+			var scriptFileName = new PackageInstallScriptFileName(packageInstallDirectory);
+			return new PackageInstallScript(package, scriptFileName);
+		}
 	}
 }

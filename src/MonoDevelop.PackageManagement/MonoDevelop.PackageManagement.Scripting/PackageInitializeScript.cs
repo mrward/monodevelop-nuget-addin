@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// PackageInitializeScript.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,34 @@
 //
 
 using System;
+using NuGet;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public class PackageInitializeScript : PackageScript
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		public PackageInitializeScript(IPackage package, IPackageScriptFileName fileName)
+			: base(package, fileName)
+		{
+		}
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		protected override void BeforeRun()
+		{
+			AddScriptDirectoryToEnvironmentPath();
+		}
+		
+		void AddScriptDirectoryToEnvironmentPath()
+		{
+			if (ScriptFileName.ScriptDirectoryExists()) {
+				string directory = ScriptFileName.GetScriptDirectory();
+				AddScriptDirectoryToEnvironmentPath(directory);
+			}
+		}
+		
+		void AddScriptDirectoryToEnvironmentPath(string directory)
+		{
+			//var environmentPath = new PowerShellSessionEnvironmentPath(Session);
+			//environmentPath.Append(directory);
+		}
 	}
 }

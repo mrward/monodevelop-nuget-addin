@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2014 Matthew Ward
+// Copyright (C) 2011-2014 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -51,7 +51,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 		
 		void SetDefaultRunspace();
 		
-		//IConsoleHostFileConflictResolver CreateFileConflictResolver(FileConflictAction fileConflictAction);
+		IConsoleHostFileConflictResolver CreateFileConflictResolver(FileConflictAction fileConflictAction);
 		
 		IPackageManagementProject GetProject(string packageSource, string projectName);
 		IPackageManagementProject GetProject(IPackageRepository sourceRepository, string projectName);

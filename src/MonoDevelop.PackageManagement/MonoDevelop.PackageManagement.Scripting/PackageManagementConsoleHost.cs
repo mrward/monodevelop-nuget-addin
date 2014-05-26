@@ -4,7 +4,7 @@
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2014 Matthew Ward
+// Copyright (C) 2011-2014 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -47,7 +47,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 		IRegisteredPackageRepositories registeredRepositories;
 		IPowerShellHostFactory powerShellHostFactory;
 		IPowerShellHost powerShellHost;
-//		IPackageManagementAddInPath addinPath;
+		IPackageManagementAddInPath addinPath;
 		IPackageManagementEvents packageEvents;
 		string prompt = "PM> ";
 		
@@ -55,13 +55,13 @@ namespace ICSharpCode.PackageManagement.Scripting
 			IPackageManagementSolution solution,
 			IRegisteredPackageRepositories registeredRepositories,
 			IPackageManagementEvents packageEvents,
-			IPowerShellHostFactory powerShellHostFactory)
-			//IPackageManagementAddInPath addinPath)
+			IPowerShellHostFactory powerShellHostFactory,
+			IPackageManagementAddInPath addinPath)
 		{
 			this.Solution = solution;
 			this.registeredRepositories = registeredRepositories;
 			this.powerShellHostFactory = powerShellHostFactory;
-			//this.addinPath = addinPath;
+			this.addinPath = addinPath;
 			this.packageEvents = packageEvents;
 		}
 		
@@ -73,8 +73,8 @@ namespace ICSharpCode.PackageManagement.Scripting
 				solution,
 				registeredRepositories,
 				packageEvents,
-				new PowerShellHostFactory())
-				//new PackageManagementAddInPath())
+				new PowerShellHostFactory(),
+				new PackageManagementAddInPath())
 		{
 		}
 		
@@ -138,7 +138,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 		void InitPowerShell()
 		{
 			CreatePowerShellHost();
-//			AddModulesToImport();
+			AddModulesToImport();
 //			powerShellHost.SetRemoteSignedExecutionPolicy();
 //			UpdateFormatting();
 			RedefineClearHostFunction();
@@ -162,12 +162,12 @@ namespace ICSharpCode.PackageManagement.Scripting
 			return NuGetVersion.Version;
 		}
 		
-//		void AddModulesToImport()
-//		{
-//			string module = addinPath.CmdletsAssemblyFileName;
-//			powerShellHost.ModulesToImport.Add(module);
-//		}
-//		
+		void AddModulesToImport()
+		{
+			string module = addinPath.CmdletsAssemblyFileName;
+			powerShellHost.ModulesToImport.Add(module);
+		}
+		
 //		void UpdateFormatting()
 //		{
 //			IEnumerable<string> fileNames = addinPath.GetPowerShellFormattingFileNames();
@@ -300,9 +300,9 @@ namespace ICSharpCode.PackageManagement.Scripting
 //			powerShellHost.SetDefaultRunspace();
 		}
 		
-//		public IConsoleHostFileConflictResolver CreateFileConflictResolver(FileConflictAction fileConflictAction)
-//		{
-//			return new ConsoleHostFileConflictResolver(packageEvents, fileConflictAction);
-//		}
+		public IConsoleHostFileConflictResolver CreateFileConflictResolver(FileConflictAction fileConflictAction)
+		{
+			return new ConsoleHostFileConflictResolver(packageEvents, fileConflictAction);
+		}
 	}
 }

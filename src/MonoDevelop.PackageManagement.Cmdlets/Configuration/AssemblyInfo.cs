@@ -9,12 +9,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MonoDevelop.PackageManagement")]
-[assembly: AssemblyDescription("NuGet addin for MonoDevelop")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyTitle("MonoDevelop.PackageManagement.Cmdlets")]
+[assembly: AssemblyDescription("Package Management PowerShell Cmdlets for MonoDevelop")]
 [assembly: AssemblyProduct("MonoDevelop.PackageManagement")]
-[assembly: AssemblyCopyright("Copyright (C) 2011-2013 Matthew Ward")]
+[assembly: AssemblyCopyright("Copyright (C) 2012-2014 Matthew Ward")]
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -107,6 +107,11 @@ namespace ICSharpCode.PackageManagement
 			remove { projectManager.PackageReferenceRemoved -= value; }
 		}
 		
+		public event EventHandler<PackageOperationEventArgs> PackageReferenceRemoving {
+			add { projectManager.PackageReferenceRemoving += value; }
+			remove { projectManager.PackageReferenceRemoving -= value; }
+		}
+		
 		public bool IsPackageInstalled(IPackage package)
 		{
 			return projectManager.IsInstalled(package);

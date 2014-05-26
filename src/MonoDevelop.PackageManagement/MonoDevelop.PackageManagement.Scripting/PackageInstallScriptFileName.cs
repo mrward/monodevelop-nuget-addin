@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// PackageInstallScriptFileName.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,24 @@
 //
 
 using System;
+using NuGet;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public class PackageInstallScriptFileName : PackageScriptFileName
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		public PackageInstallScriptFileName(string packageInstallDirectory)
+			: base(packageInstallDirectory)
+		{
+		}
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public PackageInstallScriptFileName(IFileSystem fileSystem)
+			: base(fileSystem)
+		{
+		}
+		
+		public override string Name {
+			get { return "install.ps1"; }
+		}
 	}
 }

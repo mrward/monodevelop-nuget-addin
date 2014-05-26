@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{E0A5E80A-003B-4335-A9DC-A76E2E46D38D}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ICSharpCode.PackageManagement.Cmdlets</RootNamespace>
+    <AssemblyName>MonoDevelop.PackageManagement.Cmdlets</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OutputPath>..\..\bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' " />
+  <ItemGroup>
+    <Reference Include="MonoDevelop.Core">
+      <HintPath>..\..\lib\MonoDevelop.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoDevelop.Ide">
+      <HintPath>..\..\lib\MonoDevelop.Ide.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NuGet.Console.Types">
+      <HintPath>..\..\lib\NuGet.Console.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\..\lib\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\AssemblyInfo.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\CmdletTerminatingError.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\GetPackageCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\GetProjectCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\GetVSComponentModelCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\ICmdletTerminatingError.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\InstallPackageCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\InvokeInitializePackagesCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\InvokeProcessPackageActionsCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\InvokeUpdateWorkingDirectoryCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\ITerminatingCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\OpenProjects.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\PackageManagementCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\UninstallPackageCmdlet.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Cmdlets\UpdatePackageCmdlet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\external\pash\Source\System.Management\System.Management.csproj">
+      <Project>{C5E303EC-5684-4C95-B0EC-2593E6662403}</Project>
+      <Name>System.Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoDevelop.PackageManagement.PowerShell\MonoDevelop.PackageManagement.PowerShell.csproj">
+      <Project>{A406803B-C584-43A3-BCEE-A0BB3132CB5F}</Project>
+      <Name>MonoDevelop.PackageManagement.PowerShell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoDevelop.PackageManagement\MonoDevelop.PackageManagement.csproj">
+      <Project>{F218643D-2E74-4309-820E-206A54B7133F}</Project>
+      <Name>MonoDevelop.PackageManagement</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

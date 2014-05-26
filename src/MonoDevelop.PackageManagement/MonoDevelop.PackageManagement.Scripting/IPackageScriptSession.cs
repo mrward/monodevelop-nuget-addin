@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// IPackageScriptSession.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -28,20 +28,16 @@
 
 using System;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public interface IPackageScriptSession
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		void SetEnvironmentPath(string path);
+		string GetEnvironmentPath();
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		void AddVariable(string name, object value);
+		void RemoveVariable(string name);
+		
+		void InvokeScript(string script);
 	}
 }

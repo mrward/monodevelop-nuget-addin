@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// IConsoleHostFileConflictResolver.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -28,20 +28,9 @@
 
 using System;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public interface IConsoleHostFileConflictResolver : IDisposable
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
-		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
 	}
 }

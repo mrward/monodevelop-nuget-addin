@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// CmdletTerminatingError.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,32 @@
 //
 
 using System;
+using System.Management.Automation;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Cmdlets
 {
-	public interface IScriptingConsole : IDisposable
+	public class CmdletTerminatingError : ICmdletTerminatingError
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		ITerminatingCmdlet cmdlet;
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public CmdletTerminatingError(ITerminatingCmdlet cmdlet)
+		{
+			this.cmdlet = cmdlet;
+		}
+		
+		public void ThrowNoProjectOpenError()
+		{
+			ErrorRecord error = CreateInvalidOperationErrorRecord("NoProjectOpen");
+			cmdlet.ThrowTerminatingError(error);
+		}
+		
+		ErrorRecord CreateInvalidOperationErrorRecord(string errorId)
+		{
+			return new ErrorRecord(
+				new InvalidOperationException("A project must be open to run this command."),
+				"NoProjectOpen",
+				ErrorCategory.InvalidOperation,
+				null);
+		}
 	}
 }

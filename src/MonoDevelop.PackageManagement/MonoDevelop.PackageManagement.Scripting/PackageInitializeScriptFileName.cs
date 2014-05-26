@@ -1,5 +1,5 @@
 ﻿// 
-// IScriptingConsole.cs
+// PackageInitializeScriptFileName.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -27,21 +27,25 @@
 //
 
 using System;
+using System.IO;
+using NuGet;
 
-namespace ICSharpCode.Scripting
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	public interface IScriptingConsole : IDisposable
+	public class PackageInitializeScriptFileName : PackageScriptFileName
 	{
-		bool ScrollToEndWhenTextWritten { get; set; }
+		public PackageInitializeScriptFileName(string packageInstallDirectory)
+			: base(packageInstallDirectory)
+		{
+		}
 		
-		void Clear();
-		void SendLine(string line);
-		void SendText(string text);
-		void WriteLine();
-		void WriteLine(string text, ScriptingStyle style);
-		void Write(string text, ScriptingStyle style);
-		string ReadLine(int autoIndentSize);
-		string ReadFirstUnreadLine();
-		int GetMaximumVisibleColumns();
+		public PackageInitializeScriptFileName(IFileSystem fileSystem)
+			: base(fileSystem)
+		{
+		}
+		
+		public override string Name {
+			get { return "init.ps1"; }
+		}
 	}
 }
