@@ -40,6 +40,7 @@ namespace MonoDevelop.PackageManagement
 		Button clearButton;
 		PackageManagementConsoleViewModel viewModel;
 		bool reloadingPackageSources;
+		bool reloadingProjects;
 		ListStore projectListStore;
 
 		public PackageConsoleToolbarWidget ()
@@ -76,9 +77,10 @@ namespace MonoDevelop.PackageManagement
 		void RegisterEvents()
 		{
 			viewModel.PackageSources.CollectionChanged += ViewModelPackageSourcesChanged;
-			packageSourcesComboBox.Changed += PackageSourcesChanged;
+			packageSourcesComboBox.Changed += PackageSourcesComboBoxChanged;
 			
-			viewModel.Projects.CollectionChanged += ProjectsChanged;
+			viewModel.Projects.CollectionChanged += ViewModelProjectsChanged;
+			projectsComboBox.Changed += ProjectsComboBoxChanged;
 		}
 		
 		void LoadPackageSources ()
@@ -135,7 +137,7 @@ namespace MonoDevelop.PackageManagement
 			return 0;
 		}
 		
-		void PackageSourcesChanged (object sender, EventArgs e)
+		void PackageSourcesComboBoxChanged (object sender, EventArgs e)
 		{
 			if (reloadingPackageSources)
 				return;
@@ -165,11 +167,37 @@ namespace MonoDevelop.PackageManagement
 			}
 		}
 		
-		void ProjectsChanged(object sender, NotifyCollectionChangedEventArgs e)
+		void ViewModelProjectsChanged (object sender, NotifyCollectionChangedEventArgs e)
 		{
-			LoadProjects();
+			reloadingProjects = true;
+			
+			LoadProjects ();
+			
+			reloadingProjects = false;
 		}
 		
+		void ProjectsComboBoxChanged (object sender, EventArgs e)
+		{
+			if (reloadingProjects)
+				return;
+			
+			UpdateDefaultProject ();
+		}
+		
+		void UpdateDefaultProject ()
+		{
+			int selectedIndex = projectsComboBox.Active;
+			
+			if (selectedIndex < 0) {
+				viewModel.DefaultProject = null;
+				return;
+			}
+			
+			TreeIter iter;
+			projectListStore.IterNthChild (out iter, selectedIndex);
+			var project = (Project)projectListStore.GetValue (iter, 1);
+			viewModel.DefaultProject = project;
+		}
 	}
 }
 
