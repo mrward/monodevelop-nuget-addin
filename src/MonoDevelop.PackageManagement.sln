@@ -8,6 +8,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.PackageManageme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.PackageManagement.PowerShell", "MonoDevelop.PackageManagement.PowerShell\MonoDevelop.PackageManagement.PowerShell.csproj", "{A406803B-C584-43A3-BCEE-A0BB3132CB5F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pash", "Pash", "{FD4E03C1-EAE1-41F8-B533-557A5A821033}"
+	ProjectSection(SolutionItems) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "010.Irony.2010", "external\pash\Libraries\Irony\Irony\010.Irony.2010.csproj", "{D81F5C91-D7DB-46E5-BC99-49488FB6814C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Commands.Management", "external\pash\Source\Microsoft.PowerShell.Commands.Management\Microsoft.Commands.Management.csproj", "{91225A72-A021-4B7D-BA56-5E1B7AC02F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.PowerShell.Commands.Utility", "external\pash\Source\Microsoft.PowerShell.Commands.Utility\Microsoft.PowerShell.Commands.Utility.csproj", "{0E1D573C-C57D-4A83-A739-3A38E719D87E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Management", "external\pash\Source\System.Management\System.Management.csproj", "{C5E303EC-5684-4C95-B0EC-2593E6662403}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,5 +38,27 @@ Global
 		{A406803B-C584-43A3-BCEE-A0BB3132CB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A406803B-C584-43A3-BCEE-A0BB3132CB5F}.Release|Any CPU.Build.0 = Release|x86
 		{A406803B-C584-43A3-BCEE-A0BB3132CB5F}.Release|Any CPU.ActiveCfg = Release|x86
+		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91225A72-A021-4B7D-BA56-5E1B7AC02F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91225A72-A021-4B7D-BA56-5E1B7AC02F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91225A72-A021-4B7D-BA56-5E1B7AC02F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91225A72-A021-4B7D-BA56-5E1B7AC02F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1D573C-C57D-4A83-A739-3A38E719D87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1D573C-C57D-4A83-A739-3A38E719D87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1D573C-C57D-4A83-A739-3A38E719D87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1D573C-C57D-4A83-A739-3A38E719D87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E303EC-5684-4C95-B0EC-2593E6662403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E303EC-5684-4C95-B0EC-2593E6662403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E303EC-5684-4C95-B0EC-2593E6662403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E303EC-5684-4C95-B0EC-2593E6662403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D81F5C91-D7DB-46E5-BC99-49488FB6814C} = {FD4E03C1-EAE1-41F8-B533-557A5A821033}
+		{91225A72-A021-4B7D-BA56-5E1B7AC02F03} = {FD4E03C1-EAE1-41F8-B533-557A5A821033}
+		{0E1D573C-C57D-4A83-A739-3A38E719D87E} = {FD4E03C1-EAE1-41F8-B533-557A5A821033}
+		{C5E303EC-5684-4C95-B0EC-2593E6662403} = {FD4E03C1-EAE1-41F8-B533-557A5A821033}
 	EndGlobalSection
 EndGlobal

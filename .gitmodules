@@ -1,0 +1,3 @@
+[submodule "src/external/pash"]
+	path = src/external/pash
+	url = git://github.com/mrward/pash.git

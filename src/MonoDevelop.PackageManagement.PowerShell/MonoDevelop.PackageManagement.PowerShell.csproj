@@ -40,21 +40,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' " />
   <ItemGroup>
-    <Reference Include="Irony">
-      <HintPath>..\..\..\Utils\Pash\Source\System.Management\bin\Debug\Irony.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.PowerShell.Commands.Management">
-      <HintPath>..\..\..\Utils\Pash\Source\PashConsole\bin\Debug\Microsoft.PowerShell.Commands.Management.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.PowerShell.Commands.Utility">
-      <HintPath>..\..\..\Utils\Pash\Source\PashConsole\bin\Debug\Microsoft.PowerShell.Commands.Utility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Management.Automation">
-      <HintPath>..\..\..\Utils\Pash\Source\System.Management\bin\Debug\System.Management.Automation.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -71,6 +59,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MonoDevelop.PackageManagement.Scripting" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\external\pash\Libraries\Irony\Irony\010.Irony.2010.csproj">
+      <Project>{D81F5C91-D7DB-46E5-BC99-49488FB6814C}</Project>
+      <Name>010.Irony.2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\pash\Source\Microsoft.PowerShell.Commands.Management\Microsoft.Commands.Management.csproj">
+      <Project>{91225A72-A021-4B7D-BA56-5E1B7AC02F03}</Project>
+      <Name>Microsoft.Commands.Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\pash\Source\Microsoft.PowerShell.Commands.Utility\Microsoft.PowerShell.Commands.Utility.csproj">
+      <Project>{0E1D573C-C57D-4A83-A739-3A38E719D87E}</Project>
+      <Name>Microsoft.PowerShell.Commands.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\pash\Source\System.Management\System.Management.csproj">
+      <Project>{C5E303EC-5684-4C95-B0EC-2593E6662403}</Project>
+      <Name>System.Management</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>
