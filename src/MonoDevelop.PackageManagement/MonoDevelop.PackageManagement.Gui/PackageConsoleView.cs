@@ -112,7 +112,18 @@ namespace MonoDevelop.PackageManagement
 		
 		public int GetMaximumVisibleColumns ()
 		{
-			return 80;
+			int maxVisibleColumns = 160;
+			
+			DispatchService.GuiSyncDispatch (() => {
+				int windowWidth = Allocation.Width;
+				
+				if (windowWidth > 0) {
+					maxVisibleColumns = windowWidth / 5;
+				}
+				
+			});
+			
+			return maxVisibleColumns;
 		}
 	}
 }
