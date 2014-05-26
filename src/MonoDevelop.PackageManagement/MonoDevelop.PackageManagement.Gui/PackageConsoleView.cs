@@ -32,6 +32,7 @@ using ICSharpCode.PackageManagement.Scripting;
 using ICSharpCode.Scripting;
 using MonoDevelop.Components;
 using MonoDevelop.Ide;
+using Pango;
 
 namespace MonoDevelop.PackageManagement
 {
@@ -42,6 +43,9 @@ namespace MonoDevelop.PackageManagement
 			// HACK - to allow text to appear before first prompt.
 			PromptString = String.Empty;
 			Clear ();
+			
+			FontDescription font = FontDescription.FromString (DesktopService.DefaultMonospaceFont);
+			SetFont (font);
 		}
 		
 		void WriteOutputLine (string format, params object[] args)
