@@ -105,7 +105,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 		Pipeline CreatePipeline(string command)
 		{
 			Pipeline pipeline = runspace.CreatePipeline();
-			pipeline.Commands.AddScript(command);
+			pipeline.Commands.AddScript(command, false);
 			pipeline.Commands.Add("out-default");
 			pipeline.Commands[0].MergeMyResults(PipelineResultTypes.Error, PipelineResultTypes.Output);
 			return pipeline;
