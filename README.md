@@ -1,8 +1,10 @@
-# NuGet Addin for MonoDevelop and Xamarin Studio
+# NuGet Addin for MonoDevelop and Xamarin Studio 3.0 and 4.x
 
-This is a port of the [SharpDevelop NuGet package management addin](http://community.sharpdevelop.net/blogs/mattward/archive/2011/01/23/NuGetSupportInSharpDevelop.aspx) that works with MonoDevelop and Xamarin Studio under Windows, Mac and Linux. It adds a Manage Packages dialog to MonoDevelop and Xamarin Studio where you can install, update or uninstall NuGet packages.
+This is a port of the [SharpDevelop NuGet package management addin](http://community.sharpdevelop.net/blogs/mattward/archive/2011/01/23/NuGetSupportInSharpDevelop.aspx) that works with MonoDevelop and Xamarin Studio 3.0 and 4.x under Windows, Mac and Linux. It adds a Manage Packages dialog to MonoDevelop and Xamarin Studio where you can install, update or uninstall NuGet packages.
 
-It uses a custom build of [NuGet.Core.dll](https://github.com/mrward/nuget/), based on the original NuGet source code taken from [CodePlex](http://nuget.codeplex.com), some code from the latest version of the Mono runtime library and a custom build of [Microsoft's XML Document Transformation (XDT) library](https://github.com/mrward/xdt).
+Please note that **Xamarin Studio 5.0** and **MonoDevelop 5.0** both have the NuGet addin built-in. All further development of the NuGet addin, for MonoDevelop and Xamarin Studio version 5.0 and above, will be done in the main [MonoDevelop GitHub repository](https://github.com/mono/monodevelop). The code available here is for MonoDevelop and Xamarin Studio 3.0 and 4.x.
+
+The addin uses a custom build of [NuGet.Core.dll](https://github.com/mrward/nuget/), based on the original NuGet source code taken from [CodePlex](http://nuget.codeplex.com), some code from the latest version of the Mono runtime library and a custom build of [Microsoft's XML Document Transformation (XDT) library](https://github.com/mrward/xdt).
 
 For more information see the [announcement blog post](http://community.sharpdevelop.net/blogs/mattward/archive/2013/01/07/MonoDevelopNuGetAddin.aspx).
 
@@ -19,7 +21,11 @@ For more information see the [announcement blog post](http://community.sharpdeve
 
 The addin is available from a custom MonoDevelop addin repository. You can add this repository to MonoDevelop or Xamarin Studio via the [Add-in Manager](http://monodevelop.com/Documentation/Installing_Add-ins). To open the Add-in Manager dialog on Windows and on Linux select **Add-in Manager** from the **Tools** menu. On the Mac open the **Xamarin Studio** menu and select **Add-in Manager**. In the Add-in Manager dialog select the **Gallery** tab. Click the down arrow next to the repositories drop down list and select **Manage Repositories** to open the Add-in Repository Management dialog. Click the **Add** button. Copy the MonoDevelop NuGet addin repository url, shown below, that corresponds to your MonoDevelop version, and paste it into the **Url** text box.
 
-For MonoDevelop and Xamarin Studio 4.0 and 4.2:
+For MonoDevelop and Xamarin Studio 5.0:
+
+    The NuGet addin is built-in and does not need to be installed separately.
+
+For MonoDevelop and Xamarin Studio 4.x:
 
     http://mrward.github.com/monodevelop-nuget-addin-repository/4.0/main.mrep
 
@@ -73,8 +79,3 @@ If you see a WebException indicating there was an invalid certificate received f
     mozroots --import --sync
 
 See the original post on [NuGet on Mono](http://monomvc.wordpress.com/2012/03/06/nuget-on-mono/) for more details.
-
-# Todo
-
-  * Share the core parts of the source code between SharpDevelop 5 and MonoDevelop. Main differences are UI and project system, but the majority of the code was used without modification.
-  * Make this addin available in the main MonoDevelop addins repository.
