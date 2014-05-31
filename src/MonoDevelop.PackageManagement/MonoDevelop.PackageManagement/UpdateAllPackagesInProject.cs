@@ -1,10 +1,10 @@
 ﻿// 
-// IUpdatePackageActions.cs
+// UpdateAllPackagesInProject.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
 // 
-// Copyright (C) 2013 Matthew Ward
+// Copyright (C) 2011-2014 Matthew Ward
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,14 +28,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ICSharpCode.PackageManagement.Scripting;
+using NuGet;
 
 namespace ICSharpCode.PackageManagement
 {
-	public interface IUpdatePackageActions : IUpdatePackageSettings
+	public class UpdateAllPackagesInProject : UpdatePackageActions
 	{
-		IPackageScriptRunner PackageScriptRunner { get; set; }
+		IPackageManagementProject project;
 		
-		IEnumerable<UpdatePackageAction> CreateActions();
+		public UpdateAllPackagesInProject(IPackageManagementProject project)
+		{
+			this.project = project;
+			this.UpdateDependencies = true;
+		}
+		
+		public override IEnumerable<UpdatePackageAction> CreateActions()
+		{
+			foreach (IPackage package in GetPackages()) {
+				yield return CreateUpdatePackageAction(package);
+			}
+		}
+		
+		IEnumerable<IPackage> GetPackages()
+		{
+			return project.GetPackagesInReverseDependencyOrder();
+		}
+		
+		UpdatePackageAction CreateUpdatePackageAction(IPackage package)
+		{
+			UpdatePackageAction action = CreateDefaultUpdatePackageAction(project);
+			action.PackageId = package.Id;
+			return action;
+		}
 	}
 }

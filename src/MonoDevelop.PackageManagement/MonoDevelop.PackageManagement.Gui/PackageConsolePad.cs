@@ -88,8 +88,6 @@ namespace MonoDevelop.PackageManagement
 
 		void OnConsoleInput (object sender, ConsoleInputEventArgs e)
 		{
-			//view.WriteOutput (e.Text);
-			//view.Prompt (true);
 			viewModel.ProcessUserInput (e.Text);
 		}
 		

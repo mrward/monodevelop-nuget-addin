@@ -150,6 +150,7 @@
     <Compile Include="MonoDevelop.PackageManagement\ITaskFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IThreadSafePackageManagementEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IUpdatePackageActions.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\IUpdatePackageActionsFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IUpdatePackagesAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\IUpdatePackageSettings.cs" />
     <Compile Include="MonoDevelop.PackageManagement\LicenseAcceptanceService.cs" />
@@ -248,11 +249,16 @@
     <Compile Include="MonoDevelop.PackageManagement\ThreadSafePackageManagementEvents.cs" />
     <Compile Include="MonoDevelop.PackageManagement\ThreadSafeProjectBrowserUpdater.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UninstallPackageAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdateAllPackagesInProject.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdateAllPackagesInSolution.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackages.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackagesViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackageViewModel.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatedPackageViewModelFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackageAction.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdatePackageActions.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdatePackageActionsFactory.cs" />
+    <Compile Include="MonoDevelop.PackageManagement\UpdatePackageInAllProjects.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdatePackagesActionFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement\UpdateSolutionPackagesAction.cs" />
