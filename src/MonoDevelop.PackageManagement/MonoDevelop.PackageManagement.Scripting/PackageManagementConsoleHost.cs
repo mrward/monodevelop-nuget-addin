@@ -30,14 +30,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-using ICSharpCode.PackageManagement.EnvDTE;
 using ICSharpCode.Scripting;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using NuGet;
-
-//using ICSharpCode.PackageManagement.EnvDTE;
-
 
 namespace ICSharpCode.PackageManagement.Scripting
 {
@@ -154,7 +150,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 					this.ScriptingConsole,
 					GetNuGetVersion(),
 					clearConsoleHostCommand,
-					new DTE());
+					new EnvDTE.DTE());
 		}
 		
 		protected virtual Version GetNuGetVersion()

@@ -66,6 +66,7 @@
     <Compile Include="MonoDevelop.PackageManagement.Commands\PackagesCommandHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Commands\RestorePackagesHandler.cs" />
     <Compile Include="MonoDevelop.PackageManagement.EnvDTE\DTE.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.EnvDTE\Project.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsolePad.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Gui\PackageConsoleView.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\ClearPackageManagementConsoleHostCommand.cs" />
