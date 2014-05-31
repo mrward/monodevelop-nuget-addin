@@ -1,5 +1,5 @@
 ﻿// 
-// InvokeUpdateWorkingDirectoryCmdlet.cs
+// PowerShellWorkingDirectory.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -26,56 +26,32 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.Management.Automation;
-using ICSharpCode.PackageManagement.Scripting;
+using MonoDevelop.Projects;
 
-namespace ICSharpCode.PackageManagement.Cmdlets
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	[Cmdlet(VerbsLifecycle.Invoke, "UpdateWorkingDirectory", DefaultParameterSetName = ParameterAttribute.AllParameterSets)]
-	public class InvokeUpdateWorkingDirectoryCmdlet : PackageManagementCmdlet
+	public class PowerShellWorkingDirectory
 	{
 		IPackageManagementProjectService projectService;
 		
-		public InvokeUpdateWorkingDirectoryCmdlet()
-			: this(
-				PackageManagementServices.ProjectService,
-				PackageManagementServices.ConsoleHost,
-				null)
-		{
-		}
-		
-		public InvokeUpdateWorkingDirectoryCmdlet(
-			IPackageManagementProjectService projectService,
-			IPackageManagementConsoleHost consoleHost,
-			ICmdletTerminatingError terminatingError)
-			: base(consoleHost, terminatingError)
+		public PowerShellWorkingDirectory(IPackageManagementProjectService projectService)
 		{
 			this.projectService = projectService;
 		}
 		
-		protected override void ProcessRecord()
+		public string GetWorkingDirectory()
 		{
-			UpdateWorkingDirectory();
+			Solution solution = projectService.OpenSolution;
+			if (solution != null) {
+				return QuotedDirectory(solution.BaseDirectory);
+			}
+			return "$env:USERPROFILE";
 		}
 		
-		void UpdateWorkingDirectory()
+		string QuotedDirectory(string directory)
 		{
-			string directory = GetWorkingDirectory();
-			UpdateWorkingDirectory(directory);
-		}
-		
-		string GetWorkingDirectory()
-		{
-			var workingDirectory = new PowerShellWorkingDirectory(projectService);
-			return workingDirectory.GetWorkingDirectory();
-		}
-		
-		void UpdateWorkingDirectory(string directory)
-		{
-			string command = String.Format("Set-Location {0}", directory);
-			InvokeScript(command);
+			return String.Format("'{0}'", directory);
 		}
 	}
 }

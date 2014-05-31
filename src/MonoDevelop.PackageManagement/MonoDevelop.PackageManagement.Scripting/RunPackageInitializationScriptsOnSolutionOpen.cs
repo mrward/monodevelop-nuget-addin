@@ -1,5 +1,5 @@
 ﻿// 
-// InvokeInitializePackagesCmdlet.cs
+// RunPackageInitializationScriptsOnSolutionOpen.cs
 // 
 // Author:
 //   Matt Ward <ward.matt@gmail.com>
@@ -26,63 +26,62 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.Management.Automation;
-using ICSharpCode.PackageManagement.Scripting;
+using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 
-namespace ICSharpCode.PackageManagement.Cmdlets
+namespace ICSharpCode.PackageManagement.Scripting
 {
-	[Cmdlet(VerbsLifecycle.Invoke, "InitializePackages", DefaultParameterSetName = ParameterAttribute.AllParameterSets)]
-	public class InvokeInitializePackagesCmdlet : PackageManagementCmdlet
+	public class RunPackageInitializationScriptsOnSolutionOpen
 	{
-		IPackageManagementProjectService projectService;
 		IPackageInitializationScriptsFactory scriptsFactory;
+		PackageInitializationScriptsConsole scriptsConsole;
 		
-		public InvokeInitializePackagesCmdlet()
+		public RunPackageInitializationScriptsOnSolutionOpen(
+			IPackageManagementProjectService projectService)
 			: this(
-				PackageManagementServices.ProjectService,
-				new PackageInitializationScriptsFactory(),
-				PackageManagementServices.ConsoleHost,
-				null)
+				projectService,
+				new PackageInitializationScriptsConsole(PackageManagementServices.ConsoleHost),
+				new PackageInitializationScriptsFactory())
 		{
 		}
 		
-		public InvokeInitializePackagesCmdlet(
+		public RunPackageInitializationScriptsOnSolutionOpen(
 			IPackageManagementProjectService projectService,
-			IPackageInitializationScriptsFactory scriptsFactory,
-			IPackageManagementConsoleHost consoleHost,
-			ICmdletTerminatingError terminatingError)
-			: base(consoleHost, terminatingError)
+			PackageInitializationScriptsConsole scriptsConsole,
+			IPackageInitializationScriptsFactory scriptsFactory)
 		{
-			this.projectService = projectService;
+			IdeApp.Workspace.SolutionLoaded += SolutionLoaded;
+			this.scriptsConsole = scriptsConsole;
 			this.scriptsFactory = scriptsFactory;
 		}
 		
-		protected override void ProcessRecord()
+		void SolutionLoaded(object sender, SolutionEventArgs e)
 		{
-			UpdateWorkingDirectory();
-			RunPackageInitializationScripts();
+			RunPackageInitializationScripts(e.Solution);
 		}
 		
-		void UpdateWorkingDirectory()
+		void RunPackageInitializationScripts(Solution solution)
 		{
-			string command = "Invoke-UpdateWorkingDirectory";
-			InvokeScript(command);
-		}
-		
-		void RunPackageInitializationScripts()
-		{
-			IPackageInitializationScripts scripts = GetPackageInitializationScripts();
-			if (scripts.Any()) {
-				scripts.Run(this);
+			if (SolutionHasPackageInitializationScripts(solution)) {
+				RunInitializePackagesCmdlet();
 			}
 		}
 		
-		IPackageInitializationScripts GetPackageInitializationScripts()
+		bool SolutionHasPackageInitializationScripts(Solution solution)
 		{
-			Solution solution = projectService.OpenSolution;
+			IPackageInitializationScripts scripts = CreatePackageInitializationScripts(solution);
+			return scripts.Any();
+		}
+		
+		void RunInitializePackagesCmdlet()
+		{
+			string command = "Invoke-InitializePackages";
+			scriptsConsole.ExecuteCommand(command);
+		}
+		
+		IPackageInitializationScripts CreatePackageInitializationScripts(Solution solution)
+		{
 			return scriptsFactory.CreatePackageInitializationScripts(solution);
 		}
 	}

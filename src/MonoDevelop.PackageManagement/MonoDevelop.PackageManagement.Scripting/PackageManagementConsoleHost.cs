@@ -115,10 +115,10 @@ namespace ICSharpCode.PackageManagement.Scripting
 		{
 			DispatchService.BackgroundDispatch(() => {
 				RunSynchronous();
+				IsRunning = true;
 			});
 //			thread = CreateThread(RunSynchronous);
 //			thread.Start();
-//			IsRunning = true;
 		}
 		
 //		protected virtual IThread CreateThread(ThreadStart threadStart)
@@ -130,7 +130,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 		{
 			InitPowerShell();
 			WriteInfoBeforeFirstPrompt();
-//			InitializePackageScriptsForOpenSolution();
+			InitializePackageScriptsForOpenSolution();
 			WritePrompt();
 //			ProcessUserCommands();
 		}
@@ -143,7 +143,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 //			UpdateFormatting();
 			RedefineClearHostFunction();
 //			DefineTabExpansionFunction();
-//			UpdateWorkingDirectory();
+			UpdateWorkingDirectory();
 		}
 		
 		void CreatePowerShellHost()
@@ -204,17 +204,17 @@ namespace ICSharpCode.PackageManagement.Scripting
 		
 		void UpdateWorkingDirectory()
 		{
-//			string command = "Invoke-UpdateWorkingDirectory";
-//			powerShellHost.ExecuteCommand(command);
+			string command = "Invoke-UpdateWorkingDirectory";
+			powerShellHost.ExecuteCommand(command);
 		}
 		
-//		void InitializePackageScriptsForOpenSolution()
-//		{
-//			if (Solution.IsOpen) {
-//				string command = "Invoke-InitializePackages";
-//				powerShellHost.ExecuteCommand(command);
-//			}
-//		}
+		void InitializePackageScriptsForOpenSolution()
+		{
+			if (Solution.IsOpen) {
+				string command = "Invoke-InitializePackages";
+				powerShellHost.ExecuteCommand(command);
+			}
+		}
 		
 		void WriteLine(string message)
 		{
@@ -247,6 +247,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 	
 		void ProcessLine(string line)
 		{
+			string preprocessedLine = PashCommandLinePreprocessor.Process(line);
 			powerShellHost.ExecuteCommand(line);
 		}
 		

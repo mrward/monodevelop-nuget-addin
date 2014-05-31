@@ -40,6 +40,7 @@ namespace ICSharpCode.PackageManagement
 		static readonly PackageManagementEvents packageManagementEvents = new PackageManagementEvents();
 		static readonly PackageManagementProjectService projectService = new PackageManagementProjectService();
 		static readonly PackageManagementOutputMessagesView outputMessagesView;
+		static readonly RunPackageInitializationScriptsOnSolutionOpen runPackageInitializationScripts;
 		static readonly PackageActionRunner packageActionRunner;
 		static readonly IPackageRepositoryCache projectTemplatePackageRepositoryCache;
 		static readonly RegisteredProjectTemplatePackageSources projectTemplatePackageSources;
@@ -61,7 +62,8 @@ namespace ICSharpCode.PackageManagement
 			packageActionRunner = new PackageActionRunner(packageManagementEvents);
 			
 			consoleHostProvider = new PackageManagementConsoleHostProvider(solution, registeredPackageRepositories);
-			
+			runPackageInitializationScripts = new RunPackageInitializationScriptsOnSolutionOpen(projectService);
+
 			InitializeCredentialProvider();
 		}
 		

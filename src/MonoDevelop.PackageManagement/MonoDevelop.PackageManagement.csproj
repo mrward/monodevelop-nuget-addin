@@ -72,6 +72,8 @@
     <Compile Include="MonoDevelop.PackageManagement.Scripting\ConsoleHostFileConflictResolver.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\FileConflictAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IConsoleHostFileConflictResolver.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageInitializationScripts.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageInitializationScriptsFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageManagementAddInPath.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageManagementConsoleHost.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageScript.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageScriptRunner.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\IPackageScriptSession.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\NuGetVersion.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageInitializationScripts.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageInitializationScriptsConsole.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageInitializationScriptsFactory.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageInitializeScript.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageInitializeScriptFileName.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageInstallScript.cs" />
@@ -93,6 +98,9 @@
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageScriptFileName.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageUninstallScript.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\PackageUninstallScriptFileName.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PashCommandLinePreprocessor.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\PowerShellWorkingDirectory.cs" />
+    <Compile Include="MonoDevelop.PackageManagement.Scripting\RunPackageInitializationScriptsOnSolutionOpen.cs" />
     <Compile Include="MonoDevelop.PackageManagement.Scripting\RunPackageScriptsAction.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AcceptLicensesEventArgs.cs" />
     <Compile Include="MonoDevelop.PackageManagement\AggregateExceptionErrorMessage.cs" />
