@@ -239,8 +239,10 @@ namespace ICSharpCode.PackageManagement.Scripting
 		
 		public void ProcessUserInput (string line)
 		{
-			ProcessLine (line);
-			WritePrompt ();
+			DispatchService.BackgroundDispatch(() => {
+				ProcessLine (line);
+				WritePrompt ();
+			});
 		}
 	
 		void ProcessLine(string line)
