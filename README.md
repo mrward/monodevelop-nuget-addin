@@ -2,7 +2,7 @@
 
 This is a port of the [SharpDevelop NuGet package management addin](http://community.sharpdevelop.net/blogs/mattward/archive/2011/01/23/NuGetSupportInSharpDevelop.aspx) that works with MonoDevelop and Xamarin Studio 3.0 and 4.x under Windows, Mac and Linux. It adds a Manage Packages dialog to MonoDevelop and Xamarin Studio where you can install, update or uninstall NuGet packages.
 
-Please note that **Xamarin Studio 5.0** and **MonoDevelop 5.0** both have the [NuGet addin built-in](http://developer.xamarin.com/guides/cross-platform/application_fundamentals/nuget_walkthrough/). All further development of the NuGet addin, for MonoDevelop and Xamarin Studio version 5.0 and above, will be done in the main [MonoDevelop GitHub repository](https://github.com/mono/monodevelop). The code available here is for MonoDevelop and Xamarin Studio 3.0 and 4.x.
+Please note that **Xamarin Studio 5.0** and **MonoDevelop 5.0** both have the [NuGet addin built-in](http://lastexitcode.com/blog/2014/06/01/NuGetSupportInXamarinStudio5-0/). All further development of the NuGet addin, for MonoDevelop and Xamarin Studio version 5.0 and above, will be done in the main [MonoDevelop GitHub repository](https://github.com/mono/monodevelop). The code available here is for MonoDevelop and Xamarin Studio 3.0 and 4.x.
 
 The addin uses a custom build of [NuGet.Core.dll](https://github.com/mrward/nuget/), based on the original NuGet source code taken from [CodePlex](http://nuget.codeplex.com), some code from the latest version of the Mono runtime library and a custom build of [Microsoft's XML Document Transformation (XDT) library](https://github.com/mrward/xdt).
 
