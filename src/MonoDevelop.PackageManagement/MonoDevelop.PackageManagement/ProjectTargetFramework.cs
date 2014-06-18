@@ -43,13 +43,23 @@ namespace ICSharpCode.PackageManagement
 			this.project = project;
 			GetTargetFramework();
 		}
-		
+
+		const string GuidMonoMac = "{948B3504-5B70-4649-8FE4-BDE1FB46EC69}";
+		const string GuidXamarinMac = "{42C0BBD9-55CE-4FC1-8D90-A7348ABAFB23}";
+
 		void GetTargetFramework()
 		{
 			string identifier = GetTargetFrameworkIdentifier();
 			string version = GetTargetFrameworkVersion();
 			string profile = GetTargetFrameworkProfile();
-			
+
+			foreach (var guid in project.GetProjectTypeGuids ()) {
+				if (string.Equals (guid, GuidMonoMac, StringComparison.InvariantCultureIgnoreCase))
+					identifier = "MonoMac";
+				else if (string.Equals (guid, GuidXamarinMac, StringComparison.InvariantCultureIgnoreCase))
+					identifier = "XamarinMac";
+			}
+
 			GetTargetFramework(identifier, version, profile);
 		}
 		
