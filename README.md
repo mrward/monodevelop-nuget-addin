@@ -27,7 +27,7 @@ For MonoDevelop and Xamarin Studio 5.0:
 
 For MonoDevelop and Xamarin Studio 4.x:
 
-    http://mrward.github.com/monodevelop-nuget-addin-repository/4.0/main.mrep
+    mrward.github.com/monodevelop-nuget-addin-repository/4.0/main.mrep
 
 For MonoDevelop 3.0:
 
